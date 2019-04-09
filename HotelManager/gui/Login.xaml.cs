@@ -28,5 +28,12 @@ namespace HotelManager.gui
         {
             Application.Current.Shutdown();
         }
+
+        private void Btn_DangNhap_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = new MainWindow();
+            this.Hide();
+            main.Show();
+        }
     }
 }

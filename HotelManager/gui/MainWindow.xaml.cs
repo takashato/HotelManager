@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.Runtime.InteropServices;
+
 namespace HotelManager
 {
     /// <summary>
@@ -20,9 +22,37 @@ namespace HotelManager
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void ColorZone_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Window window = this as Window;
+            if (window != null)
+            {
+                window.DragMove();
+            }
+        }
+
+        private void Btn_close_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void Btn_Minimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void Btn_Maximize_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
+                this.WindowState = WindowState.Normal;
+            else
+                this.WindowState = WindowState.Maximized;
         }
     }
 }

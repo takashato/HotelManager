@@ -67,7 +67,8 @@
                     <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
                             materialDesign:RippleAssist.IsDisabled="True"
                             Content="Đăng Nhập" Margin="10"
-                            Grid.Row="2"/>
+                            Grid.Row="2"
+                            Name="btn_DangNhap" Click="Btn_DangNhap_Click"/>
 
                 </Grid>
             
