@@ -10,22 +10,36 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using System.Runtime.InteropServices;
+using System.Data;
 
-namespace HotelManager
+namespace HotelManager.gui
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ThuePhong.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ThuePhong : Window
     {
-
-        public MainWindow()
+        //List<KhachHang> khachHangs;
+        public ThuePhong()
         {
             InitializeComponent();
+            //khachHangs = new List<KhachHang>(3);
+            InitTable();
+        }
+
+        private void InitTable()
+        {
+            for(int i = 0;i<3;i++)
+            {
+                KhachHang khachHang = new KhachHang();
+                khachHang.tenKH = "khach hang " + i;
+                khachHang.loaiKH = "a";
+                khachHang.CMND = "00";
+                khachHang.DiaChi = "Tran Duy Hung";
+                lstKhachHang.Items.Add(khachHang);
+            }
         }
 
         private void ColorZone_MouseDown(object sender, MouseButtonEventArgs e)
@@ -55,16 +69,14 @@ namespace HotelManager
                 this.WindowState = WindowState.Maximized;
         }
 
-        private void Btn_About_Click(object sender, RoutedEventArgs e)
-        {
-            gui.Window1 window1 = new gui.Window1();
-            window1.Show();
-        }
 
-        private void Btn_ThuePhong_Click(object sender, RoutedEventArgs e)
-        {
-            gui.ThuePhong thuePhong = new gui.ThuePhong();
-            thuePhong.Show();
-        }
+    }
+
+    public class KhachHang
+    {
+        public string tenKH { get; set; }
+        public string loaiKH { get; set; }
+        public string CMND { get; set; }
+        public string DiaChi { get; set; }
     }
 }

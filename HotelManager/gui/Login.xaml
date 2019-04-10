@@ -14,7 +14,7 @@
         WindowStartupLocation="CenterScreen"
         Title="Hotel Management Login" Height="440" Width="350" WindowStyle="None" ResizeMode="NoResize">
 
-    <Grid Background="#35CCAF" Margin="1 2 1 1">
+    <Grid Background="#35CCAF" Margin="2">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="80"/>
@@ -28,7 +28,9 @@
                     materialDesign:ShadowAssist.ShadowDepth="Depth0"
                     Width="100" 
                     ToolTip="Đóng ứng dụng"
-                    Click="Button_Click">
+                    Click="Button_Click"
+                    BorderThickness="2"
+                    Foreground="White">
                 <materialDesign:PackIcon Kind="Power"/>
             </Button>
         </DockPanel>
@@ -68,7 +70,8 @@
                             materialDesign:RippleAssist.IsDisabled="True"
                             Content="Đăng Nhập" Margin="10"
                             Grid.Row="2"
-                            Name="btn_DangNhap" Click="Btn_DangNhap_Click"/>
+                            Name="btn_DangNhap" Click="Btn_DangNhap_Click"
+                            Foreground="White"/>
 
                 </Grid>
             
