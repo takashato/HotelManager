@@ -11,10 +11,10 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="18"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown"
         Title="Hotel Management Login" Height="440" Width="350" WindowStyle="None" ResizeMode="NoResize">
 
-    <Grid Background="#35CCAF" Margin="2">
+    <Grid Background="#35CCAF">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="80"/>

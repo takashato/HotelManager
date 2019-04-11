@@ -1,211 +1,141 @@
-﻿<Window x:Class="HotelManager.MainWindow"
+﻿<Window x:Class="HotelManager.gui.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HotelManager"
+        xmlns:local="clr-namespace:HotelManager.gui"
         mc:Ignorable="d"
-        Title="Hotel Management" Height="450" Width="800"
+        Title="Hotel Management" Height="800" Width="1200"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
-        TextElement.FontSize="18"
+        TextElement.FontSize="22"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
-        WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None" Visibility="Visible">
-    <Grid Background="#ffffff">
+        WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None" >
+
+    <Grid Background="#35CCAF">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <materialDesign:ColorZone Grid.Row="0" 
-                                  Grid.ColumnSpan="4"
-                                  Mode="PrimaryDark"
-                                  materialDesign:ShadowAssist.ShadowDepth="Depth3" 
-                                  Background="#35CCAF" 
-                                  MouseDown="ColorZone_MouseDown"
-                                  VerticalAlignment="Stretch"
-                                  Margin="0"
-                                  Height="32">
-            <Grid>
-                <TextBlock VerticalAlignment="Center" 
-                           Margin="12,0,0,0"
-                           FontSize="14">
-                    Quản Lý Khách Sạn
-                </TextBlock>
-                <ToolBarPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Foreground="White" 
-                        Background="Transparent" 
-                        HorizontalAlignment="Right" 
-                        BorderThickness="0"
-                        Name="btn_Minimize"
-                        Click="Btn_Minimize_Click">
-                        <materialDesign:PackIcon Kind="WindowMinimize" />
-                    </Button>
-                    <Button Foreground="White" 
-                        Background="Transparent" 
-                        HorizontalAlignment="Right" 
-                        BorderThickness="0"
-                        Name="btn_Maximize"
-                        Click="Btn_Maximize_Click">
-                        <materialDesign:PackIcon Kind="WindowMaximize" />
-                    </Button>
-                    <Button Foreground="White" 
-                        Background="Transparent" 
-                        HorizontalAlignment="Right" 
-                        BorderThickness="0"
-                        Name="btn_close"
-                        Click="Btn_close_Click">
-                        <materialDesign:PackIcon Kind="Close"/>
-                    </Button>
-                </ToolBarPanel>
-            </Grid>
+        <!-- Title bar -->
+        <DockPanel Margin="-10 0" 
+                   Height="45" 
+                   Grid.Column="1" 
+                   MouseDown="TitleBar_MouseDown">
+            <TextBlock DockPanel.Dock="Left" 
+                       VerticalAlignment="Center" 
+                       Margin="30 0 0 0"
+                       FontSize="16"
+                       Foreground="White"
+                       Text="Đăng nhập bởi nhanvien001"/>
 
-        </materialDesign:ColorZone>
+            <Button DockPanel.Dock="Right"
+                    Background="Transparent" 
+                    HorizontalAlignment="Right" 
+                    BorderThickness="0"
+                    Name="btn_close"
+                    Click="Btn_close_Click">
+                <materialDesign:PackIcon Kind="Close"/>
+            </Button>
 
-        <Button Height="Auto" 
-                Width="Auto" 
-                Margin="24" 
-                Grid.Column="0" 
-                Grid.Row="1"
-                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                Background="#35CCAF"
-                Foreground="#ffffff"
-                materialDesign:ShadowAssist.ShadowDepth="Depth1">
-            <StackPanel >
-                <materialDesign:PackIcon Kind="HomeModern" HorizontalAlignment="Center" Height="64" Width="64"/>
-                <TextBlock HorizontalAlignment="Center"
-                           Padding="12">
-                    Danh Mục Phòng
-                </TextBlock>
-            </StackPanel>
-        </Button>
-        <Button Height="Auto" 
-            Width="Auto" 
-            Margin="24" 
-            Grid.Column="1" 
-            Grid.Row="1"
-            Style="{StaticResource MaterialDesignRaisedLightButton}"
-            ToolTip="Resource name: MaterialDesignRaisedLightButton"
-            Background="#35CCAF"
-            Foreground="#ffffff"
-            materialDesign:ShadowAssist.ShadowDepth="Depth1"
-            Name="btn_ThuePhong"
-            Click="Btn_ThuePhong_Click">
-            <StackPanel >
-                <Image Source="./icon/order.png"
-                       Width="60"
-                       Height="60">
-                </Image>
-                <TextBlock HorizontalAlignment="Center"
-                           Padding="12">
-                    Thuê Phòng
-                </TextBlock>
-            </StackPanel>
-        </Button>
+            <Button DockPanel.Dock="Right"
+                    Background="Transparent" 
+                    HorizontalAlignment="Right" 
+                    BorderThickness="0"
+                    Name="btn_Maximize"
+                    Click="Btn_Maximize_Click">
+                <materialDesign:PackIcon Kind="WindowMaximize" />
+            </Button>
+
+            <Button DockPanel.Dock="Right"
+                    Background="Transparent"
+                    HorizontalAlignment="Right" 
+                    BorderThickness="0"
+                    Name="btn_Minimize"
+                    Click="Btn_Minimize_Click">
+                <materialDesign:PackIcon Kind="WindowMinimize" />
+            </Button>
+
+        </DockPanel>
+
+        <!-- Left sidebar -->
+        <Grid Grid.Row="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <materialDesign:PackIcon Margin="0 50 0 20" 
+                                     HorizontalAlignment="Center" 
+                                     Kind="HomeHeart" 
+                                     Height="150" Width="150"
+                                     Foreground="White"/>
+
+            <ListBox Grid.Row="1" 
+                     Name="LbxMenu" 
+                     Foreground="White" 
+                     SelectionChanged="ListBox_SelectionChanged">
+
+                <ListBoxItem Margin="0 5">
+                    <StackPanel Margin="15 0"  Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="BedEmpty" 
+                                                 Height="40" Width="40" Margin="5" />
+                        <TextBlock Text="Danh mục phòng" 
+                                   FontSize="22" VerticalAlignment="Center" Margin="10 0" />
+                    </StackPanel>
+                </ListBoxItem>
+
+                <ListBoxItem Margin="0 5">
+                    <StackPanel Margin="15 0"  Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="CityVariantOutline" 
+                                                 Height="40" Width="40" Margin="5" />
+                        <TextBlock Text="Loại phòng" 
+                                   FontSize="22" VerticalAlignment="Center" Margin="10 0" />
+                    </StackPanel>
+                </ListBoxItem>
+
+                <ListBoxItem Margin="0 5">
+                    <StackPanel Margin="15 0" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="FileDocumentBoxOutline" 
+                                                 Height="40" Width="40" Margin="5" />
+                        <TextBlock Text="Thay đổi quy định" 
+                                   FontSize="22" VerticalAlignment="Center" Margin="10 0" />
+                    </StackPanel>
+                </ListBoxItem>
+
+                <ListBoxItem Margin="0 5">
+                    <StackPanel Margin="15 0"  Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ChartAreaspline" 
+                                                 Height="40" Width="40" Margin="5" />
+                        <TextBlock Text="Báo cáo" 
+                                   FontSize="22" VerticalAlignment="Center" Margin="10 0" />
+                    </StackPanel>
+                </ListBoxItem>
+
+                <ListBoxItem Margin="0 5">
+                    <StackPanel Margin="15 0" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="About" 
+                                                 Height="40" Width="40" Margin="5" />
+                        <TextBlock Text="Về chúng tôi" 
+                                   FontSize="22" VerticalAlignment="Center" Margin="10 0" />
+                    </StackPanel>
+                </ListBoxItem>
+
+            </ListBox>
+        </Grid>
 
 
-        <Button Height="Auto" 
-            Width="Auto" 
-            Margin="24" 
-            Grid.Column="2" 
-            Grid.Row="1"
-            Style="{StaticResource MaterialDesignRaisedLightButton}"
-            ToolTip="Resource name: MaterialDesignRaisedLightButton"
-            Background="#35CCAF"
-            Foreground="#ffffff"
-            materialDesign:ShadowAssist.ShadowDepth="Depth1">
-            <StackPanel>
-                <materialDesign:PackIcon Kind="Payment" 
-                                         Height="64" 
-                                         Width="64"
-                                         HorizontalAlignment="Center"/>
-                <TextBlock HorizontalAlignment="Center"
-                           Padding="12">
-                    Thanh Toán
-                </TextBlock>
-            </StackPanel>
-        </Button>
+        <!-- Content -->
+        <Grid Background="#FEFEFE" Grid.Column="1" Grid.Row="1" Name="GrdContent"/>
 
-        <Button Height="Auto" 
-            Width="Auto" 
-            Margin="24" 
-            Grid.Column="0" 
-            Grid.Row="2"
-            Style="{StaticResource MaterialDesignRaisedLightButton}"
-            ToolTip="Resource name: MaterialDesignRaisedLightButton"
-            Background="#35CCAF"
-            Foreground="#ffffff"
-            materialDesign:ShadowAssist.ShadowDepth="Depth1">
-            <StackPanel>
-                <Image Source="./icon/MonthlyReport.png" Width="64" Height="64"></Image>
-                <TextBlock HorizontalAlignment="Center"
-                           Padding="12">
-                    Thanh Toán
-                </TextBlock>
-            </StackPanel>
-        </Button>
-
-        <Button Height="Auto" 
-            Width="Auto" 
-            Margin="24" 
-            Grid.Column="1" 
-            Grid.Row="2"
-            Style="{StaticResource MaterialDesignRaisedLightButton}"
-            ToolTip="Resource name: MaterialDesignRaisedLightButton"
-            Background="#35CCAF"
-            Foreground="#ffffff"
-            materialDesign:ShadowAssist.ShadowDepth="Depth1">
-            <StackPanel>
-                <Image Source="./icon/Lookup.png" Width="64" Height="64"></Image>
-                <TextBlock HorizontalAlignment="Center"
-                           Padding="12">
-                    Tra Cứu Phòng
-                </TextBlock>
-            </StackPanel>
-        </Button>
-
-        <Button Height="Auto" 
-            Width="Auto" 
-            Margin="24" 
-            Grid.Column="2" 
-            Grid.Row="2"
-            Style="{StaticResource MaterialDesignRaisedLightButton}"
-            ToolTip="Resource name: MaterialDesignRaisedLightButton"
-            Background="#35CCAF"
-            Foreground="#ffffff"
-            materialDesign:ShadowAssist.ShadowDepth="Depth1">
-            <StackPanel>
-                <Image Source="./icon/regulation.png" Width="64" Height="64"></Image>
-                <TextBlock HorizontalAlignment="Center"
-                           Padding="12">
-                    Thay Đổi Quy Định
-                </TextBlock>
-            </StackPanel>
-        </Button>
-
-        <Button Grid.Column="2"
-                Grid.Row="3"
-                Foreground="#35CCAF"
-                Background="Transparent"
-                Height="Auto"
-                Width="64"
-                BorderThickness="0"
-                HorizontalAlignment="Right"
-                Name="btn_About"
-                Click="Btn_About_Click">
-            <materialDesign:PackIcon Kind="About" Height="30" Width="30"/>
-        </Button>
-        
     </Grid>
 </Window>
