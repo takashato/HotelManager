@@ -26,6 +26,7 @@ namespace HotelManager.gui
         public MainWindow()
         {
             InitializeComponent();
+            GrdContent.Children.Add(new DanhMucPhong());
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)

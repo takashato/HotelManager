@@ -93,5 +93,26 @@ namespace HotelManager.gui
             }
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (SearchBar.Visibility == Visibility.Hidden)
+            {
+                SearchBar.Visibility = Visibility.Visible;
+                SearchBar.Text = "";
+            }
+            else if (SearchBar.Visibility == Visibility.Visible)
+                SearchBar.Visibility = Visibility.Hidden;
+        }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ThuePhongBtn_Click(object sender, RoutedEventArgs e)
+        {
+            (new ThuePhong()).ShowDialog();
+        }
     }
 }
