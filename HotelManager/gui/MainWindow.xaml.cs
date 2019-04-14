@@ -22,23 +22,12 @@ namespace HotelManager.gui
     /// </summary>
     public partial class MainWindow : Window
     {
-
         public MainWindow()
         {
             InitializeComponent();
-            GrdContent.Children.Add(new DanhMucPhong());
         }
 
-        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Window window = this as Window;
-            if (window != null)
-            {
-                window.DragMove();
-            }
-        }
-
-        private void Btn_close_Click(object sender, RoutedEventArgs e)
+                private void Btn_close_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
         }
@@ -58,8 +47,6 @@ namespace HotelManager.gui
 
         private void Btn_About_Click(object sender, RoutedEventArgs e)
         {
-            gui.Window1 window1 = new gui.Window1();
-            window1.Show();
         }
 
         private void Btn_ThuePhong_Click(object sender, RoutedEventArgs e)
@@ -79,18 +66,49 @@ namespace HotelManager.gui
                     break;
                 case 1:
                     GrdContent.Children.Clear();
+                    GrdContent.Children.Add(new UC_ThanhToan());
                     break;
                 case 2:
                     GrdContent.Children.Clear();
-                    GrdContent.Children.Add(new DanhMucPhong());
+                    GrdContent.Children.Add(new BaoCao());
                     break;
                 case 3:
                     GrdContent.Children.Clear();
+                    MessageBox.Show("Đăng Nhập Kiểm tra");
                     break;
                 case 4:
                     GrdContent.Children.Clear();
-                    GrdContent.Children.Add(new DanhMucPhong());
                     break;
+            }
+        }
+
+        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void DockPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Window window = this as Window;
+            
+            if (window != null)
+            {
+                if(!(e.LeftButton == MouseButtonState.Pressed))
+                {
+                    e.Handled = true;
+                    return;
+                }
+                window.DragMove();
             }
         }
     }

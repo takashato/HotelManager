@@ -5,16 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManager.gui"
         mc:Ignorable="d"
-        Title="Hotel Management" Height="800" Width="1200"
+        Title="Hotel Management" Height="720" Width="1280"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="22"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
-        WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None" >
+        WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None"
+        MouseDown="Window_MouseDown">
 
-    <Grid Background="#35CCAF">
+    <Grid Background="#35CCAF" MouseDown="Grid_MouseDown">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -30,13 +31,14 @@
         <DockPanel Margin="-10 0" 
                    Height="45" 
                    Grid.Column="1" 
-                   MouseDown="TitleBar_MouseDown">
+                   MouseDown="DockPanel_MouseDown">
             <TextBlock DockPanel.Dock="Left" 
                        VerticalAlignment="Center" 
                        Margin="30 0 0 0"
                        FontSize="16"
                        Foreground="White"
-                       Text="Đăng nhập bởi nhanvien001"/>
+                       Text="Đăng nhập bởi nhanvien001"
+                       MouseDown="TextBlock_MouseDown"/>
 
             <Button DockPanel.Dock="Right"
                     Background="Transparent" 
@@ -74,13 +76,14 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <materialDesign:PackIcon Margin="0 50 0 20" 
+            <materialDesign:PackIcon Margin="0 0 0 0" 
                                      HorizontalAlignment="Center" 
                                      Kind="HomeHeart" 
-                                     Height="150" Width="150"
-                                     Foreground="White"/>
+                                     Height="100" Width="100"
+                                     Foreground="White"
+                                     Grid.Row="0"/>
 
-            <ListBox Grid.Row="1" 
+            <ListBox Grid.Row="1" Grid.Column="1"
                      Name="LbxMenu" 
                      Foreground="White" 
                      SelectionChanged="ListBox_SelectionChanged">
@@ -96,18 +99,9 @@
 
                 <ListBoxItem Margin="0 5">
                     <StackPanel Margin="15 0"  Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="CityVariantOutline" 
+                        <materialDesign:PackIcon Kind="Payment" 
                                                  Height="40" Width="40" Margin="5" />
-                        <TextBlock Text="Loại phòng" 
-                                   FontSize="22" VerticalAlignment="Center" Margin="10 0" />
-                    </StackPanel>
-                </ListBoxItem>
-
-                <ListBoxItem Margin="0 5">
-                    <StackPanel Margin="15 0" Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="FileDocumentBoxOutline" 
-                                                 Height="40" Width="40" Margin="5" />
-                        <TextBlock Text="Thay đổi quy định" 
+                        <TextBlock Text="Thanh Toán" 
                                    FontSize="22" VerticalAlignment="Center" Margin="10 0" />
                     </StackPanel>
                 </ListBoxItem>
@@ -120,13 +114,25 @@
                                    FontSize="22" VerticalAlignment="Center" Margin="10 0" />
                     </StackPanel>
                 </ListBoxItem>
+                
+                <ListBoxItem Margin="0 5">
+                    <StackPanel Margin="15 0" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="FileDocumentBoxOutline" 
+                                                 Height="40" Width="40" Margin="5" />
+                        <TextBlock Text="Thay đổi quy định" 
+                                   FontSize="22" VerticalAlignment="Center" Margin="10 0" />
+                    </StackPanel>
+                </ListBoxItem>
+
+                
 
                 <ListBoxItem Margin="0 5">
                     <StackPanel Margin="15 0" Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="About" 
                                                  Height="40" Width="40" Margin="5" />
                         <TextBlock Text="Về chúng tôi" 
-                                   FontSize="22" VerticalAlignment="Center" Margin="10 0" />
+                                   FontSize="22" VerticalAlignment="Center" Margin="10 0"
+                                   />
                     </StackPanel>
                 </ListBoxItem>
 

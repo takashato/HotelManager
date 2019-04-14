@@ -24,14 +24,14 @@ namespace HotelManager.gui
     {
 
         public ObservableCollection<ThongTinPhong> DanhSachPhongTest { get; set; } = new ObservableCollection<ThongTinPhong>();
-        
+
         public DanhMucPhong()
         {
             InitializeComponent();
             DataContext = this;
             DanhSachPhongTest.Add(new ThongTinPhong() { Phong = "A101", LoaiPhong = "A-Normal", DonGia = 1000000M, TinhTrang = ThongTinPhong.TinhTrangPhong.ConTrong });
             DanhSachPhongTest.Add(new ThongTinPhong() { Phong = "B5.12", LoaiPhong = "B-VIP", DonGia = 2500000M, TinhTrang = ThongTinPhong.TinhTrangPhong.DaThue });
-            DanhSachPhongTest.Add(new ThongTinPhong() { Phong = "C303", LoaiPhong = "C-Normal", DonGia = 700000M, TinhTrang = ThongTinPhong.TinhTrangPhong.ConTrong });
+            DanhSachPhongTest.Add(new ThongTinPhong() { Phong = "C33", LoaiPhong = "C-Normal", DonGia = 700000M, TinhTrang = ThongTinPhong.TinhTrangPhong.DaThue });
             DanhSachPhongTest.Add(new ThongTinPhong() { Phong = "C303", LoaiPhong = "C-Normal", DonGia = 700000M, TinhTrang = ThongTinPhong.TinhTrangPhong.ConTrong });
             DanhSachPhongTest.Add(new ThongTinPhong() { Phong = "C303", LoaiPhong = "C-Normal", DonGia = 700000M, TinhTrang = ThongTinPhong.TinhTrangPhong.ConTrong });
             DanhSachPhongTest.Add(new ThongTinPhong() { Phong = "C303", LoaiPhong = "C-Normal", DonGia = 700000M, TinhTrang = ThongTinPhong.TinhTrangPhong.ConTrong });
@@ -94,25 +94,38 @@ namespace HotelManager.gui
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ThuePhong_Click(object sender, RoutedEventArgs e)
         {
-            if (SearchBar.Visibility == Visibility.Hidden)
+            //Truyền tham số tên phòng vào Form Thuê Phòng
+            int index = listview_DMPhong.SelectedIndex;
+            if (index < 0)
+                return;
+            string sophong = "Phòng " + DanhSachPhongTest[index].Phong;
+            gui.ThuePhong thuePhong = new ThuePhong(sophong);
+            thuePhong.Show();
+        }
+
+        private void ThanhToan_Click(object sender, RoutedEventArgs e)
+        {
+            var collection = listview_DMPhong.SelectedItems;
+            List<string> LstSoPhong = new List<string>();
+            for (int i = 0; i < collection.Count; i++)
             {
-                SearchBar.Visibility = Visibility.Visible;
-                SearchBar.Text = "";
+                int index = listview_DMPhong.Items.IndexOf(collection[i]);
+                ThongTinPhong thongTin = DanhSachPhongTest[index];
+                if (thongTin.TinhTrang == ThongTinPhong.TinhTrangPhong.ConTrong)
+                    continue;
+                LstSoPhong.Add(DanhSachPhongTest[index].Phong);
             }
-            else if (SearchBar.Visibility == Visibility.Visible)
-                SearchBar.Visibility = Visibility.Hidden;
-        }
-
-        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void ThuePhongBtn_Click(object sender, RoutedEventArgs e)
-        {
-            (new ThuePhong()).ShowDialog();
+            if(LstSoPhong.Count<1)
+            {
+                MessageBox.Show("Phòng trống");
+                return;
+            }
+            var grid = this.Parent as Grid;
+            grid.Children.Clear();
+            UC_ThanhToan thanhToan = new UC_ThanhToan(LstSoPhong);
+            grid.Children.Add(thanhToan);
         }
     }
 }
