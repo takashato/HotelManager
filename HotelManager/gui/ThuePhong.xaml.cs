@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using System.Data;
+using System.Collections.ObjectModel;
 
 namespace HotelManager.gui
 {
@@ -21,11 +22,16 @@ namespace HotelManager.gui
     /// </summary>
     public partial class ThuePhong : Window
     {
-        //List<KhachHang> khachHangs;
+        ObservableCollection<KhachHang> lstKH = new ObservableCollection<KhachHang>();
         public ThuePhong()
         {
             InitializeComponent();
-            //khachHangs = new List<KhachHang>(3);
+            
+        }
+        public ThuePhong(string Phong)
+        {
+            InitializeComponent();
+            SoPhong.Text = Phong;
             InitTable();
         }
 
@@ -38,8 +44,15 @@ namespace HotelManager.gui
                 khachHang.loaiKH = "a";
                 khachHang.CMND = "00";
                 khachHang.DiaChi = "Tran Duy Hung";
-                lstKhachHang.Items.Add(khachHang);
+                lstKH.Add(khachHang);
             }
+
+            List<string> LoaiKH = new List<string>();
+            LoaiKH.Add("Giau");
+            LoaiKH.Add("Ngheo");
+            LoaiKH.Add("NgheoVaiLon");
+            ComboLoaiKh.ItemsSource = LoaiKH;
+            lstKhachHang.ItemsSource = lstKH;
         }
 
         private void ColorZone_MouseDown(object sender, MouseButtonEventArgs e)
@@ -53,7 +66,7 @@ namespace HotelManager.gui
 
         private void Btn_close_Click(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            this.Close();
         }
 
         private void Btn_Minimize_Click(object sender, RoutedEventArgs e)
@@ -69,7 +82,10 @@ namespace HotelManager.gui
                 this.WindowState = WindowState.Maximized;
         }
 
-
+        private void Done_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Done");
+        }
     }
 
     public class KhachHang
@@ -79,4 +95,6 @@ namespace HotelManager.gui
         public string CMND { get; set; }
         public string DiaChi { get; set; }
     }
+
+    public enum LoaiKH { Thuong, Vip}
 }

@@ -13,6 +13,9 @@
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
         Title="ThuePhong" Height="450" Width="800" AllowsTransparency="True" WindowStyle="None"
         BorderThickness="1">
+    <Window.Resources>
+        
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -80,21 +83,13 @@
                                  Foreground="Black"
                                  VerticalAlignment="Center"/>
 
-        <ComboBox Name="SoPhong" 
-                  materialDesign:HintAssist.Hint="Số Phòng"
-                  Grid.Row="1"
-                  Grid.Column="1"
-                  Margin="12"
-                  VerticalAlignment="Center">
-            <ComboBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel />
-                </ItemsPanelTemplate>
-            </ComboBox.ItemsPanel>
-            <ComboBoxItem>alpha</ComboBoxItem>
-            <ComboBoxItem>beta</ComboBoxItem>
-            <ComboBoxItem>gamma</ComboBoxItem>
-        </ComboBox>
+        <TextBlock Grid.Column="1"
+                   Grid.Row="1"
+                   Text="Số Phòng"
+                   VerticalAlignment="Center"
+                   FontSize="18"
+                   Name="SoPhong">
+        </TextBlock>
 
         <materialDesign:PackIcon Kind="CalendarText" 
                                  Margin="12"
@@ -113,46 +108,42 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Stretch"/>
         <Grid Grid.ColumnSpan="4" Grid.Row="2"/>
+        
         <ToolBarPanel Grid.ColumnSpan="4" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
                 ToolTip="MaterialDesignFloatingActionDarkButton"
-                    Margin="12"
-                    VerticalAlignment="Center">
-                <materialDesign:PackIcon 
-                    Kind="PersonAddOutline"
-                    Height="24"
-                    Width="24"/>
-            </Button>
-
-            <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
-                ToolTip="MaterialDesignFloatingActionDarkButton"
                 Margin="12"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center"
+                    Click="Done_Click">
                 <materialDesign:PackIcon 
                     Kind="Check"
                     Height="24"
                     Width="24"/>
             </Button>
         </ToolBarPanel>
+        
         <DataGrid Grid.ColumnSpan="4"
                   Grid.Row="2"
                   Margin="12"
                   BorderBrush="#35CCAF"
                   BorderThickness="1"
                   Name="lstKhachHang"
-                  ItemsSource="{Binding item1}">
+                  DataContext="lstKh" 
+                  AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding tenKH}"
-                                    Header="Ten"
+
+                <materialDesign:MaterialDataGridTextColumn Binding="{Binding tenKH}"
+                                    Header="Tên Khách Hàng"
                                     EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}" />
-                <materialDesign:MaterialDataGridComboBoxColumn Header="Loại Khách Hàng">
-                </materialDesign:MaterialDataGridComboBoxColumn>
 
-                <materialDesign:MaterialDataGridTextColumn Header="Số CMND">
-
+                <materialDesign:MaterialDataGridComboBoxColumn x:Name="ComboLoaiKh" Header="Loại Khách Hàng" SelectedValueBinding="{Binding loaiKH}"></materialDesign:MaterialDataGridComboBoxColumn>
+                <materialDesign:MaterialDataGridTextColumn Header="Số CMND" 
+                                                           Binding="{Binding CMND}"
+                                                           EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
                 </materialDesign:MaterialDataGridTextColumn>
-                <materialDesign:MaterialDataGridTextColumn Header="Địa Chỉ">
-
+                <materialDesign:MaterialDataGridTextColumn Header="Địa Chỉ"
+                                                           Binding="{Binding DiaChi}"
+                                                           EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
                 </materialDesign:MaterialDataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
