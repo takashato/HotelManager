@@ -25,9 +25,19 @@ namespace HotelManager.gui
         public MainWindow()
         {
             InitializeComponent();
+            GrdContent.Children.Add(new DanhMucPhong());
         }
 
-                private void Btn_close_Click(object sender, RoutedEventArgs e)
+        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Window window = this as Window;
+            if (window != null)
+            {
+                window.DragMove();
+            }
+        }
+
+        private void Btn_close_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
         }
@@ -111,5 +121,6 @@ namespace HotelManager.gui
                 window.DragMove();
             }
         }
+
     }
 }

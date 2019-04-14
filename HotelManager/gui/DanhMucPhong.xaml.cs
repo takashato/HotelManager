@@ -24,7 +24,6 @@ namespace HotelManager.gui
     {
 
         public ObservableCollection<ThongTinPhong> DanhSachPhongTest { get; set; } = new ObservableCollection<ThongTinPhong>();
-
         public DanhMucPhong()
         {
             InitializeComponent();

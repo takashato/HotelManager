@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotelManager.gui"
         mc:Ignorable="d"
+
         Title="Hotel Management" Height="720" Width="1280"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -12,10 +13,12 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="22"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
+
         WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None"
         MouseDown="Window_MouseDown">
 
     <Grid Background="#35CCAF" MouseDown="Grid_MouseDown">
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -31,7 +34,9 @@
         <DockPanel Margin="-10 0" 
                    Height="45" 
                    Grid.Column="1" 
+
                    MouseDown="DockPanel_MouseDown">
+
             <TextBlock DockPanel.Dock="Left" 
                        VerticalAlignment="Center" 
                        Margin="30 0 0 0"
@@ -39,6 +44,7 @@
                        Foreground="White"
                        Text="Đăng nhập bởi nhanvien001"
                        MouseDown="TextBlock_MouseDown"/>
+
 
             <Button DockPanel.Dock="Right"
                     Background="Transparent" 
@@ -123,16 +129,12 @@
                                    FontSize="22" VerticalAlignment="Center" Margin="10 0" />
                     </StackPanel>
                 </ListBoxItem>
-
-                
-
                 <ListBoxItem Margin="0 5">
                     <StackPanel Margin="15 0" Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="About" 
                                                  Height="40" Width="40" Margin="5" />
                         <TextBlock Text="Về chúng tôi" 
-                                   FontSize="22" VerticalAlignment="Center" Margin="10 0"
-                                   />
+                                   FontSize="22" VerticalAlignment="Center" Margin="10 0" />
                     </StackPanel>
                 </ListBoxItem>
 
