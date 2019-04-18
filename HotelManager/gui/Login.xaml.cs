@@ -17,9 +17,9 @@ namespace HotelManager.gui
     /// <summary>
     /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class LoginWindow : Window
     {
-        public Login()
+        public LoginWindow()
         {
             InitializeComponent();
         }
@@ -31,9 +31,8 @@ namespace HotelManager.gui
 
         private void Btn_DangNhap_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow main = new MainWindow();
             this.Hide();
-            main.Show();
+            App.Instance.MainWindow.Show();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
