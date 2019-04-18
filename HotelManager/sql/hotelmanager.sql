@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 18, 2019 lúc 07:58 PM
+-- Thời gian đã tạo: Th4 18, 2019 lúc 08:06 PM
 -- Phiên bản máy phục vụ: 10.1.33-MariaDB
 -- Phiên bản PHP: 7.2.6
 
@@ -43,7 +43,7 @@ CREATE TABLE `staff` (
 --
 
 INSERT INTO `staff` (`id`, `username`, `password`, `fullname`, `lastLoginDate`, `createdDate`, `level`) VALUES
-(1, 'admin', '$2y$12$TTOxYXJzbKQZYIj1FMY5Q.4/y82wo49Ch.UgV9q.hQtFwBpyVhFWG', 'Admin', '2019-04-18 00:00:00', '2019-04-18 00:00:00', 2);
+(1, 'admin', '$2a$10$7pPFABJzPyWqey9ylmTB4.kyHn9DXO8LHISyrg8SMIbyA04LcRfcq', 'Admin', '2019-04-18 00:00:00', '2019-04-18 00:00:00', 2);
 
 --
 -- Chỉ mục cho các bảng đã đổ
