@@ -1,0 +1,47 @@
+﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+
+namespace HotelManager.db
+{
+    class DatabaseManager
+    {
+        private const string CONN_STR = "server=localhost;user=root;database=hotelmanager;port=3306;password=";
+
+        public static DatabaseManager Instance { get; set; } = new DatabaseManager(CONN_STR);
+
+        public static MySqlConnection Conn {
+            get
+            {
+                return Instance.Connection;
+            }
+        }
+
+
+        public MySqlConnection Connection { get; set; }
+
+        public DatabaseManager(string connStr)
+        {
+            Connection = new MySqlConnection(connStr);
+        }
+
+        public void Initialize()
+        {
+            Console.WriteLine("Connecting to Database...");
+            try
+            {
+                Connection.Open();
+                Console.WriteLine("Connected to Database.");
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Không thể kết nối đến database.\nVui lòng kiểm tra lại thông tin cấu hình.\n\nInfo: " + ex.Message, "Lỗi");
+                Application.Current.Shutdown();
+            }
+        }
+    }
+}

@@ -1,4 +1,5 @@
-﻿using HotelManager.gui;
+﻿using HotelManager.db;
+using HotelManager.gui;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -30,8 +31,11 @@ namespace HotelManager
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
+            DatabaseManager.Instance.Initialize();
+
             _MainWindow = new MainWindow();
             _LoginWindow = new LoginWindow();
+
             _LoginWindow.Show();
         }
 
