@@ -13,7 +13,8 @@
         TextElement.FontSize="22"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
         WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None"
-        MouseDown="Window_MouseDown">
+        MouseDown="Window_MouseDown"
+        Loaded="OnLoaded">
 
     <Grid Background="#35CCAF" MouseDown="Grid_MouseDown">
         <Grid.ColumnDefinitions>
@@ -28,18 +29,26 @@
         </Grid.RowDefinitions>
 
         <!-- Title bar -->
-        <DockPanel Margin="-10 0" 
+        <DockPanel Margin="0,0,10,0" 
                    Height="45" 
                    Grid.Column="1" 
-                   MouseDown="DockPanel_MouseDown">
-            <TextBlock DockPanel.Dock="Left" 
-                       VerticalAlignment="Center" 
-                       Margin="30 0 0 0"
-                       FontSize="16"
-                       Foreground="White"
-                       Text="Đăng nhập bởi nhanvien001"
-                       MouseDown="TextBlock_MouseDown"/>
-
+                   MouseDown="DockPanel_MouseDown" Grid.ColumnSpan="2">
+            <Button
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Margin="0 0 0 0"
+                ToolTip="MaterialDesignFlatButton">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Account" Margin="0 0 0 0" VerticalAlignment="Center"/>
+                    <TextBlock DockPanel.Dock="Left" 
+                           VerticalAlignment="Center" 
+                           Margin="10 0 0 0"
+                           FontSize="16"
+                           Foreground="White"
+                           Text="nhanvien001"
+                           MouseDown="TextBlock_MouseDown"
+                           Name="txtStaff"/>
+                </StackPanel>
+            </Button>
             <Button DockPanel.Dock="Right"
                     Background="Transparent" 
                     HorizontalAlignment="Right" 
@@ -114,7 +123,7 @@
                                    FontSize="22" VerticalAlignment="Center" Margin="10 0" />
                     </StackPanel>
                 </ListBoxItem>
-                
+
                 <ListBoxItem Margin="0 5">
                     <StackPanel Margin="15 0" Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FileDocumentBoxOutline" 
@@ -124,7 +133,7 @@
                     </StackPanel>
                 </ListBoxItem>
 
-                
+
 
                 <ListBoxItem Margin="0 5">
                     <StackPanel Margin="15 0" Orientation="Horizontal">

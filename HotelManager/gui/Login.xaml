@@ -13,17 +13,18 @@
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
         WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown"
         Title="Hotel Management Login" Height="440" Width="350" WindowStyle="None" ResizeMode="NoResize">
+    <materialDesign:DialogHost>
+        <!-- Windows Content -->
+        <Grid Background="#35CCAF">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-    <Grid Background="#35CCAF">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="80"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-
-        <!-- Row 0: Power button -->
-        <DockPanel Margin="0 10 0 0">
-            <Button HorizontalAlignment="Center" 
+            <!-- Row 0: Power button -->
+            <DockPanel Margin="0 10 0 0">
+                <Button HorizontalAlignment="Center" 
                     Background="Transparent" 
                     materialDesign:ShadowAssist.ShadowDepth="Depth0"
                     Width="100" 
@@ -31,12 +32,12 @@
                     Click="Button_Click"
                     BorderThickness="2"
                     Foreground="White">
-                <materialDesign:PackIcon Kind="Power"/>
-            </Button>
-        </DockPanel>
-        
-        <!-- Row 1: Quan Ly Khach San Label -->
-        <TextBlock Text="- QUẢN LÝ KHÁCH SẠN -" 
+                    <materialDesign:PackIcon Kind="Power"/>
+                </Button>
+            </DockPanel>
+
+            <!-- Row 1: Quan Ly Khach San Label -->
+            <TextBlock Text="- QUẢN LÝ KHÁCH SẠN -" 
                    Style="{StaticResource MaterialDesignDisplay3TextBlock}"
                    FontWeight="Bold"
                    FontSize="18" 
@@ -46,8 +47,8 @@
                    Grid.Row="1"
                    Margin="0 0 0 20"/>
 
-        <!-- Row 2: Form login -->
-        <materialDesign:Card Margin="40 0 40 60"
+            <!-- Row 2: Form login -->
+            <materialDesign:Card Margin="40 0 40 60"
                              VerticalAlignment="Stretch"
                              Background="#87FFEB"
                              Grid.Row="2">
@@ -59,13 +60,13 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBox materialDesign:HintAssist.Hint="Tên đăng nhập"    
+                    <TextBox x:Name="tbUsername" materialDesign:HintAssist.Hint="Tên đăng nhập"    
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Margin="10"/>
 
-                    <PasswordBox materialDesign:HintAssist.Hint="Mật khẩu"
+                    <PasswordBox x:Name="pbPassword" materialDesign:HintAssist.Hint="Mật khẩu"
                             Margin="10" Grid.Row="1"/>
-                    
+
                     <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
                             materialDesign:RippleAssist.IsDisabled="True"
                             Content="Đăng Nhập" Margin="10"
@@ -74,7 +75,8 @@
                             Foreground="White"/>
 
                 </Grid>
-            
-        </materialDesign:Card>
-    </Grid>
+
+            </materialDesign:Card>
+        </Grid>
+    </materialDesign:DialogHost>
 </Window>

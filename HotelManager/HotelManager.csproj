@@ -112,6 +112,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="data\Session.cs" />
     <Compile Include="db\DatabaseManager.cs" />
     <Compile Include="db\model\Staff.cs" />
     <Compile Include="gui\BaoCao.xaml.cs">
@@ -178,6 +179,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="sql\hotelmanager.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

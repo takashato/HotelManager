@@ -27,7 +27,22 @@ namespace HotelManager.gui
             InitializeComponent();
         }
 
-                private void Btn_close_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Force MainWindow update its contents
+        /// </summary>
+        private void Update()
+        {
+            if (App.Instance._Session == null) return; // Do not update when is not logged in!!!
+            txtStaff.Text = App.Instance._Session.CurrentStaff.Fullname;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Update();
+            Console.WriteLine("MainWindow loaded.");
+        }
+
+        private void Btn_close_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
         }

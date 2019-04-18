@@ -1,4 +1,5 @@
-﻿using HotelManager.db;
+﻿using HotelManager.data;
+using HotelManager.db;
 using HotelManager.gui;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,8 @@ namespace HotelManager
 
         public MainWindow _MainWindow { get; set; }
         public LoginWindow _LoginWindow { get; set; }
+
+        public Session _Session { get; set; }
 
         private void OnStartup(object sender, StartupEventArgs e)
         {

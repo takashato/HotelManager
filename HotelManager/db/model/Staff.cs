@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HotelManager.db.model
 {
-    class Staff
+    public class Staff
     {
         public int Id { get; set; }
         public string Username { get; set; }
