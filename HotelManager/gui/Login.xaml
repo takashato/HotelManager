@@ -46,7 +46,8 @@
                    VerticalAlignment="Center"
                    Grid.Row="1"
                    Margin="0 0 0 20"/>
-
+            <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center" Margin="0 25 0 0" Grid.Row="1" TextWrapping="Wrap" Text="HotelManager" FontSize="12"/>
             <!-- Row 2: Form login -->
             <materialDesign:Card Margin="40 0 40 60"
                              VerticalAlignment="Stretch"
