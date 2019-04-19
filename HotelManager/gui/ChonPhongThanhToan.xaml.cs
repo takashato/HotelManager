@@ -47,7 +47,7 @@ namespace HotelManager.gui
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             UC_ThanhToan.Phong phong = new UC_ThanhToan.Phong();
-            phong.SoPhong = this.DMPhong.DanhSachPhongTest[this.DMPhong.listview_DMPhong.SelectedIndex].Phong;
+            phong.SoPhong = this.DMPhong.RoomList[this.DMPhong.listview_DMPhong.SelectedIndex].Name;
             phongs.Add(phong);
         }
     }

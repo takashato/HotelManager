@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,13 @@ namespace HotelManager.db.model
         public DateTime LastLoginDate { get; set; }
         public DateTime CreatedDate { get; set; }
         public int Level { get; set; }
+
+        public static Staff GetByUsername(string username)
+        {
+            using (var conn = DatabaseManager.Conn) // Syntatic connection usage
+            {
+                return conn.QueryFirstOrDefault<Staff>("SELECT * FROM `staff` WHERE `username` = @username", new { username = username });
+            }
+        }
     }
 }

@@ -44,27 +44,24 @@ namespace HotelManager.gui
             string username = tbUsername.Text;
             string password = pbPassword.Password;
 
-            using(var conn = DatabaseManager.Conn) // Syntatic connection usage
+            Staff staff = Staff.GetByUsername(username);
+            if (staff == null)
             {
-                Staff staff = conn.QueryFirstOrDefault<Staff>("SELECT * FROM `staff` WHERE `username` = @username", new { username = username });
-                if (staff == null)
-                {
-                    DialogHost.CloseDialogCommand.Execute(null, null);
-                    DialogHost.Show(new MessageDialog("Tài khoản không tồn tại!"));
-                }
-                else if (!BCrypt.Net.BCrypt.Verify(password, staff.Password))
-                {
-                    DialogHost.CloseDialogCommand.Execute(null, null);
-                    DialogHost.Show(new MessageDialog("Mật khẩu không chính xác!"));
-                }
-                else
-                {
-                    // Store session
-                    App.Instance._Session = new data.Session(staff);
-                    // Show form
-                    this.Hide();
-                    App.Instance._MainWindow.Show();
-                }
+                DialogHost.CloseDialogCommand.Execute(null, null);
+                DialogHost.Show(new MessageDialog("Tài khoản không tồn tại!"));
+            }
+            else if (!BCrypt.Net.BCrypt.Verify(password, staff.Password))
+            {
+                DialogHost.CloseDialogCommand.Execute(null, null);
+                DialogHost.Show(new MessageDialog("Mật khẩu không chính xác!"));
+            }
+            else
+            {
+                // Store session
+                App.Instance._Session = new data.Session(staff);
+                // Show form
+                this.Hide();
+                App.Instance._MainWindow.Show();
             }
         }
 

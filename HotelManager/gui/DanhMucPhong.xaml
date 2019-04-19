@@ -44,7 +44,7 @@
         </DockPanel>
 
         <ListView Grid.Row="1" Grid.Column="1" Margin="20" 
-                  ItemsSource="{Binding DanhSachPhongTest}"
+                  ItemsSource="{Binding RoomList}"
                   Name="listview_DMPhong">
             <ListView.ContextMenu>
                 <ContextMenu>
@@ -55,16 +55,16 @@
 
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Phong}"
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}"
                                     Header="Phòng"
                                     Width="170"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding LoaiPhong}" 
+                    <GridViewColumn DisplayMemberBinding="{Binding Type}" 
                                     Header="Loại Phòng" 
                                     Width="210"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding DonGiaStr}" 
+                    <GridViewColumn DisplayMemberBinding="{Binding Price}" 
                                     Header="Đơn Giá"
                                     Width="240"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding TinhTrangStr}" 
+                    <GridViewColumn DisplayMemberBinding="{Binding Status}" 
                                     Header="Tình Trạng"/>
                 </GridView>
             </ListView.View>
