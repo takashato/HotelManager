@@ -35,7 +35,7 @@
                    Background="#00000000"
                    MouseDown="TitleBar_MouseDown">
 
-            <StackPanel Orientation="Horizontal" Margin="90 0">
+            <StackPanel Orientation="Horizontal" Margin="100 0">
                 <materialDesign:PackIcon Kind="Account" 
                                          Foreground="White" 
                                          VerticalAlignment="Center"/>

@@ -93,7 +93,18 @@
     <Compile Include="gui\PaymentWindow.xaml.cs">
       <DependentUpon>PaymentWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="gui\RoomTypeUC.xaml.cs">
+      <DependentUpon>RoomTypeUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="utils\EnumerationExtension.cs" />
+    <Page Include="gui\AddRoomTypeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\EditRoomTypeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="gui\EditRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -155,6 +166,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="gui\RentingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\RoomTypeUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

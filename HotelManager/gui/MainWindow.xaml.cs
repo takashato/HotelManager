@@ -76,6 +76,7 @@ namespace HotelManager.gui
                     break;
                 case 1:
                     GrdContent.Children.Clear();
+                    GrdContent.Children.Add(new RoomTypeUC());
                     break;
                 case 2:
                     GrdContent.Children.Clear();
