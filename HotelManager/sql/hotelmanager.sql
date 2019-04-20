@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 18, 2019 lúc 08:06 PM
+-- Thời gian đã tạo: Th4 20, 2019 lúc 10:14 AM
 -- Phiên bản máy phục vụ: 10.1.33-MariaDB
 -- Phiên bản PHP: 7.2.6
 
@@ -21,6 +21,46 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `hotelmanager`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `room`
+--
+
+CREATE TABLE `room` (
+  `id` int(11) NOT NULL,
+  `name` varchar(128) NOT NULL,
+  `type` varchar(128) NOT NULL,
+  `note` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `room`
+--
+
+INSERT INTO `room` (`id`, `name`, `type`, `note`) VALUES
+(1, '101', 'A', 'N/A');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `room_type`
+--
+
+CREATE TABLE `room_type` (
+  `type` varchar(128) NOT NULL,
+  `price` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `room_type`
+--
+
+INSERT INTO `room_type` (`type`, `price`) VALUES
+('A', 150000),
+('B', 170000),
+('C', 200000);
 
 -- --------------------------------------------------------
 
@@ -50,6 +90,19 @@ INSERT INTO `staff` (`id`, `username`, `password`, `fullname`, `lastLoginDate`, 
 --
 
 --
+-- Chỉ mục cho bảng `room`
+--
+ALTER TABLE `room`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Chỉ mục cho bảng `room_type`
+--
+ALTER TABLE `room_type`
+  ADD PRIMARY KEY (`type`);
+
+--
 -- Chỉ mục cho bảng `staff`
 --
 ALTER TABLE `staff`
@@ -59,6 +112,12 @@ ALTER TABLE `staff`
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
+
+--
+-- AUTO_INCREMENT cho bảng `room`
+--
+ALTER TABLE `room`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `staff`
