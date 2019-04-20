@@ -80,15 +80,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="gui\BaoCao.xaml">
+    <Compile Include="gui\EditRoomWindow.xaml.cs">
+      <DependentUpon>EditRoomWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gui\AddRoomWindow.xaml.cs">
+      <DependentUpon>AddRoomWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gui\MassPaymentWindow.xaml.cs">
+      <DependentUpon>MassPaymentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gui\PaymentWindow.xaml.cs">
+      <DependentUpon>PaymentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="utils\EnumerationExtension.cs" />
+    <Page Include="gui\EditRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="gui\ChonPhongThanhToan.xaml">
+    <Page Include="gui\AddRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="gui\DanhMucPhong.xaml">
+    <Page Include="gui\MassPaymentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\PaymentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\RoomListUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -100,7 +121,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="gui\Login.xaml">
+    <Page Include="gui\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,14 +137,8 @@
     <Compile Include="db\DatabaseManager.cs" />
     <Compile Include="db\model\Room.cs" />
     <Compile Include="db\model\Staff.cs" />
-    <Compile Include="gui\BaoCao.xaml.cs">
-      <DependentUpon>BaoCao.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="gui\ChonPhongThanhToan.xaml.cs">
-      <DependentUpon>ChonPhongThanhToan.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="gui\DanhMucPhong.xaml.cs">
-      <DependentUpon>DanhMucPhong.xaml</DependentUpon>
+    <Compile Include="gui\RoomListUC.xaml.cs">
+      <DependentUpon>RoomListUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="gui\dialog\LoadingDialog.xaml.cs">
       <DependentUpon>LoadingDialog.xaml</DependentUpon>
@@ -131,28 +146,21 @@
     <Compile Include="gui\dialog\MessageDialog.xaml.cs">
       <DependentUpon>MessageDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="gui\Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
+    <Compile Include="gui\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="gui\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="gui\ThuePhong.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="gui\UC_ThanhToan.xaml">
+    <Page Include="gui\RentingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="gui\ThuePhong.xaml.cs">
-      <DependentUpon>ThuePhong.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="gui\UC_ThanhToan.xaml.cs">
-      <DependentUpon>UC_ThanhToan.xaml</DependentUpon>
+    <Compile Include="gui\RentingWindow.xaml.cs">
+      <DependentUpon>RentingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 using System.Runtime.InteropServices;
 
 namespace HotelManager.gui
@@ -32,6 +31,8 @@ namespace HotelManager.gui
         /// </summary>
         private void Update()
         {
+            GrdContent.Children.Add(new RoomListUC());
+
             if (App.Instance._Session == null) return; // Do not update when is not logged in!!!
             txtStaff.Text = App.Instance._Session.CurrentStaff.Fullname;
         }
@@ -60,36 +61,27 @@ namespace HotelManager.gui
                 this.WindowState = WindowState.Maximized;
         }
 
-        private void Btn_About_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void Btn_ThuePhong_Click(object sender, RoutedEventArgs e)
-        {
-            gui.ThuePhong thuePhong = new gui.ThuePhong();
-            thuePhong.Show();
-        }
-
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int listItemSelectedIndex = LbxMenu.SelectedIndex;
+
+            transitioningContentSlide.OnApplyTemplate();
+            GrdCursor.Margin = new Thickness(10, (10 + (86 * listItemSelectedIndex)), 0, 0);
+
             switch (listItemSelectedIndex)
             {
                 case 0:
                     GrdContent.Children.Clear();
-                    GrdContent.Children.Add(new DanhMucPhong());
+                    GrdContent.Children.Add(new RoomListUC());
                     break;
                 case 1:
                     GrdContent.Children.Clear();
-                    GrdContent.Children.Add(new UC_ThanhToan());
                     break;
                 case 2:
                     GrdContent.Children.Clear();
-                    GrdContent.Children.Add(new BaoCao());
                     break;
                 case 3:
                     GrdContent.Children.Clear();
-                    MessageBox.Show("Đăng Nhập Kiểm tra");
                     break;
                 case 4:
                     GrdContent.Children.Clear();
@@ -97,34 +89,10 @@ namespace HotelManager.gui
             }
         }
 
-        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
-        }
-
-        private void DockPanel_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Window window = this as Window;
-            
-            if (window != null)
-            {
-                if(!(e.LeftButton == MouseButtonState.Pressed))
-                {
-                    e.Handled = true;
-                    return;
-                }
-                window.DragMove();
-            }
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
         }
     }
 }

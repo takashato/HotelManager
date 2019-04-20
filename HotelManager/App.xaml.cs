@@ -34,7 +34,7 @@ namespace HotelManager
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
-            DatabaseManager.Instance.Initialize();
+            //DatabaseManager.Instance.Initialize();
 
             _MainWindow = new MainWindow();
             _LoginWindow = new LoginWindow();

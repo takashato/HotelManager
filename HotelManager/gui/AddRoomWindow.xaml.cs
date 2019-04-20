@@ -10,28 +10,29 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using System.Collections.ObjectModel;
 namespace HotelManager.gui
 {
     /// <summary>
-    /// Interaction logic for BaoCao.xaml
+    /// Interaction logic for AddRoomWindow.xaml
     /// </summary>
-    public partial class BaoCao : UserControl
+    public partial class AddRoomWindow : Window
     {
-        ObservableCollection<BanBaoCao> BaoCaos = new ObservableCollection<BanBaoCao>();
-        public BaoCao()
+        public AddRoomWindow()
         {
             InitializeComponent();
-            TableBaoCao.ItemsSource = BaoCaos;
         }
-        private class BanBaoCao
+
+        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            string LoaiPhong { get; set; }
-            ulong DoanhThu { get; set; }
-            string TiLe { get; set; }
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

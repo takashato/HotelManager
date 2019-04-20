@@ -13,8 +13,9 @@
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
         WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown"
         Title="Hotel Management Login" Height="440" Width="350" WindowStyle="None" ResizeMode="NoResize">
+    
     <materialDesign:DialogHost>
-        <!-- Windows Content -->
+
         <Grid Background="#35CCAF">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
@@ -25,34 +26,33 @@
             <!-- Row 0: Power button -->
             <DockPanel Margin="0 10 0 0">
                 <Button HorizontalAlignment="Center" 
-                    Background="Transparent" 
-                    materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                    Width="100" 
-                    ToolTip="Đóng ứng dụng"
-                    Click="Button_Click"
-                    BorderThickness="2"
-                    Foreground="White">
+                        Background="Transparent" 
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        Width="100" 
+                        ToolTip="Đóng ứng dụng"
+                        Click="btnClose_Click"
+                        BorderThickness="2"
+                        Foreground="White">
                     <materialDesign:PackIcon Kind="Power"/>
                 </Button>
             </DockPanel>
 
             <!-- Row 1: Quan Ly Khach San Label -->
             <TextBlock Text="- QUẢN LÝ KHÁCH SẠN -" 
-                   Style="{StaticResource MaterialDesignDisplay3TextBlock}"
-                   FontWeight="Bold"
-                   FontSize="18" 
-                   Foreground="#FFFFFF" 
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   Grid.Row="1"
-                   Margin="0 0 0 20"/>
-            <TextBlock HorizontalAlignment="Center"
-                   VerticalAlignment="Center" Margin="0 25 0 0" Grid.Row="1" TextWrapping="Wrap" Text="HotelManager" FontSize="12"/>
+                       Style="{StaticResource MaterialDesignDisplay3TextBlock}"
+                       FontWeight="Bold"
+                       FontSize="18" 
+                       Foreground="#FFFFFF" 
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Grid.Row="1"
+                       Margin="0 0 0 20"/>
+
             <!-- Row 2: Form login -->
             <materialDesign:Card Margin="40 0 40 60"
-                             VerticalAlignment="Stretch"
-                             Background="#87FFEB"
-                             Grid.Row="2">
+                                 VerticalAlignment="Stretch"
+                                 Background="#87FFEB"
+                                 Grid.Row="2">
 
                 <Grid Background="White" Margin="10" VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
@@ -61,12 +61,14 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBox x:Name="tbUsername" materialDesign:HintAssist.Hint="Tên đăng nhập"    
+                    <TextBox x:Name="tbUsername" 
+                             materialDesign:HintAssist.Hint="Tên đăng nhập"    
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              Margin="10"/>
 
-                    <PasswordBox x:Name="pbPassword" materialDesign:HintAssist.Hint="Mật khẩu"
-                            Margin="10" Grid.Row="1"/>
+                    <PasswordBox x:Name="pbPassword" 
+                                 materialDesign:HintAssist.Hint="Mật khẩu"
+                                 Margin="10" Grid.Row="1"/>
 
                     <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
                             materialDesign:RippleAssist.IsDisabled="True"

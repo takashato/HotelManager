@@ -32,7 +32,7 @@ namespace HotelManager.gui
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
@@ -41,28 +41,38 @@ namespace HotelManager.gui
         {
             DialogHost.Show(new LoadingDialog());
 
-            string username = tbUsername.Text;
-            string password = pbPassword.Password;
-
-            Staff staff = Staff.GetByUsername(username);
-            if (staff == null)
+            bool testUIWithoutDatabase = true;
+            if (testUIWithoutDatabase)
             {
-                DialogHost.CloseDialogCommand.Execute(null, null);
-                DialogHost.Show(new MessageDialog("Tài khoản không tồn tại!"));
-            }
-            else if (!BCrypt.Net.BCrypt.Verify(password, staff.Password))
-            {
-                DialogHost.CloseDialogCommand.Execute(null, null);
-                DialogHost.Show(new MessageDialog("Mật khẩu không chính xác!"));
-            }
-            else
-            {
-                // Store session
-                App.Instance._Session = new data.Session(staff);
-                // Show form
                 this.Hide();
                 App.Instance._MainWindow.Show();
             }
+            else
+            {
+                string username = tbUsername.Text;
+                string password = pbPassword.Password;
+
+                Staff staff = Staff.GetByUsername(username);
+                if (staff == null)
+                {
+                    DialogHost.CloseDialogCommand.Execute(null, null);
+                    DialogHost.Show(new MessageDialog("Tài khoản không tồn tại!"));
+                }
+                else if (!BCrypt.Net.BCrypt.Verify(password, staff.Password))
+                {
+                    DialogHost.CloseDialogCommand.Execute(null, null);
+                    DialogHost.Show(new MessageDialog("Mật khẩu không chính xác!"));
+                }
+                else
+                {
+                    // Store session
+                    App.Instance._Session = new data.Session(staff);
+                    // Show form
+                    this.Hide();
+                    App.Instance._MainWindow.Show();
+                }
+            }   
+
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
