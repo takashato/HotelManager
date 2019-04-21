@@ -47,8 +47,22 @@ namespace HotelManager.gui
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             _roomToEdit.Name = txbNewRoomName.Text;
-            _roomToEdit.Type = txbNewRoomType.Text;
+            _roomToEdit.Type = cbNewRoomType.Text;
             //_phongMuonSua.DonGia = Convert.ToDecimal( txbDonGiaMoi.Text );
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            cbNewRoomType.ItemsSource = RoomType.GetRoomType();
+            cbNewRoomType.DisplayMemberPath = "Type";
+            cbNewRoomType.SelectedValuePath = "Price";
+        }
+
+        private string PriceStr => string.Format("{0:N0}", cbNewRoomType.SelectedValue);
+
+        private void CbNewRoomType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            txbNewPrice.Text = PriceStr;
         }
     }
 }

@@ -14,7 +14,7 @@
         TextElement.FontSize="18"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
         Height="430" Width="350" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" Loaded="Window_Loaded">
 
     <Grid Background="#35CCAF">
         <Grid.RowDefinitions>
@@ -82,7 +82,7 @@
                 <TextBox Grid.Column="1" Grid.Row="4" Margin="0 0 5 5" IsReadOnly="True" Name="txbOldPrice"/>
                 <TextBox Grid.Column="1" Grid.Row="6" Margin="0 0 5 5" IsReadOnly="True" Name="txbOldNote"/>
                 <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="1" Margin="0 0 5 5" Name="txbNewRoomName"/>
-                <ComboBox Foreground="#00B894" Grid.Column="1" Grid.Row="3" Margin="0 0 5 5" Name="txbNewRoomType"/>
+                <ComboBox Foreground="#00B894" Grid.Column="1" Grid.Row="3" Margin="0 0 5 5" Name="cbNewRoomType" SelectionChanged="CbNewRoomType_SelectionChanged"/>
                 <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="5" Margin="0 0 5 5" IsReadOnly="True" Name="txbNewPrice" />
                 <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="7" Margin="0 0 5 5" AcceptsReturn="True" Name="txbNewNote"/>
 

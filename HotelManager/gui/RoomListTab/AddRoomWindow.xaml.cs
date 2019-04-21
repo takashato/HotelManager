@@ -43,9 +43,11 @@ namespace HotelManager.gui
             cbRoomType.SelectedValuePath = "Price";
         }
 
+        private string PriceStr => string.Format("{0:N0}", cbRoomType.SelectedValue);
+
         private void CbRoomType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            txbPrice.Text = cbRoomType.SelectedValue.ToString();
+            txbPrice.Text = PriceStr;
         }
     }
 }
