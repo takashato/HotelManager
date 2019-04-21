@@ -155,7 +155,7 @@
 
                 <DataGrid  ItemsSource="{Binding ListGuestType}"
                            Grid.Row="1" 
-                           Margin="20 0 20 20">
+                           Margin="20 0 20 5">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Số Khách" 
                                             Width="*" IsReadOnly="True" />

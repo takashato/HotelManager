@@ -81,9 +81,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="db\model\RoomType.cs" />
-    <Compile Include="gui\RegulationGuestSurchargeUC.xaml.cs">
-      <DependentUpon>RegulationGuestSurchargeUC.xaml</DependentUpon>
-    </Compile>
     <Compile Include="gui\RegulationUC.xaml.cs">
       <DependentUpon>RegulationUC.xaml</DependentUpon>
     </Compile>
@@ -93,23 +90,13 @@
     <Compile Include="gui\AddRoomWindow.xaml.cs">
       <DependentUpon>AddRoomWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="gui\RegulationGuestTypeUC.xaml.cs">
-      <DependentUpon>RegulationGuestTypeUC.xaml</DependentUpon>
-    </Compile>
     <Compile Include="gui\MassPaymentWindow.xaml.cs">
       <DependentUpon>MassPaymentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="gui\PaymentWindow.xaml.cs">
       <DependentUpon>PaymentWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="gui\RegulationRoomTypeUC.xaml.cs">
-      <DependentUpon>RegulationRoomTypeUC.xaml</DependentUpon>
-    </Compile>
     <Compile Include="utils\EnumerationExtension.cs" />
-    <Page Include="gui\RegulationGuestSurchargeUC.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="gui\RegulationUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -122,19 +109,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="gui\RegulationGuestTypeUC.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="gui\MassPaymentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="gui\PaymentWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="gui\RegulationRoomTypeUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
