@@ -114,15 +114,6 @@
                 </ListBoxItem>
 
                 <ListBoxItem Margin="0 5">
-                    <StackPanel Margin="15 0"  Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="CityVariantOutline" 
-                                                 Height="40" Width="40" Margin="5" />
-                        <TextBlock Text="Loại phòng" 
-                                   FontSize="22" VerticalAlignment="Center" Margin="10 0" />
-                    </StackPanel>
-                </ListBoxItem>
-
-                <ListBoxItem Margin="0 5">
                     <StackPanel Margin="15 0" Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FileDocumentBoxOutline" 
                                                  Height="40" Width="40" Margin="5" />

@@ -10,28 +10,34 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace HotelManager.gui
 {
     /// <summary>
-    /// Interaction logic for AddRoomTypeWindow.xaml
+    /// Interaction logic for GuestTypeRegulationUC.xaml
     /// </summary>
-    public partial class AddRoomTypeWindow : Window
+    public partial class RegulationGuestTypeUC : UserControl
     {
-        public AddRoomTypeWindow()
+        public RegulationGuestTypeUC()
         {
             InitializeComponent();
         }
-        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
+
         }
 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
