@@ -80,6 +80,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="db\model\RoomType.cs" />
     <Compile Include="gui\EditRoomWindow.xaml.cs">
       <DependentUpon>EditRoomWindow.xaml</DependentUpon>
     </Compile>
