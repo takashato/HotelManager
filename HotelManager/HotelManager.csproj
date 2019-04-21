@@ -84,16 +84,16 @@
     <Compile Include="gui\RegulationUC.xaml.cs">
       <DependentUpon>RegulationUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="gui\EditRoomWindow.xaml.cs">
+    <Compile Include="gui\RoomListTab\EditRoomWindow.xaml.cs">
       <DependentUpon>EditRoomWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="gui\AddRoomWindow.xaml.cs">
+    <Compile Include="gui\RoomListTab\AddRoomWindow.xaml.cs">
       <DependentUpon>AddRoomWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="gui\MassPaymentWindow.xaml.cs">
+    <Compile Include="gui\RoomListTab\MassPaymentWindow.xaml.cs">
       <DependentUpon>MassPaymentWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="gui\PaymentWindow.xaml.cs">
+    <Compile Include="gui\RoomListTab\PaymentWindow.xaml.cs">
       <DependentUpon>PaymentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="utils\EnumerationExtension.cs" />
@@ -101,23 +101,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="gui\EditRoomWindow.xaml">
+    <Page Include="gui\RoomListTab\EditRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="gui\AddRoomWindow.xaml">
+    <Page Include="gui\RoomListTab\AddRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="gui\MassPaymentWindow.xaml">
+    <Page Include="gui\RoomListTab\MassPaymentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="gui\PaymentWindow.xaml">
+    <Page Include="gui\RoomListTab\PaymentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="gui\RoomListUC.xaml">
+    <Page Include="gui\RoomListTab\RoomListUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,7 +145,7 @@
     <Compile Include="db\DatabaseManager.cs" />
     <Compile Include="db\model\Room.cs" />
     <Compile Include="db\model\Staff.cs" />
-    <Compile Include="gui\RoomListUC.xaml.cs">
+    <Compile Include="gui\RoomListTab\RoomListUC.xaml.cs">
       <DependentUpon>RoomListUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="gui\dialog\LoadingDialog.xaml.cs">
@@ -161,13 +161,13 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="gui\RentingWindow.xaml">
+    <Page Include="gui\RoomListTab\RentingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="gui\RentingWindow.xaml.cs">
+    <Compile Include="gui\RoomListTab\RentingWindow.xaml.cs">
       <DependentUpon>RentingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -198,6 +198,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="sql\hotelmanager.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="gui\ReportTab\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

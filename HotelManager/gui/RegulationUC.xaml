@@ -173,22 +173,7 @@
                            Foreground="#00B894"
                            Text="Số lượng khách tối đa: "/>
             </Grid>
-
-
-
-
-
-
-            <!--
-            <local:RegulationRoomTypeUC Grid.Row="0"/>
-            <local:RegulationGuestTypeUC Grid.Row="1"/>
-            <local:RegulationGuestSurchargeUC Grid.Row="2"/>
-            -->
         </Grid>
-        
-        
-        
-        
     </Grid>
 </UserControl>
 
