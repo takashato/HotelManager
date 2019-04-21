@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using HotelManager.db.model;
 
 namespace HotelManager.gui
 {
@@ -33,6 +34,12 @@ namespace HotelManager.gui
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            cbRoomType.ItemsSource = RoomType.GetRoomType();
+            cbRoomType.DisplayMemberPath = "Type";
         }
     }
 }
