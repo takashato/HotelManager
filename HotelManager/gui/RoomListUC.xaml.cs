@@ -84,7 +84,6 @@ namespace HotelManager.gui
             RoomList.AddRange(Room.GetAll());
         }
 
-
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             if (txbSearchBar.Visibility == Visibility.Hidden)
@@ -103,14 +102,13 @@ namespace HotelManager.gui
             CollectionViewSource.GetDefaultView(lsvRoomList.ItemsSource).Refresh();
         }
 
-
         // Codes symbolize only for testing UI purpose. Bugs still exist. Who's responsible need to rewrite this function.
         private void Rent_Click(object sender, RoutedEventArgs e)
         {
-            int selectedIdx = lsvRoomList.SelectedIndex;
-            int a = RoomList.Count;
-            if (selectedIdx < 0) return;
-            Room roomToRent = RoomList[selectedIdx];
+            if (lsvRoomList.SelectedIndex < 0)
+                return;
+
+            Room roomToRent = lsvRoomList.SelectedItem as Room;
 
             if (roomToRent.Status == Room.EStatus.NotAvailable)
             {
@@ -132,7 +130,10 @@ namespace HotelManager.gui
         // Codes symbolize only for testing UI purpose. Bugs still exist. Who's responsible need to rewrite this function.
         private void Pay_Click(object sender, RoutedEventArgs e)
         {
-            Room roomToPay = RoomList[lsvRoomList.SelectedIndex];
+            if (lsvRoomList.SelectedIndex < 0)
+                return;
+
+            Room roomToPay = lsvRoomList.SelectedItem as Room;
 
             if (roomToPay.Status == Room.EStatus.Available)
             {
@@ -146,10 +147,13 @@ namespace HotelManager.gui
             (new PaymentWindow(roomToPay)).ShowDialog();
             CollectionViewSource.GetDefaultView(this.RoomList).Refresh();
         }
-        
+
         private void EditRoom_Click(object sender, RoutedEventArgs e)
         {
-            Room roomToEdit = RoomList[lsvRoomList.SelectedIndex];
+            if (lsvRoomList.SelectedIndex < 0)
+                return;
+
+            Room roomToEdit = lsvRoomList.SelectedItem as Room;
 
             if (roomToEdit.Status == Room.EStatus.NotAvailable)
             {
@@ -162,14 +166,15 @@ namespace HotelManager.gui
 
             (new EditRoomWindow(roomToEdit)).ShowDialog();
         }
-        
+
         private void DeleteRoom_Click(object sender, RoutedEventArgs e)
         {
             // TODO: Code bên dưới chỉ xóa được một phòng. 
             // Có thể nâng cấp lên để xóa nhiều phòng cùng một lúc khi người dùng Ctrl/Shift chọn nhiều phòng một lúc lúc bấm nút xóa
-            // TODO: Xóa đúng phòng khi người dùng điền vào SearchBar filter
-
-            Room roomToDelete = RoomList[lsvRoomList.SelectedIndex];
+            if (lsvRoomList.SelectedIndex < 0)
+                return;
+            
+            Room roomToDelete = lsvRoomList.SelectedItem as Room;
 
             if (roomToDelete.Status == Room.EStatus.NotAvailable)
             {
@@ -179,7 +184,7 @@ namespace HotelManager.gui
                     MessageBoxImage.Error);
                 return;
             }
-            else 
+            else
             {
                 var userAnswer = MessageBox.Show(
                     "Bạn có chắc muốn xóa phòng " + roomToDelete.Name + " không? Thao tác sẽ không được hoàn lại.",
@@ -188,10 +193,14 @@ namespace HotelManager.gui
                     MessageBoxImage.Warning);
 
                 if (userAnswer == MessageBoxResult.Yes)
+                {
                     RoomList.Remove(roomToDelete);
+                    CollectionViewSource.GetDefaultView(this.RoomList).Refresh();
+                }
+
             }
         }
-        
+
         private void AddRoom_Click(object sender, RoutedEventArgs e)
         {
             (new AddRoomWindow()).ShowDialog();

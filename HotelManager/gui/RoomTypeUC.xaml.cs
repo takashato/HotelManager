@@ -41,7 +41,16 @@ namespace HotelManager.gui
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            RoomType roomTypeToDelete = ListRoomType[lsvListRoomType.SelectedIndex];
+            if (lsvListRoomType.SelectedIndex < 0)
+            {
+                MessageBox.Show("Vui lòng chọn một chỉ mục để thực hiện thao tác", 
+                    "Xóa loại phòng không thành công", 
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                return;
+            }
+
+            RoomType roomTypeToDelete = lsvListRoomType.SelectedItem as RoomType;
 
             // TODO: write handle here
             bool ifAnyRoomRentingBelongToThisRoomType = false;
@@ -69,6 +78,15 @@ namespace HotelManager.gui
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
+            if (lsvListRoomType.SelectedIndex < 0)
+            {
+                MessageBox.Show("Vui lòng chọn một chỉ mục để thực hiện thao tác",
+                    "Chỉnh sửa thông tin loại phòng không thành công",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                return;
+            }
+
             (new EditRoomTypeWindow()).ShowDialog();
         }
     }
