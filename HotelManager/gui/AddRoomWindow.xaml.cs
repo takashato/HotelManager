@@ -40,6 +40,12 @@ namespace HotelManager.gui
         {
             cbRoomType.ItemsSource = RoomType.GetRoomType();
             cbRoomType.DisplayMemberPath = "Type";
+            cbRoomType.SelectedValuePath = "Price";
+        }
+
+        private void CbRoomType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            txbPrice.Text = cbRoomType.SelectedValue.ToString();
         }
     }
 }

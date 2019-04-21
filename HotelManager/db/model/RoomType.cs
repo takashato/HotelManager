@@ -11,7 +11,7 @@ namespace HotelManager.db.model
     {
         public string Type { get; set; }
         public decimal Price { get; set; }
-
+        public string PriceStr => string.Format("{0:N0}", Price);
         public static List<RoomType> GetRoomType()
         {
             using (var conn = DatabaseManager.Conn)

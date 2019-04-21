@@ -70,8 +70,8 @@
                 <TextBlock VerticalAlignment="Center" Grid.Row="3" Margin="10" Text="Ghi chú" />
 
                 <TextBox Grid.Column="1" Grid.Row="0" Margin="0 0 0 5"/>
-                <ComboBox x:Name="cbRoomType" Grid.Column="1" Grid.Row="1" Margin="0 0 0 5"/>
-                <TextBox Grid.Column="1" Grid.Row="2" Margin="0 0 0 5" IsReadOnly="True" />
+                <ComboBox x:Name="cbRoomType" Grid.Column="1" Grid.Row="1" Margin="0 0 0 5" SelectionChanged="CbRoomType_SelectionChanged"/>
+                <TextBox x:Name="txbPrice" Grid.Column="1" Grid.Row="2" Margin="0 0 0 5" IsReadOnly="True" />
                 <TextBox Grid.Column="1" Grid.Row="3" Margin="0 0 0 5" AcceptsReturn="True"/>
 
                 <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
