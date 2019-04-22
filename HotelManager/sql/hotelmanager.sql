@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 20, 2019 lúc 10:14 AM
--- Phiên bản máy phục vụ: 10.1.33-MariaDB
--- Phiên bản PHP: 7.2.6
+-- Host: 127.0.0.1
+-- Generation Time: Apr 22, 2019 at 08:01 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `hotelmanager`
+-- Database: `hotelmanager`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `room`
+-- Table structure for table `room`
 --
 
 CREATE TABLE `room` (
@@ -36,7 +36,7 @@ CREATE TABLE `room` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `room`
+-- Dumping data for table `room`
 --
 
 INSERT INTO `room` (`id`, `name`, `type`, `note`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `room` (`id`, `name`, `type`, `note`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `room_type`
+-- Table structure for table `room_type`
 --
 
 CREATE TABLE `room_type` (
@@ -54,7 +54,7 @@ CREATE TABLE `room_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `room_type`
+-- Dumping data for table `room_type`
 --
 
 INSERT INTO `room_type` (`type`, `price`) VALUES
@@ -65,7 +65,7 @@ INSERT INTO `room_type` (`type`, `price`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `staff`
+-- Table structure for table `staff`
 --
 
 CREATE TABLE `staff` (
@@ -79,48 +79,44 @@ CREATE TABLE `staff` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `staff`
+-- Dumping data for table `staff`
 --
 
 INSERT INTO `staff` (`id`, `username`, `password`, `fullname`, `lastLoginDate`, `createdDate`, `level`) VALUES
 (1, 'admin', '$2a$10$7pPFABJzPyWqey9ylmTB4.kyHn9DXO8LHISyrg8SMIbyA04LcRfcq', 'Admin', '2019-04-18 00:00:00', '2019-04-18 00:00:00', 2);
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `room`
+-- Indexes for table `room`
 --
 ALTER TABLE `room`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`);
+  ADD PRIMARY KEY (`name`),
+  ADD UNIQUE KEY `id_2` (`id`),
+  ADD UNIQUE KEY `id_3` (`id`),
+  ADD KEY `id_4` (`id`);
 
 --
--- Chỉ mục cho bảng `room_type`
---
-ALTER TABLE `room_type`
-  ADD PRIMARY KEY (`type`);
-
---
--- Chỉ mục cho bảng `staff`
+-- Indexes for table `staff`
 --
 ALTER TABLE `staff`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `room`
+-- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `staff`
+-- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
