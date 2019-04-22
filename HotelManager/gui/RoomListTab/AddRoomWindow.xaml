@@ -69,12 +69,13 @@
                 <TextBlock VerticalAlignment="Center" Grid.Row="2" Margin="10" Text="Đơn giá" />
                 <TextBlock VerticalAlignment="Center" Grid.Row="3" Margin="10" Text="Ghi chú" />
 
-                <TextBox Grid.Column="1" Grid.Row="0" Margin="0 0 0 5"/>
+                <TextBox x:Name="txbRoomName" Grid.Column="1" Grid.Row="0" Margin="0 0 0 5"/>
                 <ComboBox x:Name="cbRoomType" Grid.Column="1" Grid.Row="1" Margin="0 0 0 5" SelectionChanged="CbRoomType_SelectionChanged"/>
                 <TextBox x:Name="txbPrice" Grid.Column="1" Grid.Row="2" Margin="0 0 0 5" IsReadOnly="True" />
-                <TextBox Grid.Column="1" Grid.Row="3" Margin="0 0 0 5" AcceptsReturn="True"/>
+                <TextBox x:Name="txbNote" Grid.Column="1" Grid.Row="3" Margin="0 0 0 5" AcceptsReturn="True"/>
 
-                <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                <Button x:Name="btnAddRoom" 
+                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
                     materialDesign:RippleAssist.IsDisabled="True"
                     Content="Thêm phòng" 
                     Margin="0 10 0 0"
@@ -83,7 +84,7 @@
                     Grid.Row="4" 
                     Grid.ColumnSpan="2"
                     Foreground="White" 
-                    materialDesign:ShadowAssist.ShadowDepth="Depth0"/>
+                    materialDesign:ShadowAssist.ShadowDepth="Depth0" Click="BtnAddRoom_Click"/>
             </Grid>
         </Grid>
 

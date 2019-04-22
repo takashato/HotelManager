@@ -29,6 +29,11 @@ namespace HotelManager.db.model
             }
         }
 
+        public enum EStatus
+        {
+            NotAvailable = 0,
+            Available = 1,
+        }
 
         public static List<Room> GetAll()
         {
@@ -37,10 +42,28 @@ namespace HotelManager.db.model
                 return conn.Query<Room>("SELECT * FROM room INNER JOIN room_type ON room.type=room_type.type").ToList();
             }
         }
-        public enum EStatus
-        {            
-            NotAvailable = 0,
-            Available = 1,
+
+        public static int InsertRoom(string name, string type, string note)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                var room = new Room { Name = name, Type = type, Note = note };
+           
+                List<string> roomName = new List<string>();
+                roomName = conn.Query<string>("SELECT name FROM room").ToList();
+             
+                foreach(var item in roomName)
+                {
+                    if (item.CompareTo(name) == 0)
+                        return 0;
+                }
+                conn.Execute("INSERT INTO room(Id, Name, Type, Note) VALUES(@Id, @Name, @Type, @Note)", room);
+                
+                return 1;
+                
+            }
+            
         }
+        
     }
 }
