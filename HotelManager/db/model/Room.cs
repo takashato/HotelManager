@@ -64,6 +64,14 @@ namespace HotelManager.db.model
             }
             
         }
+
+        public static void DeleteRoom(string name)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                conn.Execute("DELETE FROM room WHERE name = @name", new { name = name });                       
+            }
+        }
         
     }
 }

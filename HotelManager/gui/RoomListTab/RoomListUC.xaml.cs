@@ -23,13 +23,13 @@ namespace HotelManager.gui
     /// </summary>
     public partial class RoomListUC : UserControl
     {
-        public List<Room> RoomList { get; set; } = new List<Room>();
+        public static List<Room> RoomList { get; set; } = new List<Room>();
 
         public RoomListUC()
         {
             InitializeComponent();
 
-            bool testUIWithoutDb = true;
+            bool testUIWithoutDb = false;
             if (testUIWithoutDb)
                 LoadWithoutDatabase();
             else
@@ -124,7 +124,7 @@ namespace HotelManager.gui
             // In the line above we would change AN ITEM of RoomList ObservableCollection but NOT THE RoomList COLLECTION ITSELF
             // So we need the line below to refresh the RoomList Collection to raise the change on binding
             // More details in: https://nishantrana.me/2012/04/12/refresh-observablecollection-in-wpf/
-            CollectionViewSource.GetDefaultView(this.RoomList).Refresh();
+            CollectionViewSource.GetDefaultView(RoomList).Refresh();
         }
 
         // Codes symbolize only for testing UI purpose. Bugs still exist. Who's responsible need to rewrite this function.
@@ -144,8 +144,8 @@ namespace HotelManager.gui
                 return;
             }
 
-            (new PaymentWindow(roomToPay)).ShowDialog();
-            CollectionViewSource.GetDefaultView(this.RoomList).Refresh();
+            new PaymentWindow(roomToPay).ShowDialog();
+            CollectionViewSource.GetDefaultView(RoomList).Refresh();
         }
 
         private void EditRoom_Click(object sender, RoutedEventArgs e)
@@ -173,31 +173,65 @@ namespace HotelManager.gui
             // Có thể nâng cấp lên để xóa nhiều phòng cùng một lúc khi người dùng Ctrl/Shift chọn nhiều phòng một lúc lúc bấm nút xóa
             if (lsvRoomList.SelectedIndex < 0)
                 return;
-            
+
             Room roomToDelete = lsvRoomList.SelectedItem as Room;
+
+            //if (roomToDelete.Status == Room.EStatus.NotAvailable)
+            //{
+            //    MessageBox.Show("Không thể xóa phòng đang được thuê",
+            //        "Xóa phòng không thành công",
+            //        MessageBoxButton.OK,
+            //        MessageBoxImage.Error);
+            //    return;
+            //}
+            //else
+            //{
+            //    var userAnswer = MessageBox.Show(
+            //        "Bạn có chắc muốn xóa phòng " + roomToDelete.Name + " không? Thao tác sẽ không được hoàn lại.",
+            //        "Cảnh báo",
+            //        MessageBoxButton.YesNo,
+            //        MessageBoxImage.Warning);
+
+            //    if (userAnswer == MessageBoxResult.Yes)
+            //    {
+            //        RoomList.Remove(roomToDelete);
+            //        CollectionViewSource.GetDefaultView(this.RoomList).Refresh();
+            //        Room.DeleteRoom(roomToDelete.Name);
+            //    }
+
+            //}
+            //int flag = 0;
+            //string listRoomName = "";
+            //foreach(Room item in roomToDelete)
+            //{
+            //    if (item.Status == Room.EStatus.NotAvailable)
+            //        flag = 1;
+            //    listRoomName += "<" + item.Name + "> ";
+            //}
 
             if (roomToDelete.Status == Room.EStatus.NotAvailable)
             {
-                MessageBox.Show("Không thể xóa phòng đang được thuê",
-                    "Xóa phòng không thành công",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                MessageBox.Show("Không thể xóa phòng đang được thuê", 
+                                "Xóa phòng không thành công", 
+                                MessageBoxButton.OK, 
+                                MessageBoxImage.Error);
                 return;
             }
             else
             {
-                var userAnswer = MessageBox.Show(
-                    "Bạn có chắc muốn xóa phòng " + roomToDelete.Name + " không? Thao tác sẽ không được hoàn lại.",
-                    "Cảnh báo",
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Warning);
-
+                var userAnswer = MessageBox.Show("Bạn có chắc muốn xóa phòng " + roomToDelete.Name + " không? Thao tác sẽ không được hoàn lại.",
+                                                 "Cảnh báo",
+                                                 MessageBoxButton.YesNo,
+                                                 MessageBoxImage.Warning);
                 if (userAnswer == MessageBoxResult.Yes)
                 {
+                    //foreach(Room item in roomToDelete)
                     RoomList.Remove(roomToDelete);
-                    CollectionViewSource.GetDefaultView(this.RoomList).Refresh();
+                    CollectionViewSource.GetDefaultView(RoomList).Refresh();
+                    //foreach(Room item in roomToDelete)
+                    Room.DeleteRoom(roomToDelete.Name);
+                    MessageBox.Show("Xóa phòng thành công");
                 }
-
             }
         }
 
