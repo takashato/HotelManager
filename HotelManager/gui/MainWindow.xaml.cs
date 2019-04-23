@@ -83,6 +83,7 @@ namespace HotelManager.gui
                     break;
                 case 3:
                     GrdContent.Children.Clear();
+                    GrdContent.Children.Add(new AboutUC());
                     break;
             }
         }
