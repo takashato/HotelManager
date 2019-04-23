@@ -54,11 +54,20 @@ namespace HotelManager.gui
         {
             
             int flag = Room.InsertRoom(txbRoomName.Text, cbRoomType.Text, txbNote.Text);
-            if(flag == 1)
-                MessageBox.Show("Thêm thành công!");
+            if (flag == 1)
+            {
+                MessageBox.Show("Thêm thành công!");             
+            }
             else
                 MessageBox.Show("Thêm không thành công!\nTên phòng đã có");
             
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            HotelManager.gui.RoomListUC.RoomList.Clear();
+            HotelManager.gui.RoomListUC.RoomList.AddRange(Room.GetAll());
+            CollectionViewSource.GetDefaultView(HotelManager.gui.RoomListUC.RoomList).Refresh();
         }
     }
 }
