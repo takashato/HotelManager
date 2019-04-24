@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2019 at 08:01 AM
+-- Generation Time: Apr 24, 2019 at 01:21 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.3
 
@@ -40,7 +40,8 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`id`, `name`, `type`, `note`) VALUES
-(1, '101', 'A', 'N/A');
+(1, 'B757', 'B', 'provip'),
+(2, 'A999', 'A', '');
 
 -- --------------------------------------------------------
 
@@ -50,17 +51,18 @@ INSERT INTO `room` (`id`, `name`, `type`, `note`) VALUES
 
 CREATE TABLE `room_type` (
   `type` varchar(128) NOT NULL,
-  `price` bigint(20) DEFAULT NULL
+  `price` bigint(20) DEFAULT NULL,
+  `note` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `room_type`
 --
 
-INSERT INTO `room_type` (`type`, `price`) VALUES
-('A', 150000),
-('B', 170000),
-('C', 200000);
+INSERT INTO `room_type` (`type`, `price`, `note`) VALUES
+('A', 150000, ''),
+('B', 170000, ''),
+('C', 200000, '');
 
 -- --------------------------------------------------------
 
@@ -93,7 +95,7 @@ INSERT INTO `staff` (`id`, `username`, `password`, `fullname`, `lastLoginDate`, 
 -- Indexes for table `room`
 --
 ALTER TABLE `room`
-  ADD PRIMARY KEY (`name`),
+  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id_2` (`id`),
   ADD UNIQUE KEY `id_3` (`id`),
   ADD KEY `id_4` (`id`);
@@ -113,7 +115,7 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `staff`
