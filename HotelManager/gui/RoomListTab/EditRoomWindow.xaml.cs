@@ -30,7 +30,7 @@ namespace HotelManager.gui
             txbOldRoomName.Text = _roomToEdit.Name;
             txbOldRoomType.Text = _roomToEdit.Type;
             txbOldPrice.Text = _roomToEdit.PriceStr;
-            txbOldNote.Text = _roomToEdit.Note;
+            txbOldNote.Text = Room.GetRoomNoteByName(_roomToEdit.Name);
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -46,9 +46,11 @@ namespace HotelManager.gui
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            _roomToEdit.Name = txbNewRoomName.Text;
-            _roomToEdit.Type = cbNewRoomType.Text;
+            //_roomToEdit.Name = txbNewRoomName.Text;
+            //_roomToEdit.Type = cbNewRoomType.Text;
             //_phongMuonSua.DonGia = Convert.ToDecimal( txbDonGiaMoi.Text );
+            Room.UpdateRoom(txbNewRoomName.Text, _roomToEdit.Name, cbNewRoomType.Text, txbNewNote.Text);
+            MessageBox.Show("Cập nhật thành công");
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -63,6 +65,13 @@ namespace HotelManager.gui
         private void CbNewRoomType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             txbNewPrice.Text = PriceStr;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            HotelManager.gui.RoomListUC.RoomList.Clear();
+            HotelManager.gui.RoomListUC.RoomList.AddRange(Room.GetAll());
+            CollectionViewSource.GetDefaultView(HotelManager.gui.RoomListUC.RoomList).Refresh();
         }
     }
 }

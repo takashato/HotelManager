@@ -72,6 +72,24 @@ namespace HotelManager.db.model
                 conn.Execute("DELETE FROM room WHERE name = @name", new { name = name });                       
             }
         }
+
+        public static void UpdateRoom(string newName, string oldName, string newType, string newNote)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {               
+                conn.Execute("UPDATE room SET name = '" + newName + "' WHERE name = '" + oldName + "'");
+                conn.Execute("UPDATE room SET type = '" + newType + "' WHERE name = '" + newName + "'");
+                conn.Execute("UPDATE room SET note = '" + newNote + "' WHERE name = '" + newName + "'");
+            }
+        }
+
+        public static string GetRoomNoteByName(string name)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.QueryFirstOrDefault<string>("SELECT note FROM room WHERE name = @name", new { name = name });
+            }
+        }
         
     }
 }
