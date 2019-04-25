@@ -30,6 +30,8 @@ namespace HotelManager.gui
         public LoginWindow()
         {
             InitializeComponent();
+            tbUsername.Text = Properties.Settings.Default.sUsername;
+            pbPassword.Password = Properties.Settings.Default.sPassword;
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -59,6 +61,21 @@ namespace HotelManager.gui
             {
                 // Store session
                 App.Instance._Session = new data.Session(staff);
+
+                // Store password
+                if (ckbSave.IsChecked == true)
+                {
+                    Properties.Settings.Default.sUsername = username;
+                    Properties.Settings.Default.sPassword = password;
+                    Properties.Settings.Default.Save();
+                }
+                else
+                {
+                    Properties.Settings.Default.sUsername = "";
+                    Properties.Settings.Default.sPassword = "";
+                    Properties.Settings.Default.Save();
+                }
+
                 // Show form
                 this.Hide();
                 App.Instance._MainWindow.Show();

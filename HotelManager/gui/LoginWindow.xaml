@@ -12,7 +12,7 @@
         TextElement.FontSize="18"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
         WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown"
-        Title="Hotel Management Login" Height="440" Width="350" WindowStyle="None" ResizeMode="NoResize">
+        Title="Hotel Management Login" Height="479" Width="350" WindowStyle="None" ResizeMode="NoResize">
     
     <materialDesign:DialogHost>
 
@@ -58,6 +58,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
@@ -69,11 +70,16 @@
                     <PasswordBox x:Name="pbPassword" 
                                  materialDesign:HintAssist.Hint="Mật khẩu"
                                  Margin="10" Grid.Row="1"/>
-
+                    <CheckBox Style="{StaticResource MaterialDesignCheckBox}"
+                              Grid.Row="2"
+                              Margin="10 0 0 0" IsChecked="True" FontSize="14"
+                              Name="ckbSave">
+                        Lưu mật khẩu
+                    </CheckBox>
                     <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
                             materialDesign:RippleAssist.IsDisabled="True"
                             Content="Đăng Nhập" Margin="10"
-                            Grid.Row="2"
+                            Grid.Row="3"
                             Name="btn_DangNhap" Click="Btn_DangNhap_Click"
                             Foreground="White"/>
 
