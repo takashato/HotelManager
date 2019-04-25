@@ -37,7 +37,6 @@ namespace HotelManager.gui
 
         private void Btn_close_Click(object sender, RoutedEventArgs e)
         {
-            KhachHang.count = 0;
             this.Close();
         }
 

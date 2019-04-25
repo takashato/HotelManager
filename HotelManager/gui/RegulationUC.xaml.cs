@@ -23,20 +23,47 @@ namespace HotelManager.gui
     public partial class RegulationUC : UserControl
     {
         public ObservableCollection<RoomType> ListRoomType { get; set; } = new ObservableCollection<RoomType>();
+        public ObservableCollection<CustomerType> ListCustomerType { get; set; } = new ObservableCollection<CustomerType>();
         public RegulationUC()
         {
             InitializeComponent();
 
-            ListRoomType.Add(new RoomType() { Type = "VIP_PRO", Price = 7000000M, Note = "Phòng Vip" });
-            ListRoomType.Add(new RoomType() { Type = "VIPKUTE", Price = 6500000M, Note = "Phòng Xém Vip" });
-            ListRoomType.Add(new RoomType() { Type = "SIEUVIP", Price = 2300000M, Note = "Phòng Hơi Cùi" });
-            ListRoomType.Add(new RoomType() { Type = "VIP_VIP", Price = 1100000M, Note = "Phong Xập xệ" });
-            ListRoomType.Add(new RoomType() { Type = "ABCXYZH", Price = 6900000M, Note = "Phong Thoải Mái" });
+            //ListRoomType.Add(new RoomType() { Type = "VIP_PRO", Price = 7000000M, Note = "Phòng Vip" });
+            //ListRoomType.Add(new RoomType() { Type = "VIPKUTE", Price = 6500000M, Note = "Phòng Xém Vip" });
+            //ListRoomType.Add(new RoomType() { Type = "SIEUVIP", Price = 2300000M, Note = "Phòng Hơi Cùi" });
+            //ListRoomType.Add(new RoomType() { Type = "VIP_VIP", Price = 1100000M, Note = "Phong Xập xệ" });
+            //ListRoomType.Add(new RoomType() { Type = "ABCXYZH", Price = 6900000M, Note = "Phong Thoải Mái" });
+            LoadListRoomTypeFromDB();
+            LoadListCustomerTypeFromDB();
+        }
+
+        public void LoadListRoomTypeFromDB()
+        {
+            List<RoomType> roomType = new List<RoomType>();
+
+            roomType.Clear();
+            roomType.AddRange(RoomType.GetRoomType());
+
+            ListRoomType.Clear();
+            foreach (var item in roomType)
+                ListRoomType.Add(item);
+        }
+
+        public void LoadListCustomerTypeFromDB()
+        {
+            List<CustomerType> customerType = new List<CustomerType>();
+
+            customerType.Clear();
+            customerType.AddRange(CustomerType.GetCustomerType());
+
+            ListCustomerType.Clear();
+            foreach (var item in customerType)
+                ListCustomerType.Add(item);
         }
 
         private void AddRoomType_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void DeleteRoomType_Click(object sender, RoutedEventArgs e)
@@ -46,7 +73,7 @@ namespace HotelManager.gui
 
         private void EditRoomType_Click(object sender, RoutedEventArgs e)
         {
-
+         
         }
 
         private void AddGuestType_Click(object sender, RoutedEventArgs e)

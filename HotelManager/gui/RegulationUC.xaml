@@ -83,11 +83,11 @@
                        Margin="20 0 20 20">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Loại Phòng" Binding="{Binding Type}"
-                                        Width="*" IsReadOnly="True" />
+                                        Width="*" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Đơn Giá" Binding="{Binding PriceStr}"
-                                        Width="*" IsReadOnly="True" />
+                                        Width="*" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Ghi Chú" Binding="{Binding Note}"
-                                        Width="2*" IsReadOnly="True" />
+                                        Width="2*" IsReadOnly="True"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
@@ -115,15 +115,15 @@
                 <Button Margin="10 0" Click="EditGuestType_Click" Content="Sửa"/>
             </StackPanel>
 
-            <DataGrid  ItemsSource="{Binding ListGuestType}"
+            <DataGrid  ItemsSource="{Binding ListCustomerType}"
                        Grid.Row="1"                            
                        Margin="20 0 20 20">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Loại Khách" 
+                    <DataGridTextColumn Header="Loại Khách" Binding="{Binding Type}"
                                         Width="*" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Phụ Thu (%)" 
+                    <DataGridTextColumn Header="Phụ Thu (%)" Binding="{Binding Surcharge}"
                                         Width="*" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Ghi Chú" 
+                    <DataGridTextColumn Header="Ghi Chú" Binding="{Binding Note}"
                                         Width="2*" IsReadOnly="True" />
                 </DataGrid.Columns>
             </DataGrid>
