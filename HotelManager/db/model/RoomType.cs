@@ -40,11 +40,11 @@ namespace HotelManager.db.model
             }
         }
 
-        public static void DeleteRoomType(string type)
+        public static bool DeleteRoomType(string type)
         {
             using (var conn = DatabaseManager.Conn)
             {
-                conn.Execute("DELETE FROM room_type WHERE type = @type", new { type = type });
+                return conn.Execute("DELETE FROM room_type WHERE type = @type", new { type = type }) > 0;
             }
         }
 

@@ -43,33 +43,31 @@ namespace HotelManager.db.model
             }
         }
 
-        public static int InsertRoom(string name, string type, string note)
+        public static bool InsertRoom(string name, string type, string note)
         {
             using (var conn = DatabaseManager.Conn)
             {
                 var room = new Room { Name = name, Type = type, Note = note };
-           
-                List<string> roomName = new List<string>();
-                roomName = conn.Query<string>("SELECT name FROM room").ToList();
-             
-                foreach(var item in roomName)
+
+                if (conn.ExecuteScalar<int>("SELECT COUNT(*) FROM room WHERE name = @Name", new { Name = name }) > 0)
+                    return false;
+
+                try
                 {
-                    if (item.CompareTo(name) == 0)
-                        return 0;
+                    return conn.Execute("INSERT INTO room(Name, Type, Note) VALUES(@Name, @Type, @Note)", room) > 0;
                 }
-                conn.Execute("INSERT INTO room(Name, Type, Note) VALUES(@Name, @Type, @Note)", room);
-                
-                return 1;
-                
+                catch (Exception ex)
+                {
+                    return false;
+                }
             }
-            
         }
 
-        public static void DeleteRoom(string name)
+        public static bool DeleteRoom(string name)
         {
             using (var conn = DatabaseManager.Conn)
             {
-                conn.Execute("DELETE FROM room WHERE name = @name", new { name = name });                       
+                return conn.Execute("DELETE FROM room WHERE name = @name", new { name = name }) > 0;                       
             }
         }
 
@@ -77,9 +75,7 @@ namespace HotelManager.db.model
         {
             using (var conn = DatabaseManager.Conn)
             {               
-                conn.Execute("UPDATE room SET name = '" + newName + "' WHERE name = '" + oldName + "'");
-                conn.Execute("UPDATE room SET type = '" + newType + "' WHERE name = '" + newName + "'");
-                conn.Execute("UPDATE room SET note = '" + newNote + "' WHERE name = '" + newName + "'");
+                conn.Execute("UPDATE room SET name = '" + newName + "', type = '" + newType + "', note = '" + newNote + "' WHERE name = '" + oldName + "'");
             }
         }
 

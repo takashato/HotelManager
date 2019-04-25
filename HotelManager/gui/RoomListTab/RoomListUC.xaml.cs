@@ -29,12 +29,6 @@ namespace HotelManager.gui
         {
             InitializeComponent();
 
-            bool testUIWithoutDb = true;
-            if (testUIWithoutDb)
-                LoadWithoutDatabase();
-            else
-                LoadFromDB();
-
             SetRoomListFilter();
         }
 
@@ -227,12 +221,19 @@ namespace HotelManager.gui
                                                  MessageBoxImage.Warning);
                 if (userAnswer == MessageBoxResult.Yes)
                 {
-                    //foreach(Room item in roomToDelete)
-                    RoomList.Remove(roomToDelete);
-                    CollectionViewSource.GetDefaultView(RoomList).Refresh();
-                    //foreach(Room item in roomToDelete)
-                    Room.DeleteRoom(roomToDelete.Name);
-                    MessageBox.Show("Xóa phòng thành công");
+                    if (Room.DeleteRoom(roomToDelete.Name))
+                    {
+                        //foreach(Room item in roomToDelete)
+                        RoomList.Remove(roomToDelete);
+                        CollectionViewSource.GetDefaultView(RoomList).Refresh();
+                        //foreach(Room item in roomToDelete)
+
+                        MessageBox.Show("Xóa phòng thành công!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Xóa phòng thất bại!");
+                    }
                 }
             }
         }

@@ -21,9 +21,13 @@ namespace HotelManager.gui
     /// </summary>
     public partial class MainWindow : Window
     {
+        private RoomListUC _RoomListUC { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            _RoomListUC = new RoomListUC();
+            GrdContent.Children.Add(_RoomListUC);
         }
 
         /// <summary>
@@ -31,9 +35,8 @@ namespace HotelManager.gui
         /// </summary>
         private void Update()
         {
-            GrdContent.Children.Add(new RoomListUC());
-
             if (App.Instance._Session == null) return; // Do not update when is not logged in!!!
+            _RoomListUC.LoadFromDB();
             txtStaff.Text = App.Instance._Session.CurrentStaff.Fullname;
         }
 

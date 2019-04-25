@@ -52,14 +52,15 @@ namespace HotelManager.gui
 
         private void BtnAddRoom_Click(object sender, RoutedEventArgs e)
         {
-            
-            int flag = Room.InsertRoom(txbRoomName.Text, cbRoomType.Text, txbNote.Text);
-            if (flag == 1)
+
+            if (Room.InsertRoom(txbRoomName.Text, cbRoomType.Text, txbNote.Text))
             {
-                MessageBox.Show("Thêm thành công!");             
+                MessageBox.Show("Thêm thành công!");
             }
             else
+            {
                 MessageBox.Show("Thêm không thành công!\nTên phòng đã có");
+            }
             
         }
 

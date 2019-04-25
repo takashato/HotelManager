@@ -41,37 +41,28 @@ namespace HotelManager.gui
         {
             DialogHost.Show(new LoadingDialog());
 
-            bool testUIWithoutDatabase = true;
-            if (testUIWithoutDatabase)
+            string username = tbUsername.Text;
+            string password = pbPassword.Password;
+
+            Staff staff = Staff.GetByUsername(username);
+            if (staff == null)
             {
-                this.Hide();
-                App.Instance._MainWindow.Show();
+                DialogHost.CloseDialogCommand.Execute(null, null);
+                DialogHost.Show(new MessageDialog("Tài khoản không tồn tại!"));
+            }
+            else if (!BCrypt.Net.BCrypt.Verify(password, staff.Password))
+            {
+                DialogHost.CloseDialogCommand.Execute(null, null);
+                DialogHost.Show(new MessageDialog("Mật khẩu không chính xác!"));
             }
             else
             {
-                string username = tbUsername.Text;
-                string password = pbPassword.Password;
-
-                Staff staff = Staff.GetByUsername(username);
-                if (staff == null)
-                {
-                    DialogHost.CloseDialogCommand.Execute(null, null);
-                    DialogHost.Show(new MessageDialog("Tài khoản không tồn tại!"));
-                }
-                else if (!BCrypt.Net.BCrypt.Verify(password, staff.Password))
-                {
-                    DialogHost.CloseDialogCommand.Execute(null, null);
-                    DialogHost.Show(new MessageDialog("Mật khẩu không chính xác!"));
-                }
-                else
-                {
-                    // Store session
-                    App.Instance._Session = new data.Session(staff);
-                    // Show form
-                    this.Hide();
-                    App.Instance._MainWindow.Show();
-                }
-            }   
+                // Store session
+                App.Instance._Session = new data.Session(staff);
+                // Show form
+                this.Hide();
+                App.Instance._MainWindow.Show();
+            }
 
         }
 
