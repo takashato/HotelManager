@@ -29,7 +29,7 @@ namespace HotelManager.gui
         {
             InitializeComponent();
 
-            bool testUIWithoutDb = false;
+            bool testUIWithoutDb = true;
             if (testUIWithoutDb)
                 LoadWithoutDatabase();
             else
@@ -54,6 +54,8 @@ namespace HotelManager.gui
             RoomList.Add(new Room() { Name = "C323", Type = "C-Normal", Price = 4600000M, Status = Room.EStatus.Available });
             RoomList.Add(new Room() { Name = "C3x3", Type = "C-Normal", Price = 7000000M, Status = Room.EStatus.Available });
             RoomList.Add(new Room() { Name = "C3g3", Type = "C-Normal", Price = 7000000M, Status = Room.EStatus.NotAvailable });
+            RoomList.Add(new Room() { Name = "C3z3", Type = "C-Normal", Price = 7000000M, Status = Room.EStatus.NotAvailable });
+            RoomList.Add(new Room() { Name = "Cse3", Type = "C-Normal", Price = 7000000M, Status = Room.EStatus.NotAvailable });
         }
 
         private void SetRoomListFilter()

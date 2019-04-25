@@ -8,6 +8,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              TextElement.FontWeight="Medium"
              TextElement.FontSize="18"
+             Background="#FEFEFE"
              FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
              d:DesignHeight="655" d:DesignWidth="980" 
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
@@ -20,7 +21,7 @@
 
         <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
             <Setter Property="TextElement.FontSize" Value="15" />
-            <Setter Property="HorizontalAlignment" Value="Left" />            
+            <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="Padding" Value="20 5 0 5" />
         </Style>
 
@@ -45,134 +46,132 @@
         </Style>
     </UserControl.Resources>
 
-    
-    <Grid Background="White" >
 
-        <Grid Margin="0 0 0 5">
+
+    <Grid Margin="0 0 0 5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Room Types Regulation -->
+        <Grid Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- Room Types Regulation -->
-            <Grid Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+            <TextBlock Text="DANH MỤC LOẠI PHÒNG" 
+                       Foreground="#00B894"
+                       FontSize="20"
+                       VerticalAlignment="Bottom"
+                       Margin="20 0 0 10"
+                       HorizontalAlignment="Left"/>
 
-                <TextBlock Text="DANH MỤC LOẠI PHÒNG" 
-                           Foreground="#00B894"
-                           FontSize="20"
-                           VerticalAlignment="Bottom"
-                           Margin="20 0 0 10"
-                           HorizontalAlignment="Left"/>
+            <StackPanel HorizontalAlignment="Right" 
+                        Orientation="Horizontal" 
+                        Grid.Row="0" 
+                        Margin="20 20 20 10">
+                <Button Margin="0 0 10 0" Click="AddRoomType_Click" Content="Thêm"/>
+                <Button Margin="10 0" Click="DeleteRoomType_Click" Content="Xóa"/>
+                <Button Margin="10 0" Click="EditRoomType_Click" Content="Sửa"/>
+            </StackPanel>
 
-                <StackPanel HorizontalAlignment="Right" 
-                            Orientation="Horizontal" 
-                            Grid.Row="0" 
-                            Margin="20 20 20 10">
-                    <Button Margin="0 0 10 0" Click="AddRoomType_Click" Content="Thêm"/>
-                    <Button Margin="10 0" Click="DeleteRoomType_Click" Content="Xóa"/>
-                    <Button Margin="10 0" Click="EditRoomType_Click" Content="Sửa"/>
-                </StackPanel>
+            <DataGrid  ItemsSource="{Binding ListRoomType}"
+                       Grid.Row="1"               
+                       Margin="20 0 20 20">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Loại Phòng" Binding="{Binding Type}"
+                                        Width="*" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Đơn Giá" Binding="{Binding PriceStr}"
+                                        Width="*" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Ghi Chú" Binding="{Binding Note}"
+                                        Width="2*" IsReadOnly="True" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
 
-                <DataGrid  ItemsSource="{Binding ListRoomType}"
-                           Grid.Row="1"               
-                           Margin="20 0 20 20">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Loại Phòng" Binding="{Binding Type}"
-                                            Width="*" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Đơn Giá" Binding="{Binding PriceStr}"
-                                            Width="*" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Ghi Chú" Binding="{Binding Note}"
-                                            Width="2*" IsReadOnly="True" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
+        <!-- Guest Types Regulation -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <!-- Guest Types Regulation -->
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+            <TextBlock Text="DANH MỤC LOẠI KHÁCH HÀNG" 
+                       Foreground="#00B894"
+                       FontSize="20"
+                       VerticalAlignment="Bottom"
+                       Margin="20 0 0 10"
+                       HorizontalAlignment="Left"/>
 
-                <TextBlock Text="DANH MỤC LOẠI KHÁCH HÀNG" 
-                           Foreground="#00B894"
-                           FontSize="20"
-                           VerticalAlignment="Bottom"
-                           Margin="20 0 0 10"
-                           HorizontalAlignment="Left"/>
+            <StackPanel HorizontalAlignment="Right" 
+                        Orientation="Horizontal" 
+                        Grid.Row="0" 
+                        Margin="20 20 20 10">
+                <Button Margin="0 0 10 0" Click="AddGuestType_Click" Content="Thêm"/>
+                <Button Margin="10 0" Click="DeleteGuestType_Click" Content="Xóa"/>
+                <Button Margin="10 0" Click="EditGuestType_Click" Content="Sửa"/>
+            </StackPanel>
 
-                <StackPanel HorizontalAlignment="Right" 
-                            Orientation="Horizontal" 
-                            Grid.Row="0" 
-                            Margin="20 20 20 10">
-                    <Button Margin="0 0 10 0" Click="AddGuestType_Click" Content="Thêm"/>
-                    <Button Margin="10 0" Click="DeleteGuestType_Click" Content="Xóa"/>
-                    <Button Margin="10 0" Click="EditGuestType_Click" Content="Sửa"/>
-                </StackPanel>
+            <DataGrid  ItemsSource="{Binding ListGuestType}"
+                       Grid.Row="1"                            
+                       Margin="20 0 20 20">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Loại Khách" 
+                                        Width="*" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Phụ Thu (%)" 
+                                        Width="*" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Ghi Chú" 
+                                        Width="2*" IsReadOnly="True" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
 
-                <DataGrid  ItemsSource="{Binding ListGuestType}"
-                           Grid.Row="1"                            
-                           Margin="20 0 20 20">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Loại Khách" 
-                                            Width="*" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Phụ Thu (%)" 
-                                            Width="*" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Ghi Chú" 
-                                            Width="2*" IsReadOnly="True" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
+        <!-- Guest Surcharge Regulation -->
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
 
-            <!-- Guest Surcharge Regulation -->
-            <Grid Grid.Row="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
+            <TextBlock Text="ĐIỀU CHỈNH PHỤ THỤ" 
+                       Foreground="#00B894"
+                       FontSize="20"
+                       VerticalAlignment="Bottom"
+                       Margin="20 0 0 10"
+                       HorizontalAlignment="Left"/>
 
-                <TextBlock Text="ĐIỀU CHỈNH PHỤ THỤ" 
-                           Foreground="#00B894"
-                           FontSize="20"
-                           VerticalAlignment="Bottom"
-                           Margin="20 0 0 10"
-                           HorizontalAlignment="Left"/>
+            <StackPanel HorizontalAlignment="Right" 
+                        Orientation="Horizontal" 
+                        Grid.Row="0" 
+                        Margin="20 20 20 10">
+                <Button Margin="0 0 10 0" Click="AddGuestSurcharge_Click" Content="Thêm"/>
+                <Button Margin="10 0" Click="DeleteGuestSurcharge_Click" Content="Xóa"/>
+                <Button Margin="10 0" Click="EditGuestSurcharge_Click" Content="Sửa"/>
+            </StackPanel>
 
-                <StackPanel HorizontalAlignment="Right" 
-                            Orientation="Horizontal" 
-                            Grid.Row="0" 
-                            Margin="20 20 20 10">
-                    <Button Margin="0 0 10 0" Click="AddGuestSurcharge_Click" Content="Thêm"/>
-                    <Button Margin="10 0" Click="DeleteGuestSurcharge_Click" Content="Xóa"/>
-                    <Button Margin="10 0" Click="EditGuestSurcharge_Click" Content="Sửa"/>
-                </StackPanel>
+            <DataGrid  ItemsSource="{Binding ListGuestType}"
+                       Grid.Row="1" 
+                       Margin="20 0 20 5">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Số Khách" 
+                                        Width="*" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Phụ Thu (%)" Width="*" 
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Header="Ghi Chú" 
+                                        Width="2*" IsReadOnly="True" />
+                </DataGrid.Columns>
+            </DataGrid>
 
-                <DataGrid  ItemsSource="{Binding ListGuestType}"
-                           Grid.Row="1" 
-                           Margin="20 0 20 5">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Số Khách" 
-                                            Width="*" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Phụ Thu (%)" Width="*" 
-                                            IsReadOnly="True" />
-                        <DataGridTextColumn Header="Ghi Chú" 
-                                            Width="2*" IsReadOnly="True" />
-                    </DataGrid.Columns>
-                </DataGrid>
-
-                <TextBlock Grid.Row="2"
-                           Margin="20 5"
-                           HorizontalAlignment="Right" 
-                           FontStyle="Italic" 
-                           Foreground="#00B894"
-                           Text="Số lượng khách tối đa: "/>
-            </Grid>
+            <TextBlock Grid.Row="2"
+                       Margin="20 5"
+                       HorizontalAlignment="Right" 
+                       FontStyle="Italic" 
+                       Foreground="#00B894"
+                       Text="Số lượng khách tối đa: "/>
         </Grid>
     </Grid>
 </UserControl>

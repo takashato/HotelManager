@@ -62,6 +62,7 @@
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -84,6 +85,15 @@
     <Compile Include="gui\AboutUC.xaml.cs">
       <DependentUpon>AboutUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="gui\AccountTab\AccountUC.xaml.cs">
+      <DependentUpon>AccountUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gui\AccountTab\CreateAccountWindow.xaml.cs">
+      <DependentUpon>CreateAccountWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gui\AccountTab\ChangeAccountWindow.xaml.cs">
+      <DependentUpon>ChangeAccountWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="gui\RegulationUC.xaml.cs">
       <DependentUpon>RegulationUC.xaml</DependentUpon>
     </Compile>
@@ -101,6 +111,18 @@
     </Compile>
     <Compile Include="utils\EnumerationExtension.cs" />
     <Page Include="gui\AboutUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\AccountTab\AccountUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\AccountTab\CreateAccountWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\AccountTab\ChangeAccountWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

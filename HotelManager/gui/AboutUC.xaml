@@ -7,11 +7,12 @@
              mc:Ignorable="d"              
              xmlns:StackPanel="http://materialdesigninxaml.net/winfx/xaml/themes"             
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Background="#FEFEFE"
              TextElement.FontWeight="Medium"
              TextElement.FontSize="35"
              FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
              d:DesignHeight="655" d:DesignWidth="980" >
-    
+
     <UserControl.Resources>
         <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="HorizontalAlignment" Value="Center" />
@@ -19,76 +20,76 @@
             <Setter Property="Foreground" Value="#00B894" />
         </Style>
     </UserControl.Resources>
-    
-    
-    <Grid Background="White">  
-        <Grid VerticalAlignment="Stretch" Margin="5">
-            
-            <Grid.Background>
-                <ImageBrush ImageSource="uit-logo.png" Stretch="Fill" Opacity="0.13"/>
-            </Grid.Background>
 
-            <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                    Height="60" Width="60" Margin="40"
-                    Foreground="White" 
-                    HorizontalAlignment="Right" VerticalAlignment="Top"
-                    ToolTip="Đi đến github của đồ án"      
-                    materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                    Click="GoToGithub_Click">
 
-                <materialDesign:PackIcon Kind="GithubCircle"
+
+    <Grid VerticalAlignment="Stretch" Margin="5">
+
+        <Grid.Background>
+            <ImageBrush ImageSource="uit-logo.png" Stretch="Fill" Opacity="0.13"/>
+        </Grid.Background>
+
+        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                Height="60" Width="60" Margin="40"
+                Foreground="White" 
+                HorizontalAlignment="Right" VerticalAlignment="Top"
+                ToolTip="Đi đến github của đồ án"      
+                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                Click="GoToGithub_Click">
+
+            <materialDesign:PackIcon Kind="GithubCircle"
                                          Height="50" Width="50"/>
-            </Button>
+        </Button>
 
-            <StackPanel VerticalAlignment="Center">
+        <StackPanel VerticalAlignment="Center">
 
-                <TextBlock Text="Đồ án Nhập môn Công nghệ phần mềm" FontSize="50"/>
-                <TextBlock Text="GVHD: Nguyễn Thị Thanh Trúc" />
+            <TextBlock Text="Đồ án Nhập môn Công nghệ phần mềm" FontSize="50"/>
+            <TextBlock Text="GVHD: Nguyễn Thị Thanh Trúc" />
 
-                <StackPanel Margin="40" HorizontalAlignment="Center">
+            <StackPanel Margin="40" HorizontalAlignment="Center">
 
-                    <StackPanel.Resources>
-                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                            <Setter Property="HorizontalAlignment" Value="Left" />
-                            <Setter Property="Margin" Value="5" />
-                            <Setter Property="FontSize" Value="35" />
-                            <Setter Property="Foreground" Value="#00B894" />
-                            <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="BorderThickness" Value="0" />
-                            <Setter Property="Height" Value="50" />
-                            <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth0" />
-                            <Setter Property="ToolTip" Value="Đi tới github thành viên này" />                            
-                        </Style>
-                    </StackPanel.Resources>
-                    
-                    <Button Name="btnBTS" Tag="BTS" 
-                            Click="Button_Click"
-                            MouseEnter="Button_MouseEnter"
-                            MouseLeave="Button_MouseLeave" 
-                            Content="Thành viên 1: Bành Thanh Sơn - 17520984"/>
+                <StackPanel.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                        <Setter Property="HorizontalAlignment" Value="Left" />
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="FontSize" Value="35" />
+                        <Setter Property="Foreground" Value="#00B894" />
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="Height" Value="50" />
+                        <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth0" />
+                        <Setter Property="ToolTip" Value="Đi tới github thành viên này" />
+                    </Style>
+                </StackPanel.Resources>
 
-                    <Button Name="btnPTC" Tag="PTC" 
-                            Click="Button_Click"
-                            MouseEnter="Button_MouseEnter"
-                            MouseLeave="Button_MouseLeave" 
-                            Content="Thành viên 2: Phạm Trần Chính - 17520292"/>
+                <Button Name="btnBTS" Tag="BTS" 
+                        Click="Button_Click"
+                        MouseEnter="Button_MouseEnter"
+                        MouseLeave="Button_MouseLeave" 
+                        Content="Thành viên 1: Bành Thanh Sơn - 17520984"/>
 
-                    <Button Name="btnNHL" Tag="NHL" 
-                            Click="Button_Click"
-                            MouseEnter="Button_MouseEnter"
-                            MouseLeave="Button_MouseLeave" 
-                            Content="Thành viên 3: Nguyễn Huỳnh Lợi - 17520702"/>
+                <Button Name="btnPTC" Tag="PTC" 
+                        Click="Button_Click"
+                        MouseEnter="Button_MouseEnter"
+                        MouseLeave="Button_MouseLeave" 
+                        Content="Thành viên 2: Phạm Trần Chính - 17520292"/>
 
-                    <Button Name="btnDMD" Tag="DMD" 
-                            Click="Button_Click"
-                            MouseEnter="Button_MouseEnter"
-                            MouseLeave="Button_MouseLeave" 
-                            Content="Thành viên 4: Đào Mạnh Dũng - 17520372"/>
-                </StackPanel>        
-            
+                <Button Name="btnNHL" Tag="NHL" 
+                        Click="Button_Click"
+                        MouseEnter="Button_MouseEnter"
+                        MouseLeave="Button_MouseLeave" 
+                        Content="Thành viên 3: Nguyễn Huỳnh Lợi - 17520702"/>
+
+                <Button Name="btnDMD" Tag="DMD" 
+                        Click="Button_Click"
+                        MouseEnter="Button_MouseEnter"
+                        MouseLeave="Button_MouseLeave" 
+                        Content="Thành viên 4: Đào Mạnh Dũng - 17520372"/>
             </StackPanel>
 
+        </StackPanel>
 
-        </Grid>
+
     </Grid>
+
 </UserControl>

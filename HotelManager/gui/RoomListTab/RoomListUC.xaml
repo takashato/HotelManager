@@ -7,7 +7,7 @@
              mc:Ignorable="d"              
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-             Background="{DynamicResource MaterialDesignPaper}"
+             Background="#FEFEFE"
              TextElement.FontWeight="Medium"
              TextElement.FontSize="18"
              FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
@@ -15,17 +15,42 @@
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
     <UserControl.Resources>
+
         <Style TargetType="TextBlock" 
                BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="FontSize" Value="20" />
         </Style>
+
         <Style TargetType="GridViewColumnHeader" 
                BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
             <Setter Property="TextElement.FontSize" Value="20" />
+            <Setter Property="Padding" Value="20 5 0 5" />
         </Style>
+
+        <Style TargetType="DataGridColumnHeader" 
+               BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+            <Setter Property="TextElement.FontSize" Value="18" />
+            <Setter Property="Padding" Value="20 5 0 5" />
+        </Style>
+
+        <Style TargetType="DataGrid" BasedOn="{StaticResource {x:Type DataGrid}}">
+            <Setter Property="AutoGenerateColumns" Value="False" />
+            <Setter Property="CanUserSortColumns" Value="False" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="#35CCAF" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="CanUserAddRows" Value="False" />
+        </Style>
+
+        <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+            <Setter Property="Padding" Value="35 10 0 10" />
+            <Setter Property="FontSize" Value="18" />
+        </Style>
+
     </UserControl.Resources>
 
-    <Grid Background="#FEFEFE">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -33,7 +58,7 @@
         </Grid.RowDefinitions>
 
         <!-- Search bar && Payment button -->
-        <DockPanel Grid.Row="1" Margin="0 5 0 0">
+        <DockPanel Grid.Row="1" Margin="0 5 0 5">
             <Button DockPanel.Dock="Right"
                     Style="{StaticResource MaterialDesignRaisedAccentButton}"
                     Width="150"
@@ -56,7 +81,7 @@
                     ToolTip="Tìm kiếm">
                 <materialDesign:PackIcon Kind="Magnify" Height="30" Width="30" />
             </Button>
-            
+
             <TextBox materialDesign:HintAssist.Hint="Tìm kiếm" 
                      DockPanel.Dock="Right"
                      Width="200"
@@ -69,74 +94,77 @@
 
 
         <!-- Listview data -->
-        <Border BorderBrush="#00B894" 
-                BorderThickness="1" 
-                Grid.Row="2" 
-                Grid.Column="1" 
-                Margin="20 0 20 20" >
-
-            <ListView Name="lsvRoomList" ItemsSource="{Binding RoomList, Mode=TwoWay}" >
-
-                <ListView.ContextMenu>
-                    <ContextMenu>
-
-                        <MenuItem Margin="5 -5 5 5" Header="Thuê phòng" Click="Rent_Click">
-                            <MenuItem.Icon>
-                                <materialDesign:PackIcon Kind="KeyVariant" />
-                            </MenuItem.Icon>
-                        </MenuItem>
-
-                        <MenuItem Margin="5" Header="Thanh toán phòng" Click="Pay_Click">
-                            <MenuItem.Icon>
-                                <materialDesign:PackIcon Kind="CreditCard" />
-                            </MenuItem.Icon>
-                        </MenuItem>
-
-                        <Separator Margin="0 -5"/>
-
-                        <MenuItem Margin="5" Header="Thay đổi thông tin" Click="EditRoom_Click">
-                            <MenuItem.Icon>
-                                <materialDesign:PackIcon Kind="CirclesAdd" />
-                            </MenuItem.Icon>
-                        </MenuItem>
-
-                        <MenuItem Margin="5" Header="Xóa phòng" Click="DeleteRoom_Click">
-                            <MenuItem.Icon>
-                                <materialDesign:PackIcon Kind="ServerRemove" />
-                            </MenuItem.Icon>
-                        </MenuItem>
-
-                        <Separator Margin="0 -5"/>
-
-                        <MenuItem Margin="5 5 5 -5" Header="Thêm phòng mới" Click="AddRoom_Click">
-                            <MenuItem.Icon>
-                                <materialDesign:PackIcon Kind="CirclesAdd" />
-                            </MenuItem.Icon>
-                        </MenuItem>
-
-                    </ContextMenu>
-                </ListView.ContextMenu>
 
 
-                <!-- TODO: Đổi màu của dòng hiển thị phòng tùy vào tình trạng phòng: ConTrong màu A, DaThue màu B-->
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Name}"
-                                        Header="Phòng"
-                                        Width="190"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Type}" 
-                                        Header="Loại Phòng" 
-                                        Width="230"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding PriceStr}" 
-                                        Header="Đơn Giá"
-                                        Width="260"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding StatusStr}" 
-                                        Header="Tình Trạng"/>
-                    </GridView>
-                </ListView.View>
-                
-            </ListView>
-        </Border>
+        <DataGrid Grid.Row="2" 
+                  Grid.Column="1" 
+                  Margin="20 0 20 20" 
+                  Name="lsvRoomList" 
+                  ItemsSource="{Binding RoomList}" >
+
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+
+                    <MenuItem Margin="5 -5 5 5" Header="Thuê phòng" Click="Rent_Click">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="KeyVariant" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                    <MenuItem Margin="5" Header="Thanh toán phòng" Click="Pay_Click">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="CreditCard" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                    <Separator Margin="0 -5"/>
+
+                    <MenuItem Margin="5" Header="Thay đổi thông tin" Click="EditRoom_Click">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="CirclesAdd" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                    <MenuItem Margin="5" Header="Xóa phòng" Click="DeleteRoom_Click">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="ServerRemove" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                    <Separator Margin="0 -5"/>
+
+                    <MenuItem Margin="5 5 5 -5" Header="Thêm phòng mới" Click="AddRoom_Click">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="CirclesAdd" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+
+
+            <!-- TODO: Đổi màu của dòng hiển thị phòng tùy vào tình trạng phòng: ConTrong màu A, DaThue màu B-->
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name}"
+                                    IsReadOnly="True"
+                                    Header="Phòng"
+                                    Width="*"/>
+                <DataGridTextColumn Binding="{Binding Type}" 
+                                    IsReadOnly="True"
+                                    Header="Loại Phòng" 
+                                    Width="*"/>
+                <DataGridTextColumn Binding="{Binding PriceStr}" 
+                                    IsReadOnly="True"
+                                    Header="Đơn Giá"
+                                    Width="*"/>
+                <DataGridTextColumn Binding="{Binding StatusStr}" 
+                                    IsReadOnly="True"
+                                    Header="Tình Trạng"
+                                    Width="*"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
 
     </Grid>
 
