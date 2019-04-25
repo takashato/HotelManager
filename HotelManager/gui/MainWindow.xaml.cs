@@ -83,6 +83,10 @@ namespace HotelManager.gui
                     break;
                 case 3:
                     GrdContent.Children.Clear();
+                    GrdContent.Children.Add(new AccountUC());
+                    break;
+                case 4:
+                    GrdContent.Children.Clear();
                     GrdContent.Children.Add(new AboutUC());
                     break;
             }
@@ -92,6 +96,11 @@ namespace HotelManager.gui
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
+        }
+
+        private void btnChangeAccount_Click(object sender, RoutedEventArgs e)
+        {
+            (new ChangeAccountWindow()).ShowDialog();
         }
     }
 }

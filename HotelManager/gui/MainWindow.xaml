@@ -8,14 +8,22 @@
         Title="Hotel Management" Height="720" Width="1280"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Background="{DynamicResource MaterialDesignPaper}"
+        Background="#35CCAF"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="22"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
         WindowStartupLocation="CenterScreen" AllowsTransparency="True" WindowStyle="None"
         Loaded="OnLoaded">
+    
+    <Window.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth0" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+    </Window.Resources>
 
-    <Grid Background="#35CCAF">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -35,38 +43,35 @@
                    Background="#00000000"
                    MouseDown="TitleBar_MouseDown">
 
-            <StackPanel Orientation="Horizontal" Margin="100 0">
-                <materialDesign:PackIcon Kind="Account" 
-                                         Foreground="White" 
-                                         VerticalAlignment="Center"/>
-                <TextBlock VerticalAlignment="Center" 
-                           Margin="10 0 0 0"
-                           FontSize="16"
-                           Foreground="White"
-                           Text="nhanvien001"
-                           Name="txtStaff"/>
-            </StackPanel>
+            <Button Margin="85 0" Click="btnChangeAccount_Click">
+                <StackPanel Orientation="Horizontal" >
+                    <materialDesign:PackIcon Kind="Account" 
+                                             Foreground="White" 
+                                             VerticalAlignment="Center"/>
+                    <TextBlock VerticalAlignment="Center" 
+                               Margin="10 0 0 0"
+                               FontSize="16"
+                               Foreground="White"
+                               Text="nhanvien001"
+                               Name="txtStaff"/>
+                </StackPanel>
+            </Button>
+
 
             <Button DockPanel.Dock="Right"
-                    Background="Transparent" 
                     HorizontalAlignment="Right" 
-                    BorderThickness="0"
                     Click="Btn_close_Click">
                 <materialDesign:PackIcon Kind="Close"/>
             </Button>
 
             <Button DockPanel.Dock="Right"
-                    Background="Transparent" 
                     HorizontalAlignment="Right" 
-                    BorderThickness="0"
                     Click="Btn_Maximize_Click">
                 <materialDesign:PackIcon Kind="WindowMaximize" />
             </Button>
 
             <Button DockPanel.Dock="Right"
-                    Background="Transparent"
                     HorizontalAlignment="Right" 
-                    BorderThickness="0"
                     Click="Btn_Minimize_Click">
                 <materialDesign:PackIcon Kind="WindowMinimize" />
             </Button>
@@ -79,9 +84,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-
-
-
+            
             <materialDesign:PackIcon Margin="0 20" 
                                      HorizontalAlignment="Center" 
                                      Kind="HomeHeart" 
@@ -127,6 +130,15 @@
                         <materialDesign:PackIcon Kind="ChartAreaspline" 
                                                  Height="40" Width="40" Margin="5" />
                         <TextBlock Text="Báo cáo" 
+                                   FontSize="22" VerticalAlignment="Center" Margin="10 0" />
+                    </StackPanel>
+                </ListBoxItem>
+
+                <ListBoxItem Margin="0 5">
+                    <StackPanel Margin="15 0"  Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="AccountMultiple" 
+                                                 Height="40" Width="40" Margin="5" />
+                        <TextBlock Text="Quản lý tài khoản" 
                                    FontSize="22" VerticalAlignment="Center" Margin="10 0" />
                     </StackPanel>
                 </ListBoxItem>
