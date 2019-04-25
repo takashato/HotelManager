@@ -23,7 +23,7 @@ namespace HotelManager.gui
     /// </summary>
     public partial class RoomListUC : UserControl
     {
-        public static List<Room> RoomList { get; set; } = new List<Room>();
+        public static ObservableCollection<Room> RoomList { get; set; } = new ObservableCollection<Room>();
 
         public RoomListUC()
         {
@@ -76,8 +76,9 @@ namespace HotelManager.gui
 
         public void LoadFromDB()
         {
+            var rooms = Room.GetAll();
             RoomList.Clear();
-            RoomList.AddRange(Room.GetAll());
+            foreach (var room in rooms) RoomList.Add(room);
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)

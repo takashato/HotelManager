@@ -21,13 +21,12 @@ namespace HotelManager.gui
     /// </summary>
     public partial class MainWindow : Window
     {
-        private RoomListUC _RoomListUC { get; set; }
+        private UserControl CurrentActivatedView { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            _RoomListUC = new RoomListUC();
-            GrdContent.Children.Add(_RoomListUC);
+            CurrentActivatedView = _RoomListUC;
         }
 
         /// <summary>
@@ -36,7 +35,11 @@ namespace HotelManager.gui
         private void Update()
         {
             if (App.Instance._Session == null) return; // Do not update when is not logged in!!!
+
+            // Update Views
             _RoomListUC.LoadFromDB();
+
+            // Update Staff infos
             txtStaff.Text = App.Instance._Session.CurrentStaff.Fullname;
         }
 
@@ -71,27 +74,31 @@ namespace HotelManager.gui
             transitioningContentSlide.OnApplyTemplate();
             GrdCursor.Margin = new Thickness(10, (10 + (86 * listItemSelectedIndex)), 0, 0);
 
+            UserControl ToDisplay = null;
+
             switch (listItemSelectedIndex)
             {
                 case 0:
-                    GrdContent.Children.Clear();
-                    GrdContent.Children.Add(new RoomListUC());
+                    ToDisplay = _RoomListUC;
                     break;
                 case 1:
-                    GrdContent.Children.Clear();
-                    GrdContent.Children.Add(new RegulationUC());
+                    ToDisplay = _RegulationUC;
                     break;
                 case 2:
-                    GrdContent.Children.Clear();
                     break;
                 case 3:
-                    GrdContent.Children.Clear();
-                    GrdContent.Children.Add(new AccountUC());
+                    ToDisplay = _AccountUC;
                     break;
                 case 4:
-                    GrdContent.Children.Clear();
-                    GrdContent.Children.Add(new AboutUC());
+                    ToDisplay = _AboutUC;
                     break;
+            }
+
+            if (ToDisplay != null && ToDisplay != CurrentActivatedView)
+            {
+                CurrentActivatedView.Visibility = Visibility.Collapsed; // Hide current view
+                CurrentActivatedView = ToDisplay;
+                CurrentActivatedView.Visibility = Visibility.Visible;
             }
         }
 
