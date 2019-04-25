@@ -74,11 +74,13 @@ namespace HotelManager.gui
                     || ((item as Room).Type.IndexOf(txbSearchBar.Text, StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
-        public void LoadFromDB()
+        public async void LoadFromDB()
         {
-            var rooms = Room.GetAll();
+            App.Instance._MainWindow.ShowViewLoading();
+            var rooms = await Room.GetAllAsync();
             RoomList.Clear();
             foreach (var room in rooms) RoomList.Add(room);
+            App.Instance._MainWindow.CloseViewDialog();
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
@@ -247,6 +249,11 @@ namespace HotelManager.gui
         private void btnMassPayment_Click(object sender, RoutedEventArgs e)
         {
             (new MassPaymentWindow()).ShowDialog();
+        }
+
+        private void BtnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            LoadFromDB();
         }
     }
 }

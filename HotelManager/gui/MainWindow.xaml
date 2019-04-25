@@ -157,12 +157,14 @@
 
 
         <!-- Content -->
-        <Grid Background="#FEFEFE" Grid.Column="1" Grid.Row="1" Name="GrdContent">
-            <local:RoomListUC x:Name="_RoomListUC"/>
-            <local:RegulationUC x:Name="_RegulationUC" Visibility="Collapsed"/>
-            <local:AccountUC x:Name="_AccountUC" Visibility="Collapsed"/>
-            <local:AboutUC x:Name="_AboutUC" Visibility="Collapsed"/>
-        </Grid>
+        <materialDesign:DialogHost Grid.Column="1" Grid.Row="1" Name="viewDlgHost">
+            <Grid Background="#FEFEFE" Name="GrdContent">
+                <local:RoomListUC x:Name="_RoomListUC"/>
+                <local:RegulationUC x:Name="_RegulationUC" Visibility="Collapsed"/>
+                <local:AccountUC x:Name="_AccountUC" Visibility="Collapsed"/>
+                <local:AboutUC x:Name="_AboutUC" Visibility="Collapsed"/>
+            </Grid>
+        </materialDesign:DialogHost>
 
     </Grid>
 </Window>

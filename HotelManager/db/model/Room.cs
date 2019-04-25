@@ -43,6 +43,14 @@ namespace HotelManager.db.model
             }
         }
 
+        public static Task<IEnumerable<Room>> GetAllAsync()
+        {
+            using (var conn = DatabaseManager.Conn) // Syntatic connection usage
+            {
+                return conn.QueryAsync<Room>("SELECT * FROM room INNER JOIN room_type ON room.type=room_type.type");
+            }
+        }
+
         public static bool InsertRoom(string name, string type, string note)
         {
             using (var conn = DatabaseManager.Conn)

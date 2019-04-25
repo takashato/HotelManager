@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Runtime.InteropServices;
+using MaterialDesignThemes.Wpf;
+using HotelManager.gui.dialog;
 
 namespace HotelManager.gui
 {
@@ -111,6 +113,17 @@ namespace HotelManager.gui
         private void btnChangeAccount_Click(object sender, RoutedEventArgs e)
         {
             (new ChangeAccountWindow()).ShowDialog();
+        }
+
+        public void ShowViewLoading()
+        {
+            viewDlgHost.ShowDialog(new LoadingDialog());
+        }
+
+        public async void CloseViewDialog()
+        {
+            await Task.Delay(200);
+            viewDlgHost.IsOpen = false;
         }
     }
 }
