@@ -81,6 +81,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="db\model\Customer.cs" />
     <Compile Include="db\model\RoomType.cs" />
     <Compile Include="gui\AboutUC.xaml.cs">
       <DependentUpon>AboutUC.xaml</DependentUpon>

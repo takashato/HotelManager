@@ -57,7 +57,7 @@ namespace HotelManager.db.model
                     if (item.CompareTo(name) == 0)
                         return 0;
                 }
-                conn.Execute("INSERT INTO room(Id, Name, Type, Note) VALUES(@Id, @Name, @Type, @Note)", room);
+                conn.Execute("INSERT INTO room(Name, Type, Note) VALUES(@Name, @Type, @Note)", room);
                 
                 return 1;
                 
