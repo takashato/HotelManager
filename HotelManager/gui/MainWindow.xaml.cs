@@ -87,6 +87,7 @@ namespace HotelManager.gui
                     ToDisplay = _RegulationUC;
                     break;
                 case 2:
+                    ToDisplay = _ReportUC;
                     break;
                 case 3:
                     ToDisplay = _AccountUC;

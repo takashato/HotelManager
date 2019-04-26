@@ -161,6 +161,7 @@
             <Grid Background="#FEFEFE" Name="GrdContent">
                 <local:RoomListUC x:Name="_RoomListUC"/>
                 <local:RegulationUC x:Name="_RegulationUC" Visibility="Collapsed"/>
+                <local:ReportUC x:Name="_ReportUC" Visibility="Collapsed"/>
                 <local:AccountUC x:Name="_AccountUC" Visibility="Collapsed"/>
                 <local:AboutUC x:Name="_AboutUC" Visibility="Collapsed"/>
             </Grid>

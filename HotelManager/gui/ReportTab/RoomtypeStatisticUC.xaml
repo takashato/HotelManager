@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="HotelManager.gui.RoomtypeStatisticUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HotelManager.gui" 
+             mc:Ignorable="d"              
+             xmlns:MetroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             Background="#FEFEFE"
+             TextElement.FontWeight="Medium"
+             TextElement.FontSize="18"
+             FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
+             d:DesignHeight="400" d:DesignWidth="900" 
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+    <Grid >
+        <MetroChart:StackedBar100Chart ChartTitle="Thống kê theo loại phòng" 
+                                       ChartSubTitle="" 
+                                       Foreground="#00B894" >
+            <MetroChart:StackedBar100Chart.Series>
+                <MetroChart:ChartSeries DisplayMember="Roomtype"
+                                        ItemsSource="{Binding Path=ListTest}"
+                                        SeriesTitle="Danh sách loại phòng"
+                                        ValueMember="Revenue" 
+                                        HorizontalAlignment="Center"/>
+            </MetroChart:StackedBar100Chart.Series>
+        </MetroChart:StackedBar100Chart>
+    </Grid>
+
+
+
+
+
+</UserControl>
+
+    
+    
+
+   
