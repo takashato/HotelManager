@@ -71,7 +71,7 @@
                 <DatePicker Focusable="False" SelectedDate="{x:Static system:DateTime.Now}"/>
             </StackPanel>
 
-            <DataGrid Grid.Row="1" 
+            <DataGrid x:Name="dataGridCustomer" Grid.Row="1" 
                       Grid.ColumnSpan="2" 
                       Margin="20 0 20 20" 
                       AutoGenerateColumns="False"
@@ -79,7 +79,11 @@
                       BorderBrush="#35CCAF" 
                       BorderThickness="1"
                       CanUserSortColumns="False"
-                      Background="White">
+                      Background="White"
+                      LoadingRow="DataGrid_LoadingRow" 
+                      HeadersVisibility="All" 
+                      EnableRowVirtualization="False"
+                      local:DataGridBehavior.DisplayRowNumber="True">
 
                 <DataGrid.Resources>
                     <Style TargetType="TextBlock" 
@@ -93,10 +97,6 @@
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="STT" 
-                                        Width="60" 
-                                        Binding="{Binding STT}" 
-                                        IsReadOnly="True" />
                     <DataGridTextColumn Header="Tên Khách Hàng" 
                                         Binding="{Binding HoTen}" 
                                         Width="160" />
