@@ -57,7 +57,7 @@ namespace HotelManager.db.model
             {
                 var room = new Room { Name = name, Type = type, Note = note };
 
-                if (conn.ExecuteScalar<int>("SELECT COUNT(*) FROM room WHERE name = @Name", new { Name = name }) > 0)
+                if (!IsAvailableName(name))
                     return false;
 
                 try
@@ -79,11 +79,26 @@ namespace HotelManager.db.model
             }
         }
 
-        public static void UpdateRoom(string newName, string oldName, string newType, string newNote)
+        public static bool UpdateRoom(string newName, string oldName, string newType, string newNote)
         {
             using (var conn = DatabaseManager.Conn)
-            {               
-                conn.Execute("UPDATE room SET name = '" + newName + "', type = '" + newType + "', note = '" + newNote + "' WHERE name = '" + oldName + "'");
+            {
+                try
+                {
+                    if (!newName.Equals(oldName) && IsAvailableName(newName) || newName.Equals(oldName))
+                    {
+                        conn.Execute("UPDATE room SET name = '" + newName + "', type = '" + newType + "', note = '" + newNote + "' WHERE name = '" + oldName + "'");
+                        return true;
+                    } 
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
             }
         }
 
@@ -95,5 +110,12 @@ namespace HotelManager.db.model
             }
         }
         
+        public static bool IsAvailableName(string name)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.ExecuteScalar<int>("SELECT COUNT(*) FROM room WHERE name = @Name", new { Name = name }) <= 0;
+            }
+        }
     }
 }

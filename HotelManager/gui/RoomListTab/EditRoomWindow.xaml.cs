@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using HotelManager.db.model;
+using MaterialDesignThemes.Wpf;
 
 namespace HotelManager.gui
 {
@@ -27,10 +28,8 @@ namespace HotelManager.gui
             InitializeComponent();
 
             _roomToEdit = roomToEdit;
-            txbOldRoomName.Text = _roomToEdit.Name;
-            txbOldRoomType.Text = _roomToEdit.Type;
-            txbOldPrice.Text = _roomToEdit.PriceStr;
-            txbOldNote.Text = Room.GetRoomNoteByName(_roomToEdit.Name);
+            txbNewRoomName.Text = _roomToEdit.Name;
+            txbNewNote.Text = Room.GetRoomNoteByName(_roomToEdit.Name);
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -41,16 +40,18 @@ namespace HotelManager.gui
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = false; // Not changed
             this.Close();
         }
 
-        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        private async void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             //_roomToEdit.Name = txbNewRoomName.Text;
             //_roomToEdit.Type = cbNewRoomType.Text;
             //_phongMuonSua.DonGia = Convert.ToDecimal( txbDonGiaMoi.Text );
-            Room.UpdateRoom(txbNewRoomName.Text, _roomToEdit.Name, cbNewRoomType.Text, txbNewNote.Text);
-            MessageBox.Show("Cập nhật thành công");
+            bool result = Room.UpdateRoom(txbNewRoomName.Text, _roomToEdit.Name, (cbNewRoomType.SelectedItem as RoomType).Type, txbNewNote.Text);
+            this.DialogResult = result;
+            this.Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -58,13 +59,24 @@ namespace HotelManager.gui
             cbNewRoomType.ItemsSource = RoomType.GetRoomType();
             cbNewRoomType.DisplayMemberPath = "Type";
             cbNewRoomType.SelectedValuePath = "Price";
+            foreach (RoomType roomType in cbNewRoomType.Items)
+            {
+                if (roomType.Type.Equals(_roomToEdit.Type))
+                {
+                    cbNewRoomType.SelectedItem = roomType;
+                }
+            }
         }
 
-        private string PriceStr => string.Format("{0:N0}", cbNewRoomType.SelectedValue);
+        private string GetPriceStr() 
+        {
+            if (cbNewRoomType.SelectedItem == null) return "";
+            return string.Format("{0:N0}", (cbNewRoomType.SelectedItem as RoomType).Price);
+        }
 
         private void CbNewRoomType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            txbNewPrice.Text = PriceStr;
+            txbNewPrice.Text = GetPriceStr();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

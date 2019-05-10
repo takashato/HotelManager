@@ -13,7 +13,7 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="18"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
-        Height="430" Width="350" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen"
+        Height="291.825" Width="350" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen"
         DataContext="{Binding RelativeSource={RelativeSource Self}}" Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Grid>
@@ -51,7 +51,8 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="1" Background="White">
-            <Grid Margin="10">
+            <materialDesign:DialogHost Identifier="roomEditDialog">
+                <Grid Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -67,20 +68,10 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-
-                <TextBlock VerticalAlignment="Center" Grid.Row="0" Margin="10" Text="Tên phòng cũ" />
-                <TextBlock VerticalAlignment="Center" Grid.Row="2" Margin="10" Text="Loại phòng cũ" />
-                <TextBlock VerticalAlignment="Center" Grid.Row="4" Margin="10" Text="Đơn giá cũ" />
-                <TextBlock VerticalAlignment="Center" Grid.Row="6" Margin="10" Text="Ghi chú cũ" />
-                <TextBlock Foreground="#00B894" VerticalAlignment="Center" Grid.Row="1" Margin="10" Text="Tên phòng mới" />
-                <TextBlock Foreground="#00B894" VerticalAlignment="Center" Grid.Row="3" Margin="10" Text="Loại phòng mới" />
-                <TextBlock Foreground="#00B894" VerticalAlignment="Center" Grid.Row="5" Margin="10" Text="Đơn giá mới" />
-                <TextBlock Foreground="#00B894" VerticalAlignment="Center" Grid.Row="7" Margin="10" Text="Ghi chú mới" />
-
-                <TextBox Grid.Column="1" Grid.Row="0" Margin="0 0 5 5" IsReadOnly="True" Name="txbOldRoomName"/>
-                <TextBox Grid.Column="1" Grid.Row="2" Margin="0 0 5 5" IsReadOnly="True" Name="txbOldRoomType"/>
-                <TextBox Grid.Column="1" Grid.Row="4" Margin="0 0 5 5" IsReadOnly="True" Name="txbOldPrice"/>
-                <TextBox Grid.Column="1" Grid.Row="6" Margin="0 0 5 5" IsReadOnly="True" Name="txbOldNote"/>
+                    <TextBlock  VerticalAlignment="Center" Grid.Row="1" Margin="10" Text="Tên phòng mới" />
+                <TextBlock VerticalAlignment="Center" Grid.Row="3" Margin="10" Text="Loại phòng mới" />
+                <TextBlock VerticalAlignment="Center" Grid.Row="5" Margin="10" Text="Đơn giá mới" />
+                <TextBlock VerticalAlignment="Center" Grid.Row="7" Margin="10" Text="Ghi chú mới" />
                 <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="1" Margin="0 0 5 5" Name="txbNewRoomName"/>
                 <ComboBox Foreground="#00B894" Grid.Column="1" Grid.Row="3" Margin="0 0 5 5" Name="cbNewRoomType" SelectionChanged="CbNewRoomType_SelectionChanged"/>
                 <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="5" Margin="0 0 5 5" IsReadOnly="True" Name="txbNewPrice" />
@@ -97,6 +88,7 @@
                     Click="btnUpdate_Click"
                     materialDesign:ShadowAssist.ShadowDepth="Depth0"/>
             </Grid>
+            </materialDesign:DialogHost>
         </Grid>
 
 

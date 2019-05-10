@@ -156,14 +156,13 @@ namespace HotelManager.gui
 
             if (roomToEdit.Status == Room.EStatus.NotAvailable)
             {
-                MessageBox.Show("Không thể chỉnh sửa phòng đang sử dụng",
-                    "Chỉnh sửa thông tin không thành công",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                App.Instance._MainWindow.ShowMessage("Không thể sửa phòng đang được thuê!");
                 return;
             }
 
-            (new EditRoomWindow(roomToEdit)).ShowDialog();
+            var dialogResult = (new EditRoomWindow(roomToEdit)).ShowDialog();
+            if (dialogResult == true)
+                LoadFromDB(); // Update form
         }
 
         private void DeleteRoom_Click(object sender, RoutedEventArgs e)

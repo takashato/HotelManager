@@ -121,6 +121,11 @@ namespace HotelManager.gui
             viewDlgHost.ShowDialog(new LoadingDialog());
         }
 
+        public void ShowMessage(string message)
+        {
+            viewDlgHost.ShowDialog(new MessageDialog(message));
+        }
+
         public async void CloseViewDialog()
         {
             await Task.Delay(200);
