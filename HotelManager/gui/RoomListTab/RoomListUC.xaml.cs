@@ -32,26 +32,6 @@ namespace HotelManager.gui
             SetRoomListFilter();
         }
 
-        private void LoadWithoutDatabase()
-        {
-            RoomList?.Clear();
-            RoomList.Add(new Room() { Name = "A101", Type = "A-Normal", Price = 1000000M, Status = Room.EStatus.Available });
-            RoomList.Add(new Room() { Name = "B5.2", Type = "B----VIP", Price = 2500000M, Status = Room.EStatus.NotAvailable });
-            RoomList.Add(new Room() { Name = "C336", Type = "C-Normal", Price = 3000000M, Status = Room.EStatus.NotAvailable });
-            RoomList.Add(new Room() { Name = "C303", Type = "C-Normal", Price = 4000000M, Status = Room.EStatus.Available });
-            RoomList.Add(new Room() { Name = "C323", Type = "C-Normal", Price = 5000000M, Status = Room.EStatus.NotAvailable });
-            RoomList.Add(new Room() { Name = "C333", Type = "C-Normal", Price = 6000000M, Status = Room.EStatus.Available });
-            RoomList.Add(new Room() { Name = "C343", Type = "C-Normal", Price = 7000000M, Status = Room.EStatus.Available });
-            RoomList.Add(new Room() { Name = "C353", Type = "C-Normal", Price = 8000000M, Status = Room.EStatus.NotAvailable });
-            RoomList.Add(new Room() { Name = "C363", Type = "C-Normal", Price = 9000000M, Status = Room.EStatus.Available });
-            RoomList.Add(new Room() { Name = "C373", Type = "C-Normal", Price = 7500000M, Status = Room.EStatus.NotAvailable });
-            RoomList.Add(new Room() { Name = "C323", Type = "C-Normal", Price = 4600000M, Status = Room.EStatus.Available });
-            RoomList.Add(new Room() { Name = "C3x3", Type = "C-Normal", Price = 7000000M, Status = Room.EStatus.Available });
-            RoomList.Add(new Room() { Name = "C3g3", Type = "C-Normal", Price = 7000000M, Status = Room.EStatus.NotAvailable });
-            RoomList.Add(new Room() { Name = "C3z3", Type = "C-Normal", Price = 7000000M, Status = Room.EStatus.NotAvailable });
-            RoomList.Add(new Room() { Name = "Cse3", Type = "C-Normal", Price = 7000000M, Status = Room.EStatus.NotAvailable });
-        }
-
         private void SetRoomListFilter()
         {
             // Filtering list room by listview-filtering. Details here: https://www.wpf-tutorial.com/listview-control/listview-filtering/
@@ -79,7 +59,11 @@ namespace HotelManager.gui
             App.Instance._MainWindow.ShowViewLoading();
             var rooms = await Room.GetAllAsync();
             RoomList.Clear();
-            foreach (var room in rooms) RoomList.Add(room);
+            foreach (var room in rooms)
+            {
+                room.RetrieveRentInfo();
+                RoomList.Add(room);
+            }
             App.Instance._MainWindow.CloseViewDialog();
         }
 
@@ -109,7 +93,7 @@ namespace HotelManager.gui
 
             Room roomToRent = lsvRoomList.SelectedItem as Room;
 
-            if (roomToRent.Status == Room.EStatus.NotAvailable)
+            if (!roomToRent.IsAvailable())
             {
                 // TODO: Thay CustomMessageBox đẹp hơn
                 MessageBox.Show("Phòng " + roomToRent.Name + " đã được thuê",

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2019 at 11:05 AM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.3
+-- Generation Time: May 10, 2019 at 04:37 PM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -67,6 +67,21 @@ INSERT INTO `customer_type` (`type`, `surcharge`, `note`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `rent_info`
+--
+
+CREATE TABLE `rent_info` (
+  `id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `staff_id` int(11) NOT NULL,
+  `room_id` int(11) NOT NULL,
+  `checkin_date` datetime NOT NULL,
+  `checkout_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `room`
 --
 
@@ -74,7 +89,6 @@ CREATE TABLE `room` (
   `id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `type` varchar(128) NOT NULL,
-  `status` enum('Available','NotAvailable') NOT NULL,
   `note` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -82,10 +96,10 @@ CREATE TABLE `room` (
 -- Dumping data for table `room`
 --
 
-INSERT INTO `room` (`id`, `name`, `type`, `status`, `note`) VALUES
-(1, 'B757', 'B', 'Available', 'dịch vụ vip'),
-(2, 'A999', 'A', 'Available', 'dịch vụ vip'),
-(3, 'C199', 'C', 'Available', '');
+INSERT INTO `room` (`id`, `name`, `type`, `note`) VALUES
+(1, 'B757', 'B', 'dịch vụ vip'),
+(2, 'A999', 'A', 'dịch vụ vip'),
+(3, 'C199', 'C', '');
 
 -- --------------------------------------------------------
 
@@ -143,6 +157,12 @@ ALTER TABLE `customer`
   ADD UNIQUE KEY `id_card_number` (`id_card_number`);
 
 --
+-- Indexes for table `rent_info`
+--
+ALTER TABLE `rent_info`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `room`
 --
 ALTER TABLE `room`
@@ -167,6 +187,12 @@ ALTER TABLE `staff`
 --
 ALTER TABLE `customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `rent_info`
+--
+ALTER TABLE `rent_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `room`
