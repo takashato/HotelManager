@@ -22,5 +22,20 @@ namespace HotelManager.db.model
                 return conn.Query<CustomerType>("SELECT * FROM customer_type").ToList();
             }
         }
+
+        public static bool DeleteCustomerType(string type)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                try
+                {
+                    return conn.Execute("DELETE FROM customer_type WHERE type = @type", new { type = type }) > 0;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

@@ -83,7 +83,32 @@ namespace HotelManager.gui
 
         private void DeleteGuestType_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                CustomerType customerTypeToDelete = dataGridListCustomerType.SelectedItem as CustomerType;
+                var userAnswer = MessageBox.Show("Bạn có chắc muốn xóa loại khách hàng " + customerTypeToDelete.Type + " không? Thao tác sẽ không được hoàn lại.",
+                                                 "Warning",
+                                                 MessageBoxButton.YesNo,
+                                                 MessageBoxImage.Warning);
+                if (userAnswer == MessageBoxResult.Yes)
+                {
+                    if (CustomerType.DeleteCustomerType(customerTypeToDelete.Type))
+                    {
+                        ListCustomerType.Remove(customerTypeToDelete);
+                        CollectionViewSource.GetDefaultView(ListCustomerType).Refresh();
+                        MessageBox.Show("Xóa phòng thành công!");
+                    }
+                    else
+                        MessageBox.Show("Xóa phòng thất bại!");
+                }
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Chưa chọn mục cần xóa hoặc mục được chọn trống!", 
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+            }
         }
 
         private void EditGuestType_Click(object sender, RoutedEventArgs e)

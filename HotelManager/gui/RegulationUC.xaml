@@ -117,7 +117,8 @@
 
             <DataGrid  ItemsSource="{Binding ListCustomerType}"
                        Grid.Row="1"                            
-                       Margin="20 0 20 20">
+                       Margin="20 0 20 20"
+                       x:Name="dataGridListCustomerType">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Loại Khách" Binding="{Binding Type}"
                                         Width="*" IsReadOnly="True" />
