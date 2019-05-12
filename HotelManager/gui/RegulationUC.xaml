@@ -80,7 +80,8 @@
 
             <DataGrid  ItemsSource="{Binding ListRoomType}"
                        Grid.Row="1"               
-                       Margin="20 0 20 20">
+                       Margin="20 0 20 20"
+                       x:Name="dataGridListRoomType">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Loại Phòng" Binding="{Binding Type}"
                                         Width="*" IsReadOnly="True"/>

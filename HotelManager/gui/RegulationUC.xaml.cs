@@ -68,7 +68,32 @@ namespace HotelManager.gui
 
         private void DeleteRoomType_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                RoomType roomTypeToDelete = dataGridListRoomType.SelectedItem as RoomType;
+                var userAnswer = MessageBox.Show("Bạn có chắc muốn xóa loại phòng " + roomTypeToDelete.Type + " không? Thao tác sẽ không được hoàn lại.",
+                                                 "Warning",
+                                                 MessageBoxButton.YesNo,
+                                                 MessageBoxImage.Warning);
+                if (userAnswer == MessageBoxResult.Yes)
+                {
+                    if (RoomType.DeleteRoomType(roomTypeToDelete.Type))
+                    {
+                        ListRoomType.Remove(roomTypeToDelete);
+                        CollectionViewSource.GetDefaultView(ListRoomType).Refresh();
+                        MessageBox.Show("Xóa loại phòng thành công!");
+                    }
+                    else
+                        MessageBox.Show("Xóa loại phòng thất bại!");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Chưa chọn mục cần xóa hoặc mục được chọn trống!",
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+            }
         }
 
         private void EditRoomType_Click(object sender, RoutedEventArgs e)
@@ -96,10 +121,10 @@ namespace HotelManager.gui
                     {
                         ListCustomerType.Remove(customerTypeToDelete);
                         CollectionViewSource.GetDefaultView(ListCustomerType).Refresh();
-                        MessageBox.Show("Xóa phòng thành công!");
+                        MessageBox.Show("Xóa loại khách hàng thành công!");
                     }
                     else
-                        MessageBox.Show("Xóa phòng thất bại!");
+                        MessageBox.Show("Xóa loại khách hàng thất bại!");
                 }
             }
             catch(Exception)
