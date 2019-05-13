@@ -15,7 +15,15 @@ namespace HotelManager.db.model
         public string Fullname { get; set; }
         public DateTime LastLoginDate { get; set; }
         public DateTime CreatedDate { get; set; }
-        public int Level { get; set; }
+        public ELevel Level { get; set; }
+
+        public enum ELevel
+        {
+            Receptionist = 1,
+            Manager = 2,
+            Administrator = 3
+        }
+            
 
         public static Staff GetByUsername(string username)
         {
@@ -32,5 +40,87 @@ namespace HotelManager.db.model
                 return conn.Query<Staff>("SELECT * FROM staff INNER JOIN staff_type on staff.level = staff_type.level ").ToList();
             }
         }
+
+        public static bool InsertStaff(string username, string password, string fullname, string level)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                string encryptPassword = BCrypt.Net.BCrypt.HashPassword(password);
+                int lv = 1;
+                switch (level)
+                {
+                    case "manager":
+                        lv = 2;
+                        break;
+                    case "receptionist":
+                        lv = 1;
+                        break;
+                    case "administrator":
+                        lv = 3;
+                        break;
+                }
+
+                if (!IsAvailableUsername(username))
+                    return false;
+
+                try
+                {
+                    return conn.Execute("INSERT INTO staff(username, password, fullname, level, createdDate) VALUES('" + username + "', '" + encryptPassword + "', '" + fullname + "', " + lv + ", '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") +  "')") > 0;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public static bool UpdateStaff(string newPassword, string newFullname, string newLevel, string username)
+        {
+            int lv = 1;
+            switch (newLevel)
+            {
+                case "manager":
+                    lv = 2;
+                    break;
+                case "receptionist":
+                    lv = 1;
+                    break;
+                case "administrator":
+                    lv = 3;
+                    break;
+            }
+            using (var conn = DatabaseManager.Conn)
+            {
+                try
+                {
+                    string password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+                    conn.Execute("UPDATE staff SET fullname = '" + newFullname + "', level = '" + lv + "', password = '" + password + "' WHERE username = '" + username + "'");
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public static bool DeleteStaff(string username)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.Execute("DELETE FROM staff WHERE username = @username", new { username = username }) > 0;
+            }
+        }
+
+        public static bool IsAvailableUsername(string username)
+        {
+            if ("".Equals(username)) return false;
+
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.ExecuteScalar<int>("SELECT COUNT(*) FROM staff WHERE username = @username", new { username = username }) <= 0;
+            }
+        }
+        
     }
 }

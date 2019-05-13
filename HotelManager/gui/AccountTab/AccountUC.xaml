@@ -65,7 +65,8 @@
                        FontSize="25"
                        Margin="15 10 0 5"/>
 
-            <DataGrid ItemsSource="{Binding ListAccount}">
+            <DataGrid ItemsSource="{Binding ListAccount}"
+                      x:Name="dataGridListAccount">
                 
                 <DataGrid.ContextMenu>
                     <ContextMenu>
@@ -89,11 +90,11 @@
                     <DataGridTextColumn Width="100*"            IsReadOnly="True" 
                                         Header="Tài Khoản"      Binding="{Binding Username}"/>
                     <DataGridTextColumn Width="100*"            IsReadOnly="True" 
-                                        Header="Loại Tài Khoản" Binding="{Binding AccountType}"/>
+                                        Header="Loại Tài Khoản" Binding="{Binding Level}"/>
                     <DataGridTextColumn Width="100*"            IsReadOnly="True" 
-                                        Header="Họ Tên"         Binding="{Binding Name}"/>
+                                        Header="Họ Tên"         Binding="{Binding Fullname}"/>
                     <DataGridTextColumn Width="150*"            IsReadOnly="True" 
-                                        Header="Ngày Tạo"       Binding="{Binding DateCreated}"/>
+                                        Header="Ngày Tạo"       Binding="{Binding CreatedDate}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>
