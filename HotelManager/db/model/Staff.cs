@@ -24,5 +24,13 @@ namespace HotelManager.db.model
                 return conn.QueryFirstOrDefault<Staff>("SELECT * FROM `staff` WHERE `username` = @username", new { username = username });
             }
         }
+
+        public static List<Staff> GetAll()
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.Query<Staff>("SELECT * FROM staff INNER JOIN staff_type on staff.level = staff_type.level ").ToList();
+            }
+        }
     }
 }
