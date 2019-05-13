@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2019 at 04:37 PM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Generation Time: May 13, 2019 at 09:07 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -33,16 +33,15 @@ CREATE TABLE `customer` (
   `name` varchar(128) CHARACTER SET utf8 NOT NULL,
   `id_card_number` bigint(20) NOT NULL,
   `address` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `type` varchar(20) CHARACTER SET utf8 NOT NULL,
-  `room_rental_date` date NOT NULL
+  `type` varchar(20) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`id`, `name`, `id_card_number`, `address`, `type`, `room_rental_date`) VALUES
-(1, 'Nguyễn Văn Tuấn', 2511252515, 'Hà Nội', 'Inland', '2019-04-25');
+INSERT INTO `customer` (`id`, `name`, `id_card_number`, `address`, `type`) VALUES
+(1, 'Nguyễn Văn Tuấn', 2511252515, 'Hà Nội', 'Inland');
 
 -- --------------------------------------------------------
 
@@ -61,8 +60,8 @@ CREATE TABLE `customer_type` (
 --
 
 INSERT INTO `customer_type` (`type`, `surcharge`, `note`) VALUES
-('Inland', 3, ''),
-('foreign', 10, '');
+('Foreign', 10, ''),
+('Inland', 3, '');
 
 -- --------------------------------------------------------
 
@@ -72,12 +71,12 @@ INSERT INTO `customer_type` (`type`, `surcharge`, `note`) VALUES
 
 CREATE TABLE `rent_info` (
   `id` int(11) NOT NULL,
+  `room_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `staff_id` int(11) NOT NULL,
-  `room_id` int(11) NOT NULL,
-  `checkin_date` datetime NOT NULL,
-  `checkout_date` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `checkin_date` date NOT NULL,
+  `checkout_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -89,6 +88,7 @@ CREATE TABLE `room` (
   `id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `type` varchar(128) NOT NULL,
+  `status` enum('Available','NotAvailable') NOT NULL,
   `note` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -96,10 +96,12 @@ CREATE TABLE `room` (
 -- Dumping data for table `room`
 --
 
-INSERT INTO `room` (`id`, `name`, `type`, `note`) VALUES
-(1, 'B757', 'B', 'dịch vụ vip'),
-(2, 'A999', 'A', 'dịch vụ vip'),
-(3, 'C199', 'C', '');
+INSERT INTO `room` (`id`, `name`, `type`, `status`, `note`) VALUES
+(1, 'B777', 'B', 'Available', ''),
+(2, 'A999', 'A', 'Available', 'dịch vụ vip'),
+(3, 'C199', 'C', 'Available', ''),
+(4, 'A111', 'A', 'Available', ''),
+(5, 'B123', 'B', 'Available', '');
 
 -- --------------------------------------------------------
 
@@ -145,6 +147,26 @@ CREATE TABLE `staff` (
 INSERT INTO `staff` (`id`, `username`, `password`, `fullname`, `lastLoginDate`, `createdDate`, `level`) VALUES
 (1, 'admin', '$2a$10$7pPFABJzPyWqey9ylmTB4.kyHn9DXO8LHISyrg8SMIbyA04LcRfcq', 'Admin', '2019-04-18 00:00:00', '2019-04-18 00:00:00', 2);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staff_type`
+--
+
+CREATE TABLE `staff_type` (
+  `level` int(11) NOT NULL,
+  `type` varchar(128) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `staff_type`
+--
+
+INSERT INTO `staff_type` (`level`, `type`) VALUES
+(1, 'receptionist'),
+(2, 'manager'),
+(3, 'administrator');
+
 --
 -- Indexes for dumped tables
 --
@@ -155,12 +177,6 @@ INSERT INTO `staff` (`id`, `username`, `password`, `fullname`, `lastLoginDate`, 
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id_card_number` (`id_card_number`);
-
---
--- Indexes for table `rent_info`
---
-ALTER TABLE `rent_info`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `room`
@@ -189,16 +205,10 @@ ALTER TABLE `customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `rent_info`
---
-ALTER TABLE `rent_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `staff`
