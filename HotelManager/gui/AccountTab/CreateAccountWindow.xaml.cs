@@ -36,14 +36,43 @@ namespace HotelManager.gui
             this.Close();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             cbAccountType.ItemsSource = StaffType.GetStaffTypes();
+        }
+
+        private void BtnCreateAccount_Click(object sender, RoutedEventArgs e)
+        {
+            if ("".Equals(txbUsername.Text) || "".Equals(txbPassword.Password) || "".Equals(txbRepassword.Password) || "".Equals(txbFullName.Text) || "".Equals(cbAccountType.Text))
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin");
+                return;
+            }
+            if(txbPassword.Password.Equals(txbRepassword.Password))
+            {
+                if (Staff.InsertStaff(txbUsername.Text, txbPassword.Password, txbFullName.Text, cbAccountType.Text))
+                    MessageBox.Show("Tạo tài khoản thành công!");
+                else
+                    MessageBox.Show("Tạo tài khoản không thành công!");
+            }
+            else
+            {
+                MessageBox.Show("Nhập lại mật khẩu không khớp!");
+                return;
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            HotelManager.gui.AccountUC.ListAccount.Clear();
+            List<Staff> account = new List<Staff>();
+            account.Clear();
+            account.AddRange(Staff.GetAll());
+
+            HotelManager.gui.AccountUC.ListAccount.Clear();
+            foreach (var item in account)
+                HotelManager.gui.AccountUC.ListAccount.Add(item);
+            CollectionViewSource.GetDefaultView(HotelManager.gui.AccountUC.ListAccount).Refresh();
         }
     }
 }
