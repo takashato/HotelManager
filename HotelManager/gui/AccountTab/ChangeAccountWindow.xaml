@@ -13,7 +13,7 @@
         TextElement.FontSize="18"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
         Height="270" Width="400" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}" Loaded="Window_Loaded">
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Grid Background="#35CCAF">
         <Grid.RowDefinitions>
@@ -70,7 +70,7 @@
 
                 <TextBox     Grid.Column="1" Grid.Row="0" Margin="0 0 0 5" Name="txbUsername" IsReadOnly="True" />
                 <PasswordBox Grid.Column="1" Grid.Row="1" Margin="0 0 0 5" Name="txbPassword" />
-                <TextBox     Grid.Column="1" Grid.Row="2" Margin="0 0 0 5" Name="txbName" />
+                <TextBox     Grid.Column="1" Grid.Row="2" Margin="0 0 0 5" Name="txbFullName" />
                 <ComboBox    Grid.Column="1" Grid.Row="3" Margin="0 0 0 5" Name="cbAccountType" />
 
                 <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"

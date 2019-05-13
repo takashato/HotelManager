@@ -20,9 +20,18 @@ namespace HotelManager.gui
     /// </summary>
     public partial class ChangeAccountWindow : Window
     {
+        private Staff accountToChange;
+
         public ChangeAccountWindow()
         {
             InitializeComponent();
+        }
+
+        public ChangeAccountWindow(Staff _accountToChange)
+        {
+            InitializeComponent();
+            accountToChange = _accountToChange;
+            txbUsername.Text = accountToChange.Username;
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -38,12 +47,31 @@ namespace HotelManager.gui
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            if (Staff.UpdateStaff(txbPassword.Password, txbFullName.Text, cbAccountType.Text, txbUsername.Text))
+                MessageBox.Show("Cập nhật thành công!");
+            else
+                MessageBox.Show("Cập nhật không thành công!");
+
+            //this.Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             cbAccountType.ItemsSource = StaffType.GetStaffTypes();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            HotelManager.gui.AccountUC.ListAccount.Clear();
+            List<Staff> account = new List<Staff>();
+            account.Clear();
+            account.AddRange(Staff.GetAll());
+
+            HotelManager.gui.AccountUC.ListAccount.Clear();
+            foreach (var item in account)
+                HotelManager.gui.AccountUC.ListAccount.Add(item);
+            CollectionViewSource.GetDefaultView(HotelManager.gui.AccountUC.ListAccount).Refresh();
+        }
     }
 }
+
