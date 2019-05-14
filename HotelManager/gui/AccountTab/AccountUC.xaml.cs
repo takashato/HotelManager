@@ -69,7 +69,29 @@ namespace HotelManager.gui
 
         private void deleteAccount_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (dataGridListAccount.SelectedIndex < 0)
+                return;
+
+            Staff staffToDelete = dataGridListAccount.SelectedItem as Staff;
+
+            var userAnswer = MessageBox.Show("Bạn có chắc muốn xóa tài khoản " + staffToDelete.Username + " không? Thao tác sẽ không được hoàn lại.",
+                                                 "Cảnh báo",
+                                                 MessageBoxButton.YesNo,
+                                                 MessageBoxImage.Warning);
+            if (userAnswer == MessageBoxResult.Yes)
+            {
+                if (Staff.DeleteStaff(staffToDelete.Username))
+                {                   
+                    ListAccount.Remove(staffToDelete);
+                    CollectionViewSource.GetDefaultView(ListAccount).Refresh();
+
+                    MessageBox.Show("Xóa phòng thành công!");
+                }
+                else
+                {
+                    MessageBox.Show("Xóa phòng thất bại!");
+                }
+            }
         }
     }
 }
