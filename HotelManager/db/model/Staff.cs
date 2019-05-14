@@ -65,7 +65,8 @@ namespace HotelManager.db.model
 
                 try
                 {
-                    return conn.Execute("INSERT INTO staff(username, password, fullname, level, createdDate) VALUES('" + username + "', '" + encryptPassword + "', '" + fullname + "', " + lv + ", '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") +  "')") > 0;
+                    return conn.Execute("INSERT INTO staff(username, password, fullname, level, createdDate) VALUES(@username, @password, @fullname, @level, @createdDate)",
+                        new { username = username, password = encryptPassword, fullname = fullname, level = lv, createdDate = DateTime.Now }) > 0;
                 }
                 catch (Exception ex)
                 {
