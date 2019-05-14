@@ -90,7 +90,13 @@ namespace HotelManager.gui
                     ToDisplay = _ReportUC;
                     break;
                 case 3:
-                    ToDisplay = _AccountUC;
+                    if (App.Instance._Session.CurrentStaff.Level.ToString().Equals("Administrator"))
+                        ToDisplay = _AccountUC;
+                    else
+                        MessageBox.Show("Bạn không có quyền truy cập!",
+                                        "Warning",
+                                        MessageBoxButton.OK,
+                                        MessageBoxImage.Warning);
                     break;
                 case 4:
                     ToDisplay = _AboutUC;
