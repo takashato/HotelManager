@@ -39,6 +39,7 @@ namespace HotelManager.gui
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             cbAccountType.ItemsSource = StaffType.GetStaffTypes();
+            cbAccountType.SelectedIndex = 0;
         }
 
         private void BtnCreateAccount_Click(object sender, RoutedEventArgs e)

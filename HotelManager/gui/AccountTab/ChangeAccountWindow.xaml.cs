@@ -25,6 +25,9 @@ namespace HotelManager.gui
         public ChangeAccountWindow()
         {
             InitializeComponent();
+            txbUsername.Text = App.Instance._Session.CurrentStaff.Username;
+            cbAccountType.SelectedIndex = (int)App.Instance._Session.CurrentStaff.Level - 1;
+            cbAccountType.IsEnabled = false;
         }
 
         public ChangeAccountWindow(Staff _accountToChange)
@@ -32,6 +35,7 @@ namespace HotelManager.gui
             InitializeComponent();
             accountToChange = _accountToChange;
             txbUsername.Text = accountToChange.Username;
+            cbAccountType.SelectedIndex = (int)accountToChange.Level - 1;
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)

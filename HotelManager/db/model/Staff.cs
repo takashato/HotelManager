@@ -49,13 +49,13 @@ namespace HotelManager.db.model
                 int lv = 1;
                 switch (level)
                 {
-                    case "manager":
+                    case "Manager":
                         lv = 2;
                         break;
-                    case "receptionist":
+                    case "Receptionist":
                         lv = 1;
                         break;
-                    case "administrator":
+                    case "Administrator":
                         lv = 3;
                         break;
                 }
@@ -80,13 +80,13 @@ namespace HotelManager.db.model
             int lv = 1;
             switch (newLevel)
             {
-                case "manager":
+                case "Manager":
                     lv = 2;
                     break;
-                case "receptionist":
+                case "Receptionist":
                     lv = 1;
                     break;
-                case "administrator":
+                case "Administrator":
                     lv = 3;
                     break;
             }
