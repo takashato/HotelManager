@@ -68,7 +68,7 @@
                 <TextBlock VerticalAlignment="Center" Grid.Row="2" Margin="10" Text="Họ tên"/>
                 <TextBlock VerticalAlignment="Center" Grid.Row="3" Margin="10" Text="Loại tài khoản"/>
 
-                <TextBox     Grid.Column="1" Grid.Row="0" Margin="0 0 0 5" Name="txbUsername" IsReadOnly="True" />
+                <TextBox     Grid.Column="1" Grid.Row="0" Margin="0 0 0 5" Name="txbUsername" IsEnabled="False" />
                 <PasswordBox Grid.Column="1" Grid.Row="1" Margin="0 0 0 5" Name="txbPassword" />
                 <TextBox     Grid.Column="1" Grid.Row="2" Margin="0 0 0 5" Name="txbFullName" />
                 <ComboBox    Grid.Column="1" Grid.Row="3" Margin="0 0 0 5" Name="cbAccountType" />

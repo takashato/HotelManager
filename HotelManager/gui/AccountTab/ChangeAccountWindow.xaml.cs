@@ -26,6 +26,8 @@ namespace HotelManager.gui
         {
             InitializeComponent();
             txbUsername.Text = App.Instance._Session.CurrentStaff.Username;
+            txbFullName.Text = App.Instance._Session.CurrentStaff.Fullname;
+            txbFullName.IsEnabled = false;
             cbAccountType.SelectedIndex = (int)App.Instance._Session.CurrentStaff.Level - 1;
             cbAccountType.IsEnabled = false;
         }
@@ -35,6 +37,7 @@ namespace HotelManager.gui
             InitializeComponent();
             accountToChange = _accountToChange;
             txbUsername.Text = accountToChange.Username;
+            txbFullName.Text = accountToChange.Fullname;
             cbAccountType.SelectedIndex = (int)accountToChange.Level - 1;
         }
 
