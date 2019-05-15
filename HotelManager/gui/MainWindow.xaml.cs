@@ -84,7 +84,13 @@ namespace HotelManager.gui
                     ToDisplay = _RoomListUC;
                     break;
                 case 1:
-                    ToDisplay = _RegulationUC;
+                    if(App.Instance._Session.CurrentStaff.Level.ToString().Equals("Receptionist"))
+                        MessageBox.Show("Bạn không có quyền truy cập!",
+                                        "Warning",
+                                        MessageBoxButton.OK,
+                                        MessageBoxImage.Warning);
+                    else
+                        ToDisplay = _RegulationUC;
                     break;
                 case 2:
                     ToDisplay = _ReportUC;

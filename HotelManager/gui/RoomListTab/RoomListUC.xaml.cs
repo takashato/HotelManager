@@ -133,92 +133,108 @@ namespace HotelManager.gui
 
         private void EditRoom_Click(object sender, RoutedEventArgs e)
         {
-            if (lsvRoomList.SelectedIndex < 0)
-                return;
-
-            Room roomToEdit = lsvRoomList.SelectedItem as Room;
-
-            if (roomToEdit.Status == Room.EStatus.NotAvailable)
+            if (App.Instance._Session.CurrentStaff.Level.ToString().Equals("Receptionist"))
+                MessageBox.Show("Bạn không có quyền sửa thông tin phòng!",
+                                "Warning",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+            else
             {
-                App.Instance._MainWindow.ShowMessage("Không thể sửa phòng đang được thuê!");
-                return;
-            }
+                if (lsvRoomList.SelectedIndex < 0)
+                    return;
 
-            var dialogResult = (new EditRoomWindow(roomToEdit)).ShowDialog();
-            if (dialogResult == true)
-                LoadFromDB(); // Update form
+                Room roomToEdit = lsvRoomList.SelectedItem as Room;
+
+                if (roomToEdit.Status == Room.EStatus.NotAvailable)
+                {
+                    App.Instance._MainWindow.ShowMessage("Không thể sửa phòng đang được thuê!");
+                    return;
+                }
+
+                var dialogResult = (new EditRoomWindow(roomToEdit)).ShowDialog();
+                if (dialogResult == true)
+                    LoadFromDB(); // Update form
+            }
         }
 
         private void DeleteRoom_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Code bên dưới chỉ xóa được một phòng. 
-            // Có thể nâng cấp lên để xóa nhiều phòng cùng một lúc khi người dùng Ctrl/Shift chọn nhiều phòng một lúc lúc bấm nút xóa
-            if (lsvRoomList.SelectedIndex < 0)
-                return;
-
-            Room roomToDelete = lsvRoomList.SelectedItem as Room;
-
-            //if (roomToDelete.Status == Room.EStatus.NotAvailable)
-            //{
-            //    MessageBox.Show("Không thể xóa phòng đang được thuê",
-            //        "Xóa phòng không thành công",
-            //        MessageBoxButton.OK,
-            //        MessageBoxImage.Error);
-            //    return;
-            //}
-            //else
-            //{
-            //    var userAnswer = MessageBox.Show(
-            //        "Bạn có chắc muốn xóa phòng " + roomToDelete.Name + " không? Thao tác sẽ không được hoàn lại.",
-            //        "Cảnh báo",
-            //        MessageBoxButton.YesNo,
-            //        MessageBoxImage.Warning);
-
-            //    if (userAnswer == MessageBoxResult.Yes)
-            //    {
-            //        RoomList.Remove(roomToDelete);
-            //        CollectionViewSource.GetDefaultView(this.RoomList).Refresh();
-            //        Room.DeleteRoom(roomToDelete.Name);
-            //    }
-
-            //}
-            //int flag = 0;
-            //string listRoomName = "";
-            //foreach(Room item in roomToDelete)
-            //{
-            //    if (item.Status == Room.EStatus.NotAvailable)
-            //        flag = 1;
-            //    listRoomName += "<" + item.Name + "> ";
-            //}
-
-            if (roomToDelete.Status == Room.EStatus.NotAvailable)
-            {
-                MessageBox.Show("Không thể xóa phòng đang được thuê", 
-                                "Xóa phòng không thành công", 
-                                MessageBoxButton.OK, 
-                                MessageBoxImage.Error);
-                return;
-            }
+            if (App.Instance._Session.CurrentStaff.Level.ToString().Equals("Receptionist"))
+                MessageBox.Show("Bạn không có quyền xóa phòng!",
+                                "Warning",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
             else
             {
-                var userAnswer = MessageBox.Show("Bạn có chắc muốn xóa phòng " + roomToDelete.Name + " không? Thao tác sẽ không được hoàn lại.",
-                                                 "Cảnh báo",
-                                                 MessageBoxButton.YesNo,
-                                                 MessageBoxImage.Warning);
-                if (userAnswer == MessageBoxResult.Yes)
-                {
-                    if (Room.DeleteRoom(roomToDelete.Name))
-                    {
-                        //foreach(Room item in roomToDelete)
-                        RoomList.Remove(roomToDelete);
-                        CollectionViewSource.GetDefaultView(RoomList).Refresh();
-                        //foreach(Room item in roomToDelete)
+                // TODO: Code bên dưới chỉ xóa được một phòng. 
+                // Có thể nâng cấp lên để xóa nhiều phòng cùng một lúc khi người dùng Ctrl/Shift chọn nhiều phòng một lúc lúc bấm nút xóa
+                if (lsvRoomList.SelectedIndex < 0)
+                    return;
 
-                        MessageBox.Show("Xóa phòng thành công!");
-                    }
-                    else
+                Room roomToDelete = lsvRoomList.SelectedItem as Room;
+
+                //if (roomToDelete.Status == Room.EStatus.NotAvailable)
+                //{
+                //    MessageBox.Show("Không thể xóa phòng đang được thuê",
+                //        "Xóa phòng không thành công",
+                //        MessageBoxButton.OK,
+                //        MessageBoxImage.Error);
+                //    return;
+                //}
+                //else
+                //{
+                //    var userAnswer = MessageBox.Show(
+                //        "Bạn có chắc muốn xóa phòng " + roomToDelete.Name + " không? Thao tác sẽ không được hoàn lại.",
+                //        "Cảnh báo",
+                //        MessageBoxButton.YesNo,
+                //        MessageBoxImage.Warning);
+
+                //    if (userAnswer == MessageBoxResult.Yes)
+                //    {
+                //        RoomList.Remove(roomToDelete);
+                //        CollectionViewSource.GetDefaultView(this.RoomList).Refresh();
+                //        Room.DeleteRoom(roomToDelete.Name);
+                //    }
+
+                //}
+                //int flag = 0;
+                //string listRoomName = "";
+                //foreach(Room item in roomToDelete)
+                //{
+                //    if (item.Status == Room.EStatus.NotAvailable)
+                //        flag = 1;
+                //    listRoomName += "<" + item.Name + "> ";
+                //}
+
+                if (roomToDelete.Status == Room.EStatus.NotAvailable)
+                {
+                    MessageBox.Show("Không thể xóa phòng đang được thuê",
+                                    "Xóa phòng không thành công",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Error);
+                    return;
+                }
+                else
+                {
+                    var userAnswer = MessageBox.Show("Bạn có chắc muốn xóa phòng " + roomToDelete.Name + " không? Thao tác sẽ không được hoàn lại.",
+                                                     "Cảnh báo",
+                                                     MessageBoxButton.YesNo,
+                                                     MessageBoxImage.Warning);
+                    if (userAnswer == MessageBoxResult.Yes)
                     {
-                        MessageBox.Show("Xóa phòng thất bại!");
+                        if (Room.DeleteRoom(roomToDelete.Name))
+                        {
+                            //foreach(Room item in roomToDelete)
+                            RoomList.Remove(roomToDelete);
+                            CollectionViewSource.GetDefaultView(RoomList).Refresh();
+                            //foreach(Room item in roomToDelete)
+
+                            MessageBox.Show("Xóa phòng thành công!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Xóa phòng thất bại!");
+                        }
                     }
                 }
             }
@@ -226,7 +242,13 @@ namespace HotelManager.gui
 
         private void AddRoom_Click(object sender, RoutedEventArgs e)
         {
-            (new AddRoomWindow()).ShowDialog();
+            if (App.Instance._Session.CurrentStaff.Level.ToString().Equals("Receptionist"))
+                MessageBox.Show("Bạn không có quyền thêm phòng!",
+                                "Warning",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
+            else
+                (new AddRoomWindow()).ShowDialog();
         }
 
         private void btnMassPayment_Click(object sender, RoutedEventArgs e)
