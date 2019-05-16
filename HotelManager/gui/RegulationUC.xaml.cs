@@ -24,6 +24,7 @@ namespace HotelManager.gui
     {
         public ObservableCollection<RoomType> ListRoomType { get; set; } = new ObservableCollection<RoomType>();
         public ObservableCollection<CustomerType> ListCustomerType { get; set; } = new ObservableCollection<CustomerType>();
+        public ObservableCollection<CustomerSurcharge> ListCustomerSurcharge { get; set; } = new ObservableCollection<CustomerSurcharge>();
         public RegulationUC()
         {
             InitializeComponent();
@@ -35,6 +36,7 @@ namespace HotelManager.gui
             //ListRoomType.Add(new RoomType() { Type = "ABCXYZH", Price = 6900000M, Note = "Phong Thoải Mái" });
             LoadListRoomTypeFromDB();
             LoadListCustomerTypeFromDB();
+            LoadListCustomerSurchargeFromDB();
         }
 
         public void LoadListRoomTypeFromDB()
@@ -59,6 +61,18 @@ namespace HotelManager.gui
             ListCustomerType.Clear();
             foreach (var item in customerType)
                 ListCustomerType.Add(item);
+        }
+
+        public void LoadListCustomerSurchargeFromDB()
+        {
+            List<CustomerSurcharge> customerSurcharge = new List<CustomerSurcharge>();
+
+            customerSurcharge.Clear();
+            customerSurcharge.AddRange(CustomerSurcharge.GetAll());
+
+            ListCustomerSurcharge.Clear();
+            foreach (var item in customerSurcharge)
+                ListCustomerSurcharge.Add(item);
         }
 
         private void AddRoomType_Click(object sender, RoutedEventArgs e)

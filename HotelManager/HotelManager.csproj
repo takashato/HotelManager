@@ -86,6 +86,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="db\model\Customer.cs" />
+    <Compile Include="db\model\CustomerSurcharge.cs" />
     <Compile Include="db\model\CustomerType.cs" />
     <Compile Include="db\model\RentInfo.cs" />
     <Compile Include="db\model\RoomType.cs" />
