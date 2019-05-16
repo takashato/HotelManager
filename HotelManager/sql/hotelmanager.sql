@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2019 at 09:07 AM
+-- Generation Time: May 16, 2019 at 11:04 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.3
 
@@ -46,6 +46,27 @@ INSERT INTO `customer` (`id`, `name`, `id_card_number`, `address`, `type`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `customer_surcharge`
+--
+
+CREATE TABLE `customer_surcharge` (
+  `quantum` int(11) NOT NULL,
+  `surcharge` float NOT NULL,
+  `note` text CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer_surcharge`
+--
+
+INSERT INTO `customer_surcharge` (`quantum`, `surcharge`, `note`) VALUES
+(1, 2, 'Nhiều hơn 1 khách so với số khách tối đa của phòng'),
+(2, 2.5, 'Nhiều hơn 2 khách so với số khách tối đa của phòng'),
+(3, 3, 'Nhiều hơn 3 khách so với số khách tối đa của phòng');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customer_type`
 --
 
@@ -60,8 +81,8 @@ CREATE TABLE `customer_type` (
 --
 
 INSERT INTO `customer_type` (`type`, `surcharge`, `note`) VALUES
-('Foreign', 10, ''),
-('Inland', 3, '');
+('Foreign', 10, 'Khách nước ngoài'),
+('Inland', 3, 'Khách trong nước');
 
 -- --------------------------------------------------------
 
@@ -137,7 +158,7 @@ CREATE TABLE `staff` (
   `fullname` varchar(254) NOT NULL,
   `lastLoginDate` datetime DEFAULT NULL,
   `createdDate` datetime DEFAULT NULL,
-  `level` int(1) NOT NULL DEFAULT '1' COMMENT '1: normal staff, 2: admin staff'
+  `level` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -145,7 +166,9 @@ CREATE TABLE `staff` (
 --
 
 INSERT INTO `staff` (`id`, `username`, `password`, `fullname`, `lastLoginDate`, `createdDate`, `level`) VALUES
-(1, 'admin', '$2a$10$7pPFABJzPyWqey9ylmTB4.kyHn9DXO8LHISyrg8SMIbyA04LcRfcq', 'Admin', '2019-04-18 00:00:00', '2019-04-18 00:00:00', 2);
+(1, 'admin', '$2a$10$7mI8PvVZq6dd7nSO/QUnfuJawKYIkYNoFLZig.wzU8GdN6rgIfPK2', 'Pro', '2019-04-18 00:00:00', '2019-04-18 00:00:00', 3),
+(3, 'UK', '$2a$10$Bsq83vJ6s/h2Qtyqp4wePOO.C4tkQCnjBn6/RmB3cEt6ZsG4ogjae', 'Phạm Trần Chính', NULL, '2019-05-14 17:57:27', 1),
+(4, 'Vip', '$2a$10$RZ9viEVxv9Q5I9Q8vbk7hODdYaqT6Pmn7PVgouOSQRtVwRrLsa88m', 'Lợi', NULL, '2019-05-15 17:57:44', 2);
 
 -- --------------------------------------------------------
 
@@ -163,9 +186,9 @@ CREATE TABLE `staff_type` (
 --
 
 INSERT INTO `staff_type` (`level`, `type`) VALUES
-(1, 'receptionist'),
-(2, 'manager'),
-(3, 'administrator');
+(1, 'Receptionist'),
+(2, 'Manager'),
+(3, 'Administrator');
 
 --
 -- Indexes for dumped tables
@@ -214,7 +237,7 @@ ALTER TABLE `room`
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
