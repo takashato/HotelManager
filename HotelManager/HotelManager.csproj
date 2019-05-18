@@ -103,7 +103,25 @@
     <Compile Include="gui\AccountTab\ChangeAccountWindow.xaml.cs">
       <DependentUpon>ChangeAccountWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="gui\RegulationUC.xaml.cs">
+    <Compile Include="gui\RegulationTab\AddCustomerSurchargeWindow.xaml.cs">
+      <DependentUpon>AddCustomerSurchargeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gui\RegulationTab\AddCustomerTypeWindow.xaml.cs">
+      <DependentUpon>AddCustomerTypeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gui\RegulationTab\AddRoomTypeWindow.xaml.cs">
+      <DependentUpon>AddRoomTypeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gui\RegulationTab\EditCustomerSurchargeWindow.xaml.cs">
+      <DependentUpon>EditCustomerSurchargeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gui\RegulationTab\EditCustomerTypeWindow.xaml.cs">
+      <DependentUpon>EditCustomerTypeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gui\RegulationTab\EditRoomTypeWindow.xaml.cs">
+      <DependentUpon>EditRoomTypeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="gui\RegulationTab\RegulationUC.xaml.cs">
       <DependentUpon>RegulationUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="gui\ReportTab\ReportUC.xaml.cs">
@@ -144,7 +162,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="gui\RegulationUC.xaml">
+    <Page Include="gui\RegulationTab\AddCustomerSurchargeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\RegulationTab\AddCustomerTypeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\RegulationTab\AddRoomTypeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\RegulationTab\EditCustomerSurchargeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\RegulationTab\EditCustomerTypeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\RegulationTab\EditRoomTypeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\RegulationTab\RegulationUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
