@@ -44,11 +44,8 @@ namespace HotelManager.db.model
                 var customerType = new CustomerType { Type = type, Surcharge = surcharge, Note = note };
                 List<CustomerType> customerTypes = new List<CustomerType>();
 
-                customerTypes = conn.Query<CustomerType>("SELECT * FROM `customer_type`").ToList();
-
-                foreach (var item in customerTypes)
-                    if (item.Type.CompareTo(type) == 0 || item.Surcharge == surcharge)
-                        return false;
+                if (!IsAvailable(type, surcharge))
+                    return false;
                 try
                 {
                     return conn.Execute("INSERT INTO customer_type(Type, Surcharge, Note) VALUES(@Type, @Surcharge, @Note)", customerType) > 0;
@@ -57,6 +54,35 @@ namespace HotelManager.db.model
                 {
                     return false;
                 }
+            }
+        }
+
+        public static bool UpdateCustomerType(string newCustomerType, double newSurcharge, string newNote, string oldCustomerType)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                try
+                {
+                    if (!newCustomerType.Equals(oldCustomerType) && IsAvailable(newCustomerType, newSurcharge) || newCustomerType.Equals(oldCustomerType))
+                    {
+                        conn.Execute("UPDATE customer_type SET type = '" + newCustomerType + "', surcharge = '" + newSurcharge + "', note = '" + newNote + "' WHERE type = '" + oldCustomerType + "'");
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public static bool IsAvailable(string type, double surcharge)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return (conn.ExecuteScalar<int>("SELECT COUNT(*) FROM customer_type WHERE type = @Type", new { Type = type }) + conn.ExecuteScalar<int>("SELECT COUNT(*) FROM customer_type WHERE surcharge = @Surcharge", new { Surcharge = surcharge })) <= 0;
             }
         }
     }

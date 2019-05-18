@@ -14,7 +14,7 @@
         TextElement.FontSize="18"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
         Height="291.825" Width="375" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -67,12 +67,12 @@
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock  VerticalAlignment="Center" Grid.Row="3" Margin="10,7.2,10,2.8" Text="Loại khách" Height="26" Grid.RowSpan="2" />
-                    <TextBlock VerticalAlignment="Center" Grid.Row="5" Margin="10,28.2,10,54.4" Text="Phụ thu (%)" Height="31" Grid.RowSpan="3" />
+                    <TextBlock  VerticalAlignment="Center" Grid.Row="4" Margin="10,13,10,35.2" Text="Loại khách" Height="23" Grid.RowSpan="2" />
+                    <TextBlock VerticalAlignment="Center" Grid.Row="5" Margin="10,40.6,10,51.2" Text="Phụ thu (%)" Height="29" Grid.RowSpan="3" />
                     <TextBlock VerticalAlignment="Center" Grid.Row="7" Margin="10,29.4,10,7.4" Text="Ghi chú " Height="20" />
                     <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="1" Margin="0,0,4.6,32.6" Name="txbCustomerType" Grid.RowSpan="5"/>
-                    <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="5" Margin="0,8,4.6,56.6" IsReadOnly="True" Name="txbNewSurcharge" Grid.RowSpan="3" />
-                    <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="6" Margin="0,14.4,4.6,3.6" AcceptsReturn="True" Name="txbNewNote" Grid.RowSpan="2"/>
+                    <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="5" Margin="0,22.6,4.6,50.2" Name="txbNewSurcharge" Grid.RowSpan="3" />
+                    <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="7" Margin="0,7.6,4.6,88" AcceptsReturn="True" Name="txbNewNote" Grid.RowSpan="2"/>
 
                     <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
                     materialDesign:RippleAssist.IsDisabled="True"
@@ -82,7 +82,7 @@
                     Grid.Row="8" 
                     Grid.ColumnSpan="2"
                     Foreground="White" 
-                    materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="Auto" Margin="86,22.4,83.6,14" Width="176"/>
+                    materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="Auto" Margin="86,22.4,83.6,14" Width="176" Click="Button_Click"/>
                 </Grid>
             </materialDesign:DialogHost>
         </Grid>

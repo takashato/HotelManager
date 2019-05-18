@@ -156,7 +156,10 @@ namespace HotelManager.gui
 
         private void EditGuestType_Click(object sender, RoutedEventArgs e)
         {
-            (new EditCustomerTypeWindow()).ShowDialog();
+            if (dataGridListCustomerType.SelectedIndex < 0)
+                return;
+            CustomerType customerTypeToEdit = dataGridListCustomerType.SelectedItem as CustomerType;
+            (new EditCustomerTypeWindow(customerTypeToEdit)).ShowDialog();
         }
 
         private void AddGuestSurcharge_Click(object sender, RoutedEventArgs e)
