@@ -14,7 +14,7 @@
         TextElement.FontSize="18"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
         Height="260" Width="300" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" Closing="Window_Closing">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -68,8 +68,8 @@
                 <TextBlock VerticalAlignment="Center" Grid.Row="2" Margin="10,17.4,10,0.2" Text="Phụ thu (%)" Height="24" />
                 <TextBlock VerticalAlignment="Center" Grid.Row="3" Margin="10,21.8,10,12" Text="Ghi chú" Height="23" />
 
-                <TextBox x:Name="txbRoomName" Grid.Column="1" Grid.Row="0" Margin="0,1,0.4,41.2" Grid.RowSpan="3"/>
-                <TextBox x:Name="txbPrice" Grid.Column="1" Grid.Row="2" Margin="0,0.4,0.4,0" IsReadOnly="True" Height="45" VerticalAlignment="Top" Grid.RowSpan="2" />
+                <TextBox x:Name="txbCustomerType" Grid.Column="1" Grid.Row="0" Margin="0,1,0.4,41.2" Grid.RowSpan="3"/>
+                <TextBox x:Name="txbSurcharge" Grid.Column="1" Grid.Row="2" Margin="0,0.4,0.4,0" Height="45" VerticalAlignment="Top" Grid.RowSpan="2" PreviewTextInput="TxbSurcharge_PreviewTextInput" />
                 <TextBox x:Name="txbNote" Grid.Column="1" Grid.Row="3" Margin="0,2.8,0.4,12" AcceptsReturn="True"/>
 
                 <Button x:Name="btnAddRoom" 
@@ -82,7 +82,7 @@
                     Grid.Row="4" 
                     Grid.ColumnSpan="2"
                     Foreground="White" 
-                    materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="Auto" Width="115"/>
+                    materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="Auto" Width="115" Click="BtnAddRoom_Click"/>
             </Grid>
         </Grid>
 

@@ -11,7 +11,7 @@ namespace HotelManager.db.model
     {
         public int Id { get; set; }
         public string Type { get; set; }
-        public float Surcharge { get; set; }
+        public double Surcharge { get; set; }
         public string Note { get; set; }
 
 
@@ -30,6 +30,28 @@ namespace HotelManager.db.model
                 try
                 {
                     return conn.Execute("DELETE FROM customer_type WHERE type = @type", new { type = type }) > 0;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
+        public static bool InsertCustomerType(string type, double surcharge, string note)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                var customerType = new CustomerType { Type = type, Surcharge = surcharge, Note = note };
+                List<CustomerType> customerTypes = new List<CustomerType>();
+
+                customerTypes = conn.Query<CustomerType>("SELECT * FROM `customer_type`").ToList();
+
+                foreach (var item in customerTypes)
+                    if (item.Type.CompareTo(type) == 0 || item.Surcharge == surcharge)
+                        return false;
+                try
+                {
+                    return conn.Execute("INSERT INTO customer_type(Type, Surcharge, Note) VALUES(@Type, @Surcharge, @Note)", customerType) > 0;
                 }
                 catch (Exception ex)
                 {
