@@ -113,7 +113,10 @@ namespace HotelManager.gui
 
         private void EditRoomType_Click(object sender, RoutedEventArgs e)
         {
-            (new EditRoomTypeWindow()).ShowDialog();
+            if (dataGridListRoomType.SelectedIndex < 0)
+                return;
+            RoomType roomTypeToEdit = dataGridListRoomType.SelectedItem as RoomType;
+            (new EditRoomTypeWindow(roomTypeToEdit)).ShowDialog();
         }
 
         private void AddGuestType_Click(object sender, RoutedEventArgs e)

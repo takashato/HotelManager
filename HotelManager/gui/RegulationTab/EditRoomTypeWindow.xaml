@@ -14,7 +14,7 @@
         TextElement.FontSize="18"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
         Height="291.825" Width="350" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}" >
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" Closing="Window_Closing" >
 
     <Grid>
         <Grid.RowDefinitions>
@@ -72,7 +72,7 @@
                     <TextBlock VerticalAlignment="Center" Grid.Row="5" Margin="10,24.2,9.8,4.4" Text="Đơn giá mới" Height="25" />
                     <TextBlock VerticalAlignment="Center" Grid.Row="7" Margin="10,21.2,9.8,2" Text="Ghi chú mới" Height="24" />
                     <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="1" Margin="0.2,0,4.8,4.6" Name="txbNewRoomType"/>
-                    <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="5" Margin="0.2,2.2,4.8,5.4" IsReadOnly="True" Name="txbNewPrice" />
+                    <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="5" Margin="0.2,2.2,4.8,5.4" Name="txbNewPrice" />
                     <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="7" Margin="0.2,1.2,4.8,4" AcceptsReturn="True" Name="txbNewNote"/>
 
                     <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
@@ -83,7 +83,7 @@
                     Grid.Row="8" 
                     Grid.ColumnSpan="2"
                     Foreground="White" 
-                    materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="Auto" Margin="92,22,91.8,5" Width="137"/>
+                    materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="Auto" Margin="92,22,91.8,5" Width="137" Click="Button_Click"/>
                 </Grid>
             </materialDesign:DialogHost>
         </Grid>
