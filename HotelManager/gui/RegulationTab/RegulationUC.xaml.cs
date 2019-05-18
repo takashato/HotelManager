@@ -1,4 +1,5 @@
 ﻿using HotelManager.db.model;
+using HotelManager.gui.RegulationTab;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -77,7 +78,7 @@ namespace HotelManager.gui
 
         private void AddRoomType_Click(object sender, RoutedEventArgs e)
         {
-            
+            (new AddRoomTypeWindow()).ShowDialog();
         }
 
         private void DeleteRoomType_Click(object sender, RoutedEventArgs e)
@@ -112,12 +113,12 @@ namespace HotelManager.gui
 
         private void EditRoomType_Click(object sender, RoutedEventArgs e)
         {
-         
+            (new EditRoomTypeWindow()).ShowDialog();
         }
 
         private void AddGuestType_Click(object sender, RoutedEventArgs e)
         {
-
+            (new AddCustomerTypeWindow()).ShowDialog();
         }
 
         private void DeleteGuestType_Click(object sender, RoutedEventArgs e)
@@ -152,22 +153,22 @@ namespace HotelManager.gui
 
         private void EditGuestType_Click(object sender, RoutedEventArgs e)
         {
-
+            (new EditCustomerTypeWindow()).ShowDialog();
         }
 
         private void AddGuestSurcharge_Click(object sender, RoutedEventArgs e)
         {
-
+            (new AddCustomerSurchargeWindow()).ShowDialog();
         }
 
         private void DeleteGuestSurcharge_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void EditGuestSurcharge_Click(object sender, RoutedEventArgs e)
         {
-
+            (new EditCustomerSurchargeWindow()).ShowDialog();
         }
     }
 }

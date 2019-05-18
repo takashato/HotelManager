@@ -82,7 +82,6 @@
                     Grid.Row="8" 
                     Grid.ColumnSpan="2"
                     Foreground="White" 
-                    Click="btnUpdate_Click"
                     materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="Auto" Margin="86,22.4,83.6,14" Width="176"/>
                 </Grid>
             </materialDesign:DialogHost>
