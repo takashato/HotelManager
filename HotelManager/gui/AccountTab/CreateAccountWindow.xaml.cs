@@ -65,7 +65,6 @@ namespace HotelManager.gui
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            HotelManager.gui.AccountUC.ListAccount.Clear();
             List<Staff> account = new List<Staff>();
             account.Clear();
             account.AddRange(Staff.GetAll());

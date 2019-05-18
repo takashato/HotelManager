@@ -23,9 +23,9 @@ namespace HotelManager.gui
     /// </summary>
     public partial class RegulationUC : UserControl
     {
-        public ObservableCollection<RoomType> ListRoomType { get; set; } = new ObservableCollection<RoomType>();
-        public ObservableCollection<CustomerType> ListCustomerType { get; set; } = new ObservableCollection<CustomerType>();
-        public ObservableCollection<CustomerSurcharge> ListCustomerSurcharge { get; set; } = new ObservableCollection<CustomerSurcharge>();
+        public static ObservableCollection<RoomType> ListRoomType { get; set; } = new ObservableCollection<RoomType>();
+        public static ObservableCollection<CustomerType> ListCustomerType { get; set; } = new ObservableCollection<CustomerType>();
+        public static ObservableCollection<CustomerSurcharge> ListCustomerSurcharge { get; set; } = new ObservableCollection<CustomerSurcharge>();
         public RegulationUC()
         {
             InitializeComponent();

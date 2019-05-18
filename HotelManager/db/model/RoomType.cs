@@ -23,7 +23,7 @@ namespace HotelManager.db.model
             }
         }
 
-        public static int InsertRoomType(string type, decimal price, string note)
+        public static bool InsertRoomType(string type, decimal price, string note)
         {
             using (var conn = DatabaseManager.Conn)
             {
@@ -34,9 +34,15 @@ namespace HotelManager.db.model
 
                 foreach (var item in roomTypes)
                     if (item.Type.CompareTo(type) == 0 || item.Price == price)
-                        return 0;
-                conn.Execute("INSERT INTO room_type(Type, Price, Note) VALUES(@Type, @Price, @Note)", roomType);
-                return 1;
+                        return false;
+                try
+                {
+                    return conn.Execute("INSERT INTO room_type(Type, Price, Note) VALUES(@Type, @Price, @Note)", roomType) > 0;
+                }
+                catch(Exception ex)
+                {
+                    return false;
+                }
             }
         }
 
