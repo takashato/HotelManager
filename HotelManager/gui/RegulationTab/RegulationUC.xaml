@@ -160,7 +160,8 @@
             <DataGrid  ItemsSource="{Binding ListCustomerSurcharge}"
                        Grid.Row="1" 
                        Margin="20 0 20 5"
-                       CanUserAddRows="False">
+                       CanUserAddRows="False"
+                       x:Name="dataGridListCustomerSurcharge">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Số Khách" Binding="{Binding Quantum}"
                                         Width="*" IsReadOnly="True" />

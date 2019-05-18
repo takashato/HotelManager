@@ -43,5 +43,20 @@ namespace HotelManager.db.model
                 }
             }
         }
+
+        public static bool DeleteCustomerSurcharge(int quantum)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                try
+                {
+                    return conn.Execute("DELETE FROM customer_surcharge WHERE quantum = @quantum", new { quantum = quantum }) > 0;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

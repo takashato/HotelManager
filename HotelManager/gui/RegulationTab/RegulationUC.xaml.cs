@@ -163,7 +163,32 @@ namespace HotelManager.gui
 
         private void DeleteGuestSurcharge_Click(object sender, RoutedEventArgs e)
         {
-            
+            try
+            {
+                CustomerSurcharge customerSurchargeToDelete = dataGridListCustomerSurcharge.SelectedItem as CustomerSurcharge;
+                var userAnswer = MessageBox.Show("Bạn có chắc muốn xóa loại phụ thu khách hàng " + customerSurchargeToDelete.Quantum + " không? Thao tác sẽ không được hoàn lại.",
+                                                 "Warning",
+                                                 MessageBoxButton.YesNo,
+                                                 MessageBoxImage.Warning);
+                if (userAnswer == MessageBoxResult.Yes)
+                {
+                    if (CustomerSurcharge.DeleteCustomerSurcharge(customerSurchargeToDelete.Quantum))
+                    {
+                        ListCustomerSurcharge.Remove(customerSurchargeToDelete);
+                        CollectionViewSource.GetDefaultView(ListCustomerSurcharge).Refresh();
+                        MessageBox.Show("Xóa loại khách hàng thành công!");
+                    }
+                    else
+                        MessageBox.Show("Xóa loại khách hàng thất bại!");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Chưa chọn mục cần xóa hoặc mục được chọn trống!",
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+            }
         }
 
         private void EditGuestSurcharge_Click(object sender, RoutedEventArgs e)
