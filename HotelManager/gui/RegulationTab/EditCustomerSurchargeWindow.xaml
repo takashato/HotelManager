@@ -14,7 +14,7 @@
         TextElement.FontSize="18"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
         Height="291.825" Width="410" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -74,19 +74,20 @@
                     <TextBlock  VerticalAlignment="Center" Grid.Row="1" Margin="10,17,9.8,1.6" Text="Số khách thêm" Height="23" />
                     <TextBlock VerticalAlignment="Center" Grid.Row="7" Margin="10,10.2,9.8,66.4" Text="Phụ thu (%)" Height="25" />
                     <TextBlock VerticalAlignment="Center" Grid.Row="7" Margin="10,74.2,9.8,1.4" Text="Ghi chú" Height="26" />
-                    <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="1" Margin="0.2,0,5,16.8" Name="txbNewRoomName" Grid.RowSpan="6"/>
-                    <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="5" Margin="0.2,15.4,5,60.4" IsReadOnly="True" Name="txbNewPrice" Grid.RowSpan="3" />
+                    <ComboBox  Foreground="#00B894" Grid.Column="1" Grid.Row="1" Margin="0.2,0,5,16.8" Name="cbNewQuantum" Grid.RowSpan="6"/>
+                    <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="5" Margin="0.2,15.4,5,60.4" Name="txbNewSurcharge" Grid.RowSpan="3" />
                     <TextBox  Foreground="#00B894" Grid.Column="1" Grid.Row="7" Margin="0.2,0,5,1.4" AcceptsReturn="True" Name="txbNewNote" Height="43" VerticalAlignment="Bottom"/>
 
                     <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
                     materialDesign:RippleAssist.IsDisabled="True"
-                    Content="Cập nhật" 
+                    Content="Cập nhật"
+                    x:Name="btnUpdate"
                     Padding="40 0"
                     HorizontalAlignment="Center" 
                     Grid.Row="8" 
                     Grid.ColumnSpan="2"
                     Foreground="White" 
-                    materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="Auto" Margin="98,14.6,111,12" Width="171"/>
+                    materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="Auto" Margin="98,14.6,111,12" Width="171" Click="BtnUpdate_Click"/>
                 </Grid>
             </materialDesign:DialogHost>
         </Grid>

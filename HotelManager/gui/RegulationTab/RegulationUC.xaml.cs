@@ -199,7 +199,10 @@ namespace HotelManager.gui
 
         private void EditGuestSurcharge_Click(object sender, RoutedEventArgs e)
         {
-            (new EditCustomerSurchargeWindow()).ShowDialog();
+            if (dataGridListCustomerSurcharge.SelectedIndex < 0)
+                return;
+            CustomerSurcharge customerSurchargeToEdit = dataGridListCustomerSurcharge.SelectedItem as CustomerSurcharge;
+            (new EditCustomerSurchargeWindow(customerSurchargeToEdit)).ShowDialog();
         }
     }
 }

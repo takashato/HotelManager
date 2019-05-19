@@ -31,7 +31,7 @@ namespace HotelManager.db.model
                 {
                     return conn.Execute("DELETE FROM customer_type WHERE type = @type", new { type = type }) > 0;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return false;
                 }
@@ -50,7 +50,7 @@ namespace HotelManager.db.model
                 {
                     return conn.Execute("INSERT INTO customer_type(Type, Surcharge, Note) VALUES(@Type, @Surcharge, @Note)", customerType) > 0;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return false;
                 }
@@ -71,7 +71,7 @@ namespace HotelManager.db.model
                     else
                         return false;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return false;
                 }

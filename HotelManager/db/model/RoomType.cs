@@ -36,7 +36,7 @@ namespace HotelManager.db.model
                 {
                     return conn.Execute("INSERT INTO room_type(Type, Price, Note) VALUES(@Type, @Price, @Note)", roomType) > 0;
                 }
-                catch(Exception ex)
+                catch(Exception)
                 {
                     return false;
                 }
@@ -57,7 +57,7 @@ namespace HotelManager.db.model
                     else
                         return false;
                 }
-                catch(Exception ex)
+                catch(Exception)
                 {
                     return false;
                 }

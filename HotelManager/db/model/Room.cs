@@ -81,7 +81,7 @@ namespace HotelManager.db.model
                 {
                     return conn.Execute("INSERT INTO room(Name, Type, Note) VALUES(@Name, @Type, @Note)", room) > 0;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return false;
                 }
@@ -112,7 +112,7 @@ namespace HotelManager.db.model
                         return false;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return false;
                 }

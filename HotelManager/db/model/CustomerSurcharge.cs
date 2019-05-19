@@ -26,18 +26,13 @@ namespace HotelManager.db.model
             using (var conn = DatabaseManager.Conn)
             {
                 var customerSurcharge = new CustomerSurcharge { Quantum = quantum, Surcharge = surcharge, Note = note };
-                List<CustomerSurcharge> customerSurcharges = new List<CustomerSurcharge>();
-
-                customerSurcharges = conn.Query<CustomerSurcharge>("SELECT * FROM `customer_surcharge`").ToList();
-
-                foreach (var item in customerSurcharges)
-                    if (item.Quantum == quantum || item.Surcharge == surcharge)
-                        return false;
+                if (!IsAvailable(quantum, surcharge))
+                    return false;
                 try
                 {
                     return conn.Execute("INSERT INTO customer_surcharge(Quantum, Surcharge, Note) VALUES(@Quantum, @Surcharge, @Note)", customerSurcharge) > 0;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return false;
                 }
@@ -52,10 +47,40 @@ namespace HotelManager.db.model
                 {
                     return conn.Execute("DELETE FROM customer_surcharge WHERE quantum = @quantum", new { quantum = quantum }) > 0;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return false;
                 }
+            }
+        }
+
+        public static bool UpdateCustomerSurcharge(int newQuantum, double newSurcharge, string newNote, int oldQuantum)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                try
+                {
+                    if (newQuantum != oldQuantum && IsAvailable(newQuantum, newSurcharge) || newQuantum==oldQuantum)
+                    {
+                        conn.Execute("UPDATE customer_surcharge SET quantum = '" + newQuantum + "', surcharge = '" + newSurcharge + "', note = '" + newNote + "' WHERE quantum = '" + oldQuantum + "'");
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public static bool IsAvailable(int quantum, double surcharge)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return (conn.ExecuteScalar<int>("SELECT COUNT(*) FROM customer_surcharge WHERE quantum = @Quantum", new { Quantum = quantum }) + 
+                        conn.ExecuteScalar<int>("SELECT COUNT(*) FROM customer_surcharge WHERE surcharge = @Surcharge", new { Surcharge = surcharge })) <= 0;
             }
         }
     }
