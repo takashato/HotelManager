@@ -83,7 +83,7 @@ namespace HotelManager.gui
 
         private void DeleteRoomType_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (dataGridListRoomType.SelectedIndex >= 0)
             {
                 RoomType roomTypeToDelete = dataGridListRoomType.SelectedItem as RoomType;
                 var userAnswer = MessageBox.Show("Bạn có chắc muốn xóa loại phòng " + roomTypeToDelete.Type + " không? Thao tác sẽ không được hoàn lại.",
@@ -102,9 +102,9 @@ namespace HotelManager.gui
                         MessageBox.Show("Xóa loại phòng thất bại!");
                 }
             }
-            catch (Exception)
+            else
             {
-                MessageBox.Show("Chưa chọn mục cần xóa hoặc mục được chọn trống!",
+                MessageBox.Show("Chưa chọn mục cần xóa!",
                                 "Error",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
@@ -114,9 +114,17 @@ namespace HotelManager.gui
         private void EditRoomType_Click(object sender, RoutedEventArgs e)
         {
             if (dataGridListRoomType.SelectedIndex < 0)
-                return;
-            RoomType roomTypeToEdit = dataGridListRoomType.SelectedItem as RoomType;
-            (new EditRoomTypeWindow(roomTypeToEdit)).ShowDialog();
+            {
+                MessageBox.Show("Chưa chọn mục cần sửa!",
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+            }
+            else
+            {
+                RoomType roomTypeToEdit = dataGridListRoomType.SelectedItem as RoomType;
+                (new EditRoomTypeWindow(roomTypeToEdit)).ShowDialog();
+            }
         }
 
         private void AddGuestType_Click(object sender, RoutedEventArgs e)
@@ -126,7 +134,7 @@ namespace HotelManager.gui
 
         private void DeleteGuestType_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (dataGridListCustomerType.SelectedIndex >= 0)
             {
                 CustomerType customerTypeToDelete = dataGridListCustomerType.SelectedItem as CustomerType;
                 var userAnswer = MessageBox.Show("Bạn có chắc muốn xóa loại khách hàng " + customerTypeToDelete.Type + " không? Thao tác sẽ không được hoàn lại.",
@@ -145,9 +153,9 @@ namespace HotelManager.gui
                         MessageBox.Show("Xóa loại khách hàng thất bại!");
                 }
             }
-            catch(Exception)
+            else
             {
-                MessageBox.Show("Chưa chọn mục cần xóa hoặc mục được chọn trống!", 
+                MessageBox.Show("Chưa chọn mục cần xóa!",
                                 "Error",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
@@ -157,9 +165,17 @@ namespace HotelManager.gui
         private void EditGuestType_Click(object sender, RoutedEventArgs e)
         {
             if (dataGridListCustomerType.SelectedIndex < 0)
-                return;
-            CustomerType customerTypeToEdit = dataGridListCustomerType.SelectedItem as CustomerType;
-            (new EditCustomerTypeWindow(customerTypeToEdit)).ShowDialog();
+            {
+                MessageBox.Show("Chưa chọn mục cần sửa!",
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+            }
+            else
+            {
+                CustomerType customerTypeToEdit = dataGridListCustomerType.SelectedItem as CustomerType;
+                (new EditCustomerTypeWindow(customerTypeToEdit)).ShowDialog();
+            }
         }
 
         private void AddGuestSurcharge_Click(object sender, RoutedEventArgs e)
@@ -169,7 +185,7 @@ namespace HotelManager.gui
 
         private void DeleteGuestSurcharge_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (dataGridListCustomerSurcharge.SelectedIndex >= 0)
             {
                 CustomerSurcharge customerSurchargeToDelete = dataGridListCustomerSurcharge.SelectedItem as CustomerSurcharge;
                 var userAnswer = MessageBox.Show("Bạn có chắc muốn xóa loại phụ thu khách hàng " + customerSurchargeToDelete.Quantum + " không? Thao tác sẽ không được hoàn lại.",
@@ -188,9 +204,9 @@ namespace HotelManager.gui
                         MessageBox.Show("Xóa loại khách hàng thất bại!");
                 }
             }
-            catch (Exception)
+            else
             {
-                MessageBox.Show("Chưa chọn mục cần xóa hoặc mục được chọn trống!",
+                MessageBox.Show("Chưa chọn mục cần xóa!",
                                 "Error",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Error);
@@ -200,9 +216,17 @@ namespace HotelManager.gui
         private void EditGuestSurcharge_Click(object sender, RoutedEventArgs e)
         {
             if (dataGridListCustomerSurcharge.SelectedIndex < 0)
-                return;
-            CustomerSurcharge customerSurchargeToEdit = dataGridListCustomerSurcharge.SelectedItem as CustomerSurcharge;
-            (new EditCustomerSurchargeWindow(customerSurchargeToEdit)).ShowDialog();
+            {
+                MessageBox.Show("Chưa chọn mục cần sửa!",
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+            }
+            else
+            {
+                CustomerSurcharge customerSurchargeToEdit = dataGridListCustomerSurcharge.SelectedItem as CustomerSurcharge;
+                (new EditCustomerSurchargeWindow(customerSurchargeToEdit)).ShowDialog();
+            }
         }
     }
 }
