@@ -2,10 +2,10 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 16, 2019 at 11:04 AM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.3
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th5 22, 2019 lúc 05:27 AM
+-- Phiên bản máy phục vụ: 10.1.38-MariaDB
+-- Phiên bản PHP: 7.3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `hotelmanager`
+-- Cơ sở dữ liệu: `hotelmanager`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Cấu trúc bảng cho bảng `customer`
 --
 
 CREATE TABLE `customer` (
@@ -37,7 +37,7 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `customer`
+-- Đang đổ dữ liệu cho bảng `customer`
 --
 
 INSERT INTO `customer` (`id`, `name`, `id_card_number`, `address`, `type`) VALUES
@@ -46,7 +46,7 @@ INSERT INTO `customer` (`id`, `name`, `id_card_number`, `address`, `type`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer_surcharge`
+-- Cấu trúc bảng cho bảng `customer_surcharge`
 --
 
 CREATE TABLE `customer_surcharge` (
@@ -56,53 +56,61 @@ CREATE TABLE `customer_surcharge` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `customer_surcharge`
+-- Đang đổ dữ liệu cho bảng `customer_surcharge`
 --
 
 INSERT INTO `customer_surcharge` (`quantum`, `surcharge`, `note`) VALUES
 (1, 2, 'Nhiều hơn 1 khách so với số khách tối đa của phòng'),
 (2, 2.5, 'Nhiều hơn 2 khách so với số khách tối đa của phòng'),
-(3, 3, 'Nhiều hơn 3 khách so với số khách tối đa của phòng');
+(3, 3, 'Nhiều hơn 3 khách so với số khách tối đa của phòng'),
+(5, 4, '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer_type`
+-- Cấu trúc bảng cho bảng `customer_type`
 --
 
 CREATE TABLE `customer_type` (
   `type` varchar(20) CHARACTER SET utf8 NOT NULL,
-  `surcharge` float NOT NULL,
+  `surcharge` double NOT NULL,
   `note` text CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `customer_type`
+-- Đang đổ dữ liệu cho bảng `customer_type`
 --
 
 INSERT INTO `customer_type` (`type`, `surcharge`, `note`) VALUES
-('Foreign', 10, 'Khách nước ngoài'),
-('Inland', 3, 'Khách trong nước');
+('Nước ngoài', 20, 'Khách nước ngoài đặc biệt'),
+('Nội địa', 3, 'Khách trong nước');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rent_info`
+-- Cấu trúc bảng cho bảng `rent_info`
 --
 
 CREATE TABLE `rent_info` (
   `id` int(11) NOT NULL,
-  `room_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `staff_id` int(11) NOT NULL,
+  `room_name` varchar(128) CHARACTER SET utf8 NOT NULL,
+  `customer_name` varchar(128) CHARACTER SET utf8 NOT NULL,
+  `staff_name` varchar(254) CHARACTER SET utf8 NOT NULL,
   `checkin_date` date NOT NULL,
   `checkout_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Đang đổ dữ liệu cho bảng `rent_info`
+--
+
+INSERT INTO `rent_info` (`id`, `room_name`, `customer_name`, `staff_name`, `checkin_date`, `checkout_date`) VALUES
+(1, 'B777', 'Bành Thanh Sơn', 'Pro', '2019-05-22', '0000-00-00');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `room`
+-- Cấu trúc bảng cho bảng `room`
 --
 
 CREATE TABLE `room` (
@@ -114,7 +122,7 @@ CREATE TABLE `room` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `room`
+-- Đang đổ dữ liệu cho bảng `room`
 --
 
 INSERT INTO `room` (`id`, `name`, `type`, `status`, `note`) VALUES
@@ -127,7 +135,7 @@ INSERT INTO `room` (`id`, `name`, `type`, `status`, `note`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `room_type`
+-- Cấu trúc bảng cho bảng `room_type`
 --
 
 CREATE TABLE `room_type` (
@@ -137,18 +145,19 @@ CREATE TABLE `room_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `room_type`
+-- Đang đổ dữ liệu cho bảng `room_type`
 --
 
 INSERT INTO `room_type` (`type`, `price`, `note`) VALUES
 ('A', 150000, ''),
 ('B', 170000, ''),
-('C', 200000, '');
+('C', 200000, ''),
+('D', 500000, 'Vip');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `staff`
+-- Cấu trúc bảng cho bảng `staff`
 --
 
 CREATE TABLE `staff` (
@@ -162,18 +171,19 @@ CREATE TABLE `staff` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `staff`
+-- Đang đổ dữ liệu cho bảng `staff`
 --
 
 INSERT INTO `staff` (`id`, `username`, `password`, `fullname`, `lastLoginDate`, `createdDate`, `level`) VALUES
 (1, 'admin', '$2a$10$7mI8PvVZq6dd7nSO/QUnfuJawKYIkYNoFLZig.wzU8GdN6rgIfPK2', 'Pro', '2019-04-18 00:00:00', '2019-04-18 00:00:00', 3),
-(3, 'UK', '$2a$10$Bsq83vJ6s/h2Qtyqp4wePOO.C4tkQCnjBn6/RmB3cEt6ZsG4ogjae', 'Phạm Trần Chính', NULL, '2019-05-14 17:57:27', 1),
-(4, 'Vip', '$2a$10$RZ9viEVxv9Q5I9Q8vbk7hODdYaqT6Pmn7PVgouOSQRtVwRrLsa88m', 'Lợi', NULL, '2019-05-15 17:57:44', 2);
+(3, 'UK', '$2a$10$NNX54NJo4zQglVDiI.XUzeXx23UhODGIqw1Mj8O0U4zIfCddS/VOS', 'Phạm Trần Chính', NULL, '2019-05-14 17:57:27', 2),
+(4, 'Vip', '$2a$10$RZ9viEVxv9Q5I9Q8vbk7hODdYaqT6Pmn7PVgouOSQRtVwRrLsa88m', 'Lợi', NULL, '2019-05-15 17:57:44', 2),
+(5, 'Pro', '$2a$10$U.zKMmU88QghiDj8G4CTYu4HwbXy6wRDkPHNLpmtll3hVLAA3CURu', 'Dũng', NULL, '2019-05-18 15:56:50', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `staff_type`
+-- Cấu trúc bảng cho bảng `staff_type`
 --
 
 CREATE TABLE `staff_type` (
@@ -182,7 +192,7 @@ CREATE TABLE `staff_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `staff_type`
+-- Đang đổ dữ liệu cho bảng `staff_type`
 --
 
 INSERT INTO `staff_type` (`level`, `type`) VALUES
@@ -191,18 +201,24 @@ INSERT INTO `staff_type` (`level`, `type`) VALUES
 (3, 'Administrator');
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `customer`
+-- Chỉ mục cho bảng `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id_card_number` (`id_card_number`);
 
 --
--- Indexes for table `room`
+-- Chỉ mục cho bảng `rent_info`
+--
+ALTER TABLE `rent_info`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `room`
 --
 ALTER TABLE `room`
   ADD PRIMARY KEY (`id`),
@@ -211,33 +227,39 @@ ALTER TABLE `room`
   ADD KEY `id_4` (`id`);
 
 --
--- Indexes for table `staff`
+-- Chỉ mục cho bảng `staff`
 --
 ALTER TABLE `staff`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `customer`
+-- AUTO_INCREMENT cho bảng `customer`
 --
 ALTER TABLE `customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `room`
+-- AUTO_INCREMENT cho bảng `rent_info`
+--
+ALTER TABLE `rent_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT cho bảng `room`
 --
 ALTER TABLE `room`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `staff`
+-- AUTO_INCREMENT cho bảng `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
