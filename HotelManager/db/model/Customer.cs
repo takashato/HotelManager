@@ -13,25 +13,25 @@ namespace HotelManager.db.model
         public string Name { get; set; }
         public decimal IdCardNumber { get; set; }
         public string Address { get; set; }
-        public EType Type { get; set; }
-        public string TypeStr
-        {
-            get
-            {
-                if (Type == EType.Inland)
-                    return "Nội địa";
-                if (Type == EType.Foreign)
-                    return "Nước ngoài";
-                return "Chưa set??";
-            }
-        }
-        public enum EType
-        {
-            Inland = 0,
-            Foreign = 1
-        }
+        public string Type { get; set; }
+        //public string TypeStr
+        //{
+        //    get
+        //    {
+        //        if (Type == EType.Inland)
+        //            return "Nội địa";
+        //        if (Type == EType.Foreign)
+        //            return "Nước ngoài";
+        //        return "Chưa set??";
+        //    }
+        //}
+        //public enum EType
+        //{
+        //    Inland = 0,
+        //    Foreign = 1
+        //}
 
-        public static int InsertCustomer(string name, string address, decimal idCardNumber, EType type)
+        public static int InsertCustomer(string name, string address, decimal idCardNumber, string type)
         {
             using (var conn = DatabaseManager.Conn)
             {

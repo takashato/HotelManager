@@ -14,7 +14,7 @@
         TextElement.FontSize="17"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
         Height="350" Width="700" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" Loaded="Window_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -68,7 +68,7 @@
 
             <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="100 10 10 10">
                 <TextBlock Text="Ngày thuê phòng:  " VerticalAlignment="Center"/>
-                <DatePicker Focusable="False" SelectedDate="{x:Static system:DateTime.Now}"/>
+                <DatePicker x:Name="dprCheckinDate" Focusable="False" SelectedDate="{x:Static system:DateTime.Now}"/>
             </StackPanel>
 
             <DataGrid x:Name="dataGridCustomer" Grid.Row="1" 
@@ -83,6 +83,7 @@
                       LoadingRow="DataGrid_LoadingRow" 
                       HeadersVisibility="All" 
                       EnableRowVirtualization="False"
+                      CanUserAddRows="False"
                       local:DataGridBehavior.DisplayRowNumber="True">
 
                 <DataGrid.Resources>
@@ -98,18 +99,15 @@
 
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Tên Khách Hàng" 
-                                        Binding="{Binding HoTen}" 
+                                        Binding="{Binding Name}" 
                                         Width="160" />
-                    <DataGridComboBoxColumn Header="Loại Khách Hàng" 
-                                            ItemsSource="{Binding Source={utils:Enumeration {x:Type local:LoaiKhachHang}}}"
-                                            DisplayMemberPath="Description" 
-                                            SelectedValueBinding="{Binding LoaiKh}"  
-                                            SelectedValuePath="Value" />
+                    <DataGridComboBoxColumn Header="Loại Khách Hàng" x:Name="cbColumnCustomerType"
+                                            SelectedValueBinding="{Binding Type}"/>
                     <DataGridTextColumn Header="CMND" 
-                                        Binding="{Binding CMND}" 
+                                        Binding="{Binding IdCardNumber}" 
                                         Width="95"/>
                     <DataGridTextColumn Header="Địa chỉ" 
-                                        Binding="{Binding DiaChi}" />
+                                        Binding="{Binding Address}" />
                 </DataGrid.Columns>
             </DataGrid>
 

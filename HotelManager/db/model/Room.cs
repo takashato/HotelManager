@@ -30,7 +30,7 @@ namespace HotelManager.db.model
 
         public void RetrieveRentInfo()
         {
-            _RentInfos = RentInfo.GetAllCurrentByRoomID(ID);
+            _RentInfos = RentInfo.GetAllCurrentByRoomName(Name);
         }
 
         public string GetStatus()

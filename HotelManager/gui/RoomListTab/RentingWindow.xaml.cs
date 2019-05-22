@@ -25,7 +25,7 @@ namespace HotelManager.gui
     /// </summary>
     public partial class RentingWindow : Window
     {
-        public ObservableCollection<KhachHang> ListGuestsRenting { get; set; } = new ObservableCollection<KhachHang>();
+        public ObservableCollection<Customer> ListGuestsRenting { get; set; } = new ObservableCollection<Customer>();
         private Room _roomToRent;
 
 
@@ -50,9 +50,18 @@ namespace HotelManager.gui
 
         private void btnHoanThanh_Click(object sender, RoutedEventArgs e)
         {
-            _roomToRent.Status = Room.EStatus.NotAvailable;
+            //_roomToRent.Status = Room.EStatus.NotAvailable;
             // TODO: Update Danh sách khách hàng thuê phòng cho _roomToRent
-            this.Close();
+
+            Customer customer = dataGridCustomer.Items.GetItemAt(0) as Customer;
+            
+            if(RentInfo.InsertCheckinInfo(_roomToRent.Name, App.Instance._Session.CurrentStaff.Fullname, customer.Name, (DateTime)dprCheckinDate.SelectedDate))
+                this.Close();
+            else
+            {
+                MessageBox.Show("Có lỗi xảy ra! Vui lòng thực hiện lại thao tác!");
+                this.Close();
+            }
         }
 
         private void DataGrid_LoadingRow(object sender, DataGridRowEventArgs e)
@@ -60,6 +69,17 @@ namespace HotelManager.gui
             e.Row.Header = (e.Row.GetIndex() + 1).ToString();          
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            cbColumnCustomerType.ItemsSource = CustomerType.GetCustomerType();
+            cbColumnCustomerType.DisplayMemberPath = "Type";
+            cbColumnCustomerType.SelectedValuePath = "Type";
+            Customer customer = new Customer();
+            for (int i = 0; i < 3; i++)
+            {
+                ListGuestsRenting.Add(customer);
+            }
+        }
     }
 
     public class DataGridBehavior //Copy trên stackoverflow để fix lỗi khi xóa hoặc thêm một dòng thì row header không update
@@ -141,29 +161,5 @@ namespace HotelManager.gui
         }
 
         #endregion // Get Visuals
-    }
-
-    public enum LoaiKhachHang
-    {
-        [Description("Nội địa")]
-        NoiDia,
-        [Description("Nước ngoài")]
-        NguocNgoai,
-    }
-
-    public class KhachHang
-    {
-        // Còn bug ở STT: Khi xóa một hàng (nhấn nút Delete), sau đó thêm một hàng (nhấn Enter). STT hiển thị sẽ không tăng dần như mong muốn (1 2 3 4) nữa
-        public int STT { get; set; } = ++count;
-        public string HoTen { get; set; } = HoTen_MacDinh;
-        public LoaiKhachHang LoaiKh { get; set; }
-        public string CMND { get; set; } = CMND_MacDinh;
-        public string DiaChi { get; set; } = DiaChi_MacDinh;
-
-        public static int count = 0;
-        // Nếu giá trị bằng ThuocTinh_MacDinh tức là chưa được điền ở datagrid
-        static string HoTen_MacDinh = "Họ tên";
-        static string CMND_MacDinh = "123456789";
-        static string DiaChi_MacDinh = "Địa chỉ";
     }
 }
