@@ -32,6 +32,12 @@ namespace HotelManager.gui
         public RentingWindow(Room roomToRent)
         {
             InitializeComponent();
+            
+            for (int i = 0; i < 3; i++)
+            {
+                Customer customer = new Customer();
+                ListGuestsRenting.Add(customer);
+            }
 
             _roomToRent = roomToRent;
             txbRoomName.Text = "Phòng " + _roomToRent.Name;
@@ -54,9 +60,13 @@ namespace HotelManager.gui
             // TODO: Update Danh sách khách hàng thuê phòng cho _roomToRent
 
             Customer customer = dataGridCustomer.Items.GetItemAt(0) as Customer;
-            
-            if(RentInfo.InsertCheckinInfo(_roomToRent.Name, App.Instance._Session.CurrentStaff.Fullname, customer.Name, (DateTime)dprCheckinDate.SelectedDate))
+
+            if (RentInfo.InsertCheckinInfo(_roomToRent.Name, App.Instance._Session.CurrentStaff.Fullname, customer.Name, (DateTime)dprCheckinDate.SelectedDate) 
+                && Customer.InsertCustomer(customer.Name, customer.Address, customer.IdCardNumber, customer.Type))
+            {
+                Room.UpdateRoomStatus(_roomToRent.Name);
                 this.Close();
+            }
             else
             {
                 MessageBox.Show("Có lỗi xảy ra! Vui lòng thực hiện lại thao tác!");
@@ -74,11 +84,6 @@ namespace HotelManager.gui
             cbColumnCustomerType.ItemsSource = CustomerType.GetCustomerType();
             cbColumnCustomerType.DisplayMemberPath = "Type";
             cbColumnCustomerType.SelectedValuePath = "Type";
-            Customer customer = new Customer();
-            for (int i = 0; i < 3; i++)
-            {
-                ListGuestsRenting.Add(customer);
-            }
         }
     }
 

@@ -128,5 +128,23 @@ namespace HotelManager.db.model
                 return conn.ExecuteScalar<int>("SELECT COUNT(*) FROM room WHERE name = @Name", new { Name = name }) <= 0;
             }
         }
+
+        public static bool UpdateRoomStatus(string roomName)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                try
+                {
+                    if (RentInfo.FindRoomRented(roomName))
+                        return conn.Execute("UPDATE room SET status = @Status WHERE name = @Name", new { Status = "NotAvailable", Name = roomName }) > 0;
+                    else
+                        return conn.Execute("UPDATE room SET status = @Status WHERE name = @Name", new { Status = "Available", Name = roomName }) > 0;
+                }
+                catch(Exception)
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

@@ -39,5 +39,13 @@ namespace HotelManager.db.model
                 }
             }
         }
+
+        public static bool FindRoomRented(string roomName)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.ExecuteScalar<int>("SELECT COUNT(*) FROM rent_info WHERE room_name = @roomName", new { RoomName = roomName }) > 0;
+            }
+        }
     }
 }

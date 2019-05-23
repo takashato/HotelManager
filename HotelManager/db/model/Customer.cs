@@ -31,7 +31,7 @@ namespace HotelManager.db.model
         //    Foreign = 1
         //}
 
-        public static int InsertCustomer(string name, string address, decimal idCardNumber, string type)
+        public static bool InsertCustomer(string name, string address, decimal idCardNumber, string type)
         {
             using (var conn = DatabaseManager.Conn)
             {
@@ -42,9 +42,15 @@ namespace HotelManager.db.model
 
                 foreach (var item in listIDNumber)
                     if (item == idCardNumber)
-                        return 0;
-                conn.Execute("INSERT INTO customer(Name, ) VALUES()", customer);
-                return 1;
+                        return false;
+                try
+                {
+                    return conn.Execute("INSERT INTO customer(name, address, id_card_number, type) VALUES(@Name, @Address, @IdCardNumber, @Type)", customer) > 0;
+                }
+                catch(Exception)
+                {
+                    return false;
+                }
             }
         }
     }
