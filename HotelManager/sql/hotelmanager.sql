@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 22, 2019 lúc 05:27 AM
+-- Thời gian đã tạo: Th5 23, 2019 lúc 12:27 PM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.3
 
@@ -35,13 +35,6 @@ CREATE TABLE `customer` (
   `address` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `type` varchar(20) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Đang đổ dữ liệu cho bảng `customer`
---
-
-INSERT INTO `customer` (`id`, `name`, `id_card_number`, `address`, `type`) VALUES
-(1, 'Nguyễn Văn Tuấn', 2511252515, 'Hà Nội', 'Inland');
 
 -- --------------------------------------------------------
 
@@ -97,15 +90,8 @@ CREATE TABLE `rent_info` (
   `customer_name` varchar(128) CHARACTER SET utf8 NOT NULL,
   `staff_name` varchar(254) CHARACTER SET utf8 NOT NULL,
   `checkin_date` date NOT NULL,
-  `checkout_date` date NOT NULL
+  `checkout_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Đang đổ dữ liệu cho bảng `rent_info`
---
-
-INSERT INTO `rent_info` (`id`, `room_name`, `customer_name`, `staff_name`, `checkin_date`, `checkout_date`) VALUES
-(1, 'B777', 'Bành Thanh Sơn', 'Pro', '2019-05-22', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -117,7 +103,7 @@ CREATE TABLE `room` (
   `id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `type` varchar(128) NOT NULL,
-  `status` enum('Available','NotAvailable') NOT NULL,
+  `status` varchar(128) NOT NULL,
   `note` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -131,6 +117,20 @@ INSERT INTO `room` (`id`, `name`, `type`, `status`, `note`) VALUES
 (3, 'C199', 'C', 'Available', ''),
 (4, 'A111', 'A', 'Available', ''),
 (5, 'B123', 'B', 'Available', '');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `room_rental_detail`
+--
+
+CREATE TABLE `room_rental_detail` (
+  `room_name` varchar(128) CHARACTER SET utf8 NOT NULL,
+  `customer_name` varchar(128) CHARACTER SET utf8 NOT NULL,
+  `customer_id` bigint(20) DEFAULT NULL,
+  `address` text CHARACTER SET utf8 NOT NULL,
+  `customer_type` varchar(20) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -241,13 +241,13 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT cho bảng `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `rent_info`
 --
 ALTER TABLE `rent_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `room`
