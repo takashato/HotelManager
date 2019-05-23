@@ -89,6 +89,7 @@
     <Compile Include="db\model\CustomerSurcharge.cs" />
     <Compile Include="db\model\CustomerType.cs" />
     <Compile Include="db\model\RentInfo.cs" />
+    <Compile Include="db\model\RoomRentalDetail.cs" />
     <Compile Include="db\model\RoomType.cs" />
     <Compile Include="db\model\StaffType.cs" />
     <Compile Include="gui\AboutUC.xaml.cs">
