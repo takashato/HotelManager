@@ -1,4 +1,5 @@
 ﻿using HotelManager.db.model;
+using HotelManager.gui.RoomListTab;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -259,6 +260,26 @@ namespace HotelManager.gui
         private void BtnRefresh_Click(object sender, RoutedEventArgs e)
         {
             LoadFromDB();
+        }
+
+        private void Details_Click(object sender, RoutedEventArgs e)
+        {
+            if (lsvRoomList.SelectedIndex < 0)
+                return;
+            Room roomToShowDetails = lsvRoomList.SelectedItem as Room;
+
+            if (roomToShowDetails.Status == Room.EStatus.Available)
+            {
+                MessageBox.Show("Phòng " + roomToShowDetails.Name + " chưa được thuê",
+                    "Thanh toán không thành công",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return;
+            }
+            else
+            {
+                (new RoomRentalDetailWindow(roomToShowDetails)).ShowDialog();
+            }
         }
     }
 }

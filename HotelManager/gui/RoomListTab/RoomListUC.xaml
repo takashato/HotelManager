@@ -132,7 +132,7 @@
 
                     <MenuItem Margin="5" Header="Thay đổi thông tin" Click="EditRoom_Click">
                         <MenuItem.Icon>
-                            <materialDesign:PackIcon Kind="CirclesAdd" />
+                            <materialDesign:PackIcon Kind="DatabaseEdit" />
                         </MenuItem.Icon>
                     </MenuItem>
 
@@ -147,6 +147,14 @@
                     <MenuItem Margin="5 5 5 -5" Header="Thêm phòng mới" Click="AddRoom_Click">
                         <MenuItem.Icon>
                             <materialDesign:PackIcon Kind="CirclesAdd" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+                    <Separator Margin="0 -5"/>
+                    
+                    <MenuItem Margin="5 5 5 -5" Header="Chi tiết" Click="Details_Click">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="AccountDetails" />
                         </MenuItem.Icon>
                     </MenuItem>
 

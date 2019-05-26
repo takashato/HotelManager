@@ -67,8 +67,14 @@ namespace HotelManager.gui
                 Room.UpdateRoomStatus(_roomToRent.Name);
                 foreach (Customer item in ListGuestsRenting)
                 {
-                    if (!item.Name.Equals(""))
+                    try
+                    {
                         RoomRentalDetail.InsertRoomRentalDetail(_roomToRent.Name, item.Name, item.IdCardNumber, item.Address, item.Type);
+                    }
+                    catch(Exception)
+                    {
+
+                    }
                 }
                 this.Close();
             }
