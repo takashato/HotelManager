@@ -146,6 +146,9 @@
     <Compile Include="gui\ReportTab\RoomtypeStatisticUC.xaml.cs">
       <DependentUpon>RoomtypeStatisticUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="gui\RoomListTab\RoomRentalDetailWindow.xaml.cs">
+      <DependentUpon>RoomRentalDetailWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="utils\EnumerationExtension.cs" />
     <Page Include="gui\AboutUC.xaml">
       <SubType>Designer</SubType>
@@ -264,6 +267,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="gui\ReportTab\RoomtypeStatisticUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="gui\RoomListTab\RoomRentalDetailWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

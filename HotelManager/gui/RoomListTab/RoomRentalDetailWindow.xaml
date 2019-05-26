@@ -1,0 +1,132 @@
+﻿<Window x:Class="HotelManager.gui.RoomListTab.RoomRentalDetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HotelManager.gui.RoomListTab"
+        mc:Ignorable="d"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:utils="clr-namespace:HotelManager.utils"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="#35CCAF"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="17"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
+        Height="350" Width="700" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="5"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="-10 0" 
+              Height="30" 
+              Grid.Column="1" 
+              Background="#00000000"
+              MouseDown="TitleBar_MouseDown">
+
+            <Button Background="Transparent" 
+                    HorizontalAlignment="Right" 
+                    BorderThickness="0"
+                    Click="Btn_close_Click">
+                <materialDesign:PackIcon Kind="Close"/>
+            </Button>
+
+            <TextBlock VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"
+                       Margin="0 0 0 0"
+                       FontSize="20"
+                       Foreground="White"
+                       Text="CHI TIẾT KHÁCH THUÊ PHÒNG"/>
+        </Grid>
+
+
+        <Grid Grid.Row="1" Grid.Column="1" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock VerticalAlignment="Center"
+                       Name="txbRoomName"
+                       Background="White" 
+                       Margin="30 10"/>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="100 10 10 10">
+                <TextBlock Text="Ngày thuê phòng:  " VerticalAlignment="Center"/>
+                <TextBlock Margin="0,0,0,-0.4" Width="141" x:Name="txblDateCheckin"></TextBlock>
+            </StackPanel>
+
+            <DataGrid x:Name="dataGridCustomer" Grid.Row="1" 
+                      Grid.ColumnSpan="2" 
+                      Margin="20 0 20 20" 
+                      AutoGenerateColumns="False"
+                      ItemsSource="{Binding roomRentalDetails}"
+                      BorderBrush="#35CCAF" 
+                      BorderThickness="1"
+                      CanUserSortColumns="False"
+                      Background="White" 
+                      HeadersVisibility="All" 
+                      CanUserAddRows="False" LoadingRow="DataGridCustomer_LoadingRow" 
+                      >
+
+                <DataGrid.Resources>
+                    <Style TargetType="TextBlock" 
+                           BasedOn="{StaticResource {x:Type TextBlock}}">
+                        <Setter Property="FontSize" Value="15" />
+                    </Style>
+                    <Style TargetType="DataGridColumnHeader" 
+                           BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                        <Setter Property="TextElement.FontSize" Value="13" />
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Tên Khách Hàng" 
+                                        Binding="{Binding CustomerName}" 
+                                        Width="160" 
+                                        IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Loại Khách Hàng"
+                                        Binding="{Binding CustomerType}"
+                                        IsReadOnly="True"/>
+                    <DataGridTextColumn Header="CMND" 
+                                        Binding="{Binding CustomerID}" 
+                                        Width="95"
+                                        IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Địa chỉ" 
+                                        Binding="{Binding Address}" 
+                                        IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Button Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                    materialDesign:RippleAssist.IsDisabled="True"
+                    Content="Đóng" 
+                    Margin="0 -10 0 10"
+                    Padding="50 0"
+                    HorizontalAlignment="Center" 
+                    Grid.Row="2" 
+                    Grid.ColumnSpan="2"
+                    Foreground="White"  
+                    materialDesign:ShadowAssist.ShadowDepth="Depth0" Click="Button_Click"/>
+        </Grid>
+
+
+
+
+    </Grid>
+</Window>
