@@ -83,5 +83,13 @@ namespace HotelManager.db.model
                         conn.ExecuteScalar<int>("SELECT COUNT(*) FROM customer_surcharge WHERE surcharge = @Surcharge", new { Surcharge = surcharge })) <= 0;
             }
         }
+
+        public static double GetSurchargeByQuantum(int quantum)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.ExecuteScalar<double>("SELECT surcharge FROM customer_surcharge WHERE quantum = @Quantum", new { Quantum = quantum});
+            }
+        }
     }
 }

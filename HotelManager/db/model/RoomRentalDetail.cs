@@ -46,5 +46,21 @@ namespace HotelManager.db.model
                 return conn.Query<RoomRentalDetail>("SELECT * FROM room_rental_detail WHERE room_name = @RoomName", new { RoomName = roomName}).ToList();              
             }
         }
+
+        public static int GetQuantumCustomerInRoom(string roomName)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.ExecuteScalar<int>("SELECT COUNT(*) FROM room_rental_detail WHERE room_name = @RoomName", new { RoomName = roomName});
+            }
+        }
+
+        public static int GetQuantumForeignCustomerInRoom(string roomName)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.ExecuteScalar<int>("SELECT COUNT(*) FROM room_rental_detail WHERE room_name = @RoomName AND customer_type = @CustomerType", new { RoomName = roomName, CustomerType = "Nước ngoài"});
+            }
+        }
     }
 }

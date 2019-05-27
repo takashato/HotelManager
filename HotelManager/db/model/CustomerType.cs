@@ -85,5 +85,13 @@ namespace HotelManager.db.model
                 return (conn.ExecuteScalar<int>("SELECT COUNT(*) FROM customer_type WHERE type = @Type", new { Type = type }) + conn.ExecuteScalar<int>("SELECT COUNT(*) FROM customer_type WHERE surcharge = @Surcharge", new { Surcharge = surcharge })) <= 0;
             }
         }
+
+        public static double GetSurcharge(string type)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.ExecuteScalar<double>("SELECT surcharge FROM customer_type WHERE type = @Type", new { Type = type});
+            }
+        }
     }
 }

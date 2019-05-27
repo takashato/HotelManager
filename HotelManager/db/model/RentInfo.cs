@@ -52,7 +52,22 @@ namespace HotelManager.db.model
         {
             using (var conn = DatabaseManager.Conn)
             {
-                return conn.QueryFirstOrDefault<DateTime>("SELECT checkin_date FROM rent_info WHERE room_name = @roomName", new { RoomName = roomName}).Date;
+                return conn.QueryFirstOrDefault<DateTime>("SELECT checkin_date FROM rent_info WHERE room_name = @RoomName", new { RoomName = roomName}).Date;
+            }
+        }
+
+        public static bool UpdateChechoutDate(string roomName)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                try
+                {
+                    return conn.Execute("UPDATE rent_info SET checkout_date = @CheckoutDate WHERE room_name = @RoomName", new { RoomName = roomName, CheckoutDate = DateTime.Now}) > 0;
+                }
+                catch(Exception)
+                {
+                    return false;
+                }
             }
         }
     }

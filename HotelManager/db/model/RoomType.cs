@@ -14,6 +14,7 @@ namespace HotelManager.db.model
         public decimal Price { get; set; }
         public string Note { get; set; }
         public string PriceStr => string.Format("{0:N0}", Price);
+        public int MaxCustomer { get; set; }
 
         public static List<RoomType> GetRoomType()
         {
@@ -77,6 +78,14 @@ namespace HotelManager.db.model
             using (var conn = DatabaseManager.Conn)
             {
                 return (conn.ExecuteScalar<int>("SELECT COUNT(*) FROM room_type WHERE type = @Type", new { Type = type }) + conn.ExecuteScalar<int>("SELECT COUNT(*) FROM room_type WHERE price = @Price", new { Price = price})) <= 0;
+            }
+        }
+
+        public static int GetMaxCustomerInRoom(string type)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.ExecuteScalar<int>("SELECT max_customer FROM room_type WHERE type = @Type", new { Type = type});
             }
         }
     }

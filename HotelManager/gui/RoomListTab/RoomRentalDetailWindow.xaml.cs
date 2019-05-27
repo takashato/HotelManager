@@ -31,7 +31,7 @@ namespace HotelManager.gui.RoomListTab
             LoadFromDB(_roomToShowDetail.Name);
             
             txbRoomName.Text = "Phòng " + _roomToShowDetail.Name;
-            txblDateCheckin.Text = "" + RentInfo.GetDateCheckin(_roomToShowDetail.Name).ToString("d");
+            txblDateCheckin.Text = RentInfo.GetDateCheckin(_roomToShowDetail.Name).ToString("dd/MM/yyyy");
         }
 
         public void LoadFromDB(string roomName)
