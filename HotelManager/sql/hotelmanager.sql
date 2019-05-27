@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 23, 2019 lúc 12:27 PM
+-- Thời gian đã tạo: Th5 27, 2019 lúc 09:12 AM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.3
 
@@ -35,6 +35,13 @@ CREATE TABLE `customer` (
   `address` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `type` varchar(20) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `customer`
+--
+
+INSERT INTO `customer` (`id`, `name`, `id_card_number`, `address`, `type`) VALUES
+(1, 'Nguyễn A', 123456, 'Cần Thơ', 'Nội địa');
 
 -- --------------------------------------------------------
 
@@ -76,7 +83,7 @@ CREATE TABLE `customer_type` (
 
 INSERT INTO `customer_type` (`type`, `surcharge`, `note`) VALUES
 ('Nước ngoài', 20, 'Khách nước ngoài đặc biệt'),
-('Nội địa', 3, 'Khách trong nước');
+('Nội địa', 0, 'Khách trong nước');
 
 -- --------------------------------------------------------
 
@@ -92,6 +99,13 @@ CREATE TABLE `rent_info` (
   `checkin_date` date NOT NULL,
   `checkout_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `rent_info`
+--
+
+INSERT INTO `rent_info` (`id`, `room_name`, `customer_name`, `staff_name`, `checkin_date`, `checkout_date`) VALUES
+(1, 'B777', 'Nguyễn A', 'Pro', '2019-05-27', NULL);
 
 -- --------------------------------------------------------
 
@@ -112,7 +126,7 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`id`, `name`, `type`, `status`, `note`) VALUES
-(1, 'B777', 'B', 'Available', ''),
+(1, 'B777', 'B', 'NotAvailable', ''),
 (2, 'A999', 'A', 'Available', 'dịch vụ vip'),
 (3, 'C199', 'C', 'Available', ''),
 (4, 'A111', 'A', 'Available', ''),
@@ -132,6 +146,14 @@ CREATE TABLE `room_rental_detail` (
   `customer_type` varchar(20) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Đang đổ dữ liệu cho bảng `room_rental_detail`
+--
+
+INSERT INTO `room_rental_detail` (`room_name`, `customer_name`, `customer_id`, `address`, `customer_type`) VALUES
+('B777', 'Nguyễn A', 123456, 'Cần Thơ', 'Nội địa'),
+('B777', 'Nguyễn B', 542312, 'Cần Thơ', 'Nội địa');
+
 -- --------------------------------------------------------
 
 --
@@ -141,6 +163,7 @@ CREATE TABLE `room_rental_detail` (
 CREATE TABLE `room_type` (
   `type` varchar(128) NOT NULL,
   `price` bigint(20) DEFAULT NULL,
+  `max_customer` int(11) NOT NULL,
   `note` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -148,11 +171,11 @@ CREATE TABLE `room_type` (
 -- Đang đổ dữ liệu cho bảng `room_type`
 --
 
-INSERT INTO `room_type` (`type`, `price`, `note`) VALUES
-('A', 150000, ''),
-('B', 170000, ''),
-('C', 200000, ''),
-('D', 500000, 'Vip');
+INSERT INTO `room_type` (`type`, `price`, `max_customer`, `note`) VALUES
+('A', 150000, 3, ''),
+('B', 170000, 4, ''),
+('C', 200000, 5, ''),
+('D', 500000, 8, 'Vip');
 
 -- --------------------------------------------------------
 
@@ -241,13 +264,13 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT cho bảng `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `rent_info`
 --
 ALTER TABLE `rent_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `room`
