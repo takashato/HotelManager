@@ -47,5 +47,13 @@ namespace HotelManager.db.model
                 return conn.ExecuteScalar<int>("SELECT COUNT(*) FROM rent_info WHERE room_name = @roomName", new { RoomName = roomName }) > 0;
             }
         }
+
+        public static DateTime GetDateCheckin(string roomName)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.QueryFirstOrDefault<DateTime>("SELECT checkin_date FROM rent_info WHERE room_name = @roomName", new { RoomName = roomName}).Date;
+            }
+        }
     }
 }
