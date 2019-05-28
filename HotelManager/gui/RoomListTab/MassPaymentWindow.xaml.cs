@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using HotelManager.db.model;
 
 namespace HotelManager.gui
 {
@@ -38,6 +39,18 @@ namespace HotelManager.gui
         private void btnPay_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            cbCustomerName.ItemsSource = Customer.GetCustomers();
+            cbCustomerName.DisplayMemberPath = "Name";
+            cbCustomerName.SelectedValuePath = "Address";
+        }
+
+        private void CbCustomerName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            txbAddress.Text = (string)cbCustomerName.SelectedValue;
         }
     }
 }

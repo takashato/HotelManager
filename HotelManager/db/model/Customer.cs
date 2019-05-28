@@ -53,5 +53,13 @@ namespace HotelManager.db.model
                 }
             }
         }
+
+        public static List<Customer>GetCustomers()
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.Query<Customer>("SELECT * FROM customer INNER JOIN room_rental_detail ON customer.name = room_rental_detail.customer_name").ToList();
+            }
+        }
     }
 }

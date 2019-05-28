@@ -65,9 +65,8 @@ namespace HotelManager.gui
         private void btnPay_Click(object sender, RoutedEventArgs e)
         {
 
-            if (RentInfo.UpdateChechoutDate(_roomToPay.Name) && RoomRentalDetail.DeleteRoomRentalDetail(_roomToPay.Name))
+            if (RentInfo.UpdateChechoutDate(_roomToPay.Name) && RoomRentalDetail.DeleteRoomRentalDetail(_roomToPay.Name) && Room.UpdateRoomStatus(_roomToPay.Name))
             {
-                Room.UpdateRoomStatus(_roomToPay.Name);
                 MessageBox.Show("Thanh toán thành công!");
             }
             else

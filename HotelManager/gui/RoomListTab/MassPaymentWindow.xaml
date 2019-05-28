@@ -14,7 +14,7 @@
         TextElement.FontSize="17"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
         Height="450" Width="620" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" Loaded="Window_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -76,9 +76,9 @@
                 <TextBlock Grid.Row="1" Margin="10" Text="Địa chỉ: " />
                 <TextBlock Grid.Row="2" Margin="10" Text="Tổng tiền: " />
 
-                <TextBox Grid.Column="1" Grid.Row="0" Margin="10 0 0 5"/>
-                <TextBox Grid.Column="1" Grid.Row="1" Margin="10 0 0 5"/>
-                <TextBox Grid.Column="1" Grid.Row="2" Margin="10 0 0 5" IsReadOnly="True" />
+                <ComboBox Grid.Column="1" Grid.Row="0" Margin="10 0 0 5" x:Name="cbCustomerName" SelectionChanged="CbCustomerName_SelectionChanged"/>
+                <TextBox Grid.Column="1" Grid.Row="1" Margin="10 0 0 5" x:Name="txbAddress"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Margin="10 0 0 5" IsReadOnly="True"  x:Name="txbTotalFee"/>
             </Grid>
 
             <DataGrid Grid.Row="1" 
@@ -115,7 +115,7 @@
                     <DataGridTextColumn Header="Số Khách" 
                                         IsReadOnly="True" />
 
-                    <DataGridCheckBoxColumn Header="Khách Ngoại" 
+                    <DataGridTextColumn Header="Khách Ngoại" 
                                         IsReadOnly="True" />
 
                     <DataGridTextColumn Header="Thành Tiền" 
