@@ -62,9 +62,8 @@ namespace HotelManager.gui
             Customer customer = dataGridCustomer.Items.GetItemAt(0) as Customer;
 
             if (RentInfo.InsertCheckinInfo(_roomToRent.Name, App.Instance._Session.CurrentStaff.Fullname, customer.Name, (DateTime)dprCheckinDate.SelectedDate) 
-                && Customer.InsertCustomer(customer.Name, customer.Address, customer.IdCardNumber, customer.Type))
+                && Customer.InsertCustomer(customer.Name, customer.Address, customer.IdCardNumber, customer.Type) && Room.UpdateRoomStatus(_roomToRent.Name))
             {
-                Room.UpdateRoomStatus(_roomToRent.Name);
                 foreach (Customer item in ListGuestsRenting)
                 {
                     try
@@ -76,6 +75,7 @@ namespace HotelManager.gui
 
                     }
                 }
+                PaymentDetail.InsertPaymentDetail(_roomToRent.Name, (DateTime)dprCheckinDate.SelectedDate, RoomRentalDetail.GetQuantumCustomerInRoom(_roomToRent.Name), RoomRentalDetail.GetQuantumForeignCustomerInRoom(_roomToRent.Name));
                 this.Close();
             }
             else

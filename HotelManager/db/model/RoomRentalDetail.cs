@@ -9,6 +9,7 @@ namespace HotelManager.db.model
 {
     public class RoomRentalDetail
     {
+        public int Id { get; set; }
         public string RoomName { get; set; }
         public string CustomerName { get; set; }
         public decimal CustomerID { get; set; }
@@ -43,7 +44,7 @@ namespace HotelManager.db.model
         {
             using (var conn = DatabaseManager.Conn)
             {
-                return conn.Query<RoomRentalDetail>("SELECT * FROM room_rental_detail WHERE room_name = @RoomName", new { RoomName = roomName}).ToList();              
+                return conn.Query<RoomRentalDetail>("SELECT room_name, customer_name, customer_id, address, customer_type FROM room_rental_detail WHERE room_name = @RoomName", new { RoomName = roomName}).ToList();              
             }
         }
 

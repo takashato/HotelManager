@@ -70,5 +70,13 @@ namespace HotelManager.db.model
                 }
             }
         }
+
+        public static List<Room> GetRoomNameByCustomerName(string customerName)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.Query<Room>("SELECT room_name FROM rent_info WHERE customer_name = @CustomerName", new { CustomerName = customerName}).ToList();
+            }
+        }
     }
 }

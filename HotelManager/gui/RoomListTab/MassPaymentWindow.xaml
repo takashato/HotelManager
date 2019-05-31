@@ -85,7 +85,7 @@
                       Grid.ColumnSpan="2" 
                       Margin="20 10" 
                       AutoGenerateColumns="False"
-                      ItemsSource="{Binding DsKhThuePhong}"
+                      ItemsSource="{Binding paymentDetails}"
                       BorderBrush="#35CCAF" 
                       BorderThickness="1"
                       CanUserSortColumns="False"
@@ -104,22 +104,29 @@
 
                 <DataGrid.Columns>
 
-                    <DataGridComboBoxColumn Header="Phòng" />
+                    <DataGridTextColumn Header="Phòng" 
+                                        IsReadOnly="True"
+                                        Binding="{Binding RoomName}"/>
 
                     <DataGridTextColumn Header="Ngày Thuê" 
-                                        IsReadOnly="True" />
+                                        IsReadOnly="True" 
+                                        Binding="{Binding CheckinDate}"/>
 
                     <DataGridTextColumn Header="Số Ngày Thuê" 
-                                        IsReadOnly="True" />
+                                        IsReadOnly="True" 
+                                        Binding="{Binding DaysRented}"/>
 
                     <DataGridTextColumn Header="Số Khách" 
-                                        IsReadOnly="True" />
+                                        IsReadOnly="True" 
+                                        Binding="{Binding CustomerQuantum}"/>
 
                     <DataGridTextColumn Header="Khách Ngoại" 
-                                        IsReadOnly="True" />
+                                        IsReadOnly="True" 
+                                        Binding="{Binding ForeignQuantum}"/>
 
                     <DataGridTextColumn Header="Thành Tiền" 
-                                        IsReadOnly="True" />
+                                        IsReadOnly="True" 
+                                        Binding="{Binding Amount}"/>
 
                 </DataGrid.Columns>
             </DataGrid>

@@ -146,5 +146,13 @@ namespace HotelManager.db.model
                 }
             }
         }
+
+        public static List<Room> GetRoomsByCustomerName(string customerName)
+        {
+            using (var con = DatabaseManager.Conn)
+            {
+                return con.Query<Room>("SELECT * FROM (room INNER JOIN rent_info ON room.name = rent_info.room_name) INNER JOIN room_type ON room.type=room_type.type WHERE rent_info.customer_name = @CustomerName", new { CustomerName = customerName}).ToList();
+            }
+        }
     }
 }
