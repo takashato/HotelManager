@@ -48,5 +48,13 @@ namespace HotelManager.db.model
                 return conn.Query<PaymentDetail>("SELECT room_name, checkin_date, days_rented, customer_quantum, foreign_quantum, amount FROM payment_detail").ToList();
             }
         }
+
+        public static double CalculateTotalMoney(string customerName)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.ExecuteScalar<double>("SELECT SUM(amount) FROM payment_detail INNER JOIN rent_info ON payment_detail.room_name = rent_info.room_name WHERE rent_info.customer_name = @CustomerName", new { CustomerName = customerName});
+            }
+        }
     }
 }

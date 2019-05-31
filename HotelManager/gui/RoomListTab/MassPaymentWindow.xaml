@@ -89,7 +89,8 @@
                       BorderBrush="#35CCAF" 
                       BorderThickness="1"
                       CanUserSortColumns="False"
-                      Background="White">
+                      Background="White"
+                      x:Name="dataGridPaymentDetail">
 
                 <DataGrid.Resources>
                     <Style TargetType="TextBlock" 
