@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 27, 2019 lúc 09:12 AM
+-- Thời gian đã tạo: Th5 29, 2019 lúc 10:09 AM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.3
 
@@ -41,7 +41,7 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`id`, `name`, `id_card_number`, `address`, `type`) VALUES
-(1, 'Nguyễn A', 123456, 'Cần Thơ', 'Nội địa');
+(1, 'Maria Ozawa', 2354567, 'Nhật', 'Nước ngoài');
 
 -- --------------------------------------------------------
 
@@ -88,6 +88,29 @@ INSERT INTO `customer_type` (`type`, `surcharge`, `note`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `payment_detail`
+--
+
+CREATE TABLE `payment_detail` (
+  `id` int(11) NOT NULL,
+  `room_name` varchar(128) CHARACTER SET utf8 NOT NULL,
+  `checkin_date` date NOT NULL,
+  `days_rented` int(11) NOT NULL,
+  `customer_quantum` int(11) NOT NULL,
+  `foreign_quantum` int(11) NOT NULL,
+  `amount` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Đang đổ dữ liệu cho bảng `payment_detail`
+--
+
+INSERT INTO `payment_detail` (`id`, `room_name`, `checkin_date`, `days_rented`, `customer_quantum`, `foreign_quantum`, `amount`) VALUES
+(1, 'B777', '2019-05-29', 1, 2, 2, 238000);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `rent_info`
 --
 
@@ -105,7 +128,7 @@ CREATE TABLE `rent_info` (
 --
 
 INSERT INTO `rent_info` (`id`, `room_name`, `customer_name`, `staff_name`, `checkin_date`, `checkout_date`) VALUES
-(1, 'B777', 'Nguyễn A', 'Pro', '2019-05-27', NULL);
+(1, 'B777', 'Maria Ozawa', 'Pro', '2019-05-29', NULL);
 
 -- --------------------------------------------------------
 
@@ -139,6 +162,7 @@ INSERT INTO `room` (`id`, `name`, `type`, `status`, `note`) VALUES
 --
 
 CREATE TABLE `room_rental_detail` (
+  `id` int(11) NOT NULL,
   `room_name` varchar(128) CHARACTER SET utf8 NOT NULL,
   `customer_name` varchar(128) CHARACTER SET utf8 NOT NULL,
   `customer_id` bigint(20) DEFAULT NULL,
@@ -150,9 +174,9 @@ CREATE TABLE `room_rental_detail` (
 -- Đang đổ dữ liệu cho bảng `room_rental_detail`
 --
 
-INSERT INTO `room_rental_detail` (`room_name`, `customer_name`, `customer_id`, `address`, `customer_type`) VALUES
-('B777', 'Nguyễn A', 123456, 'Cần Thơ', 'Nội địa'),
-('B777', 'Nguyễn B', 542312, 'Cần Thơ', 'Nội địa');
+INSERT INTO `room_rental_detail` (`id`, `room_name`, `customer_name`, `customer_id`, `address`, `customer_type`) VALUES
+(1, 'B777', 'Maria Ozawa', 2354567, 'Nhật', 'Nước ngoài'),
+(2, 'B777', 'Yui Hatano', 5678789, 'Nhật', 'Nước ngoài');
 
 -- --------------------------------------------------------
 
@@ -235,6 +259,12 @@ ALTER TABLE `customer`
   ADD UNIQUE KEY `id_card_number` (`id_card_number`);
 
 --
+-- Chỉ mục cho bảng `payment_detail`
+--
+ALTER TABLE `payment_detail`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `rent_info`
 --
 ALTER TABLE `rent_info`
@@ -248,6 +278,12 @@ ALTER TABLE `room`
   ADD UNIQUE KEY `id_2` (`id`),
   ADD UNIQUE KEY `id_3` (`id`),
   ADD KEY `id_4` (`id`);
+
+--
+-- Chỉ mục cho bảng `room_rental_detail`
+--
+ALTER TABLE `room_rental_detail`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `staff`
@@ -267,6 +303,12 @@ ALTER TABLE `customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT cho bảng `payment_detail`
+--
+ALTER TABLE `payment_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT cho bảng `rent_info`
 --
 ALTER TABLE `rent_info`
@@ -277,6 +319,12 @@ ALTER TABLE `rent_info`
 --
 ALTER TABLE `room`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT cho bảng `room_rental_detail`
+--
+ALTER TABLE `room_rental_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `staff`
