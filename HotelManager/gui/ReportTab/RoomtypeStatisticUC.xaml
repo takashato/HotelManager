@@ -19,10 +19,10 @@
                                        ChartSubTitle="" 
                                        Foreground="#00B894" >
             <MetroChart:StackedBar100Chart.Series>
-                <MetroChart:ChartSeries DisplayMember="Roomtype"
-                                        ItemsSource="{Binding Path=ListTest}"
+                <MetroChart:ChartSeries DisplayMember="RoomType"
+                                        ItemsSource="{Binding Path=RoomTypeReports}"
                                         SeriesTitle="Danh sách loại phòng"
-                                        ValueMember="Revenue" 
+                                        ValueMember="Amount" 
                                         HorizontalAlignment="Center"/>
             </MetroChart:StackedBar100Chart.Series>
         </MetroChart:StackedBar100Chart>

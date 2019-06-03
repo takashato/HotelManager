@@ -1,5 +1,7 @@
-﻿using System;
+﻿using HotelManager.db.model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,21 +22,28 @@ namespace HotelManager.gui
     /// </summary>
     public partial class RoomtypeStatisticUC : UserControl
     {
-        public List<TestData> ListTest { get; set; } = new List<TestData>();
+        public ObservableCollection<RevenueReport> RoomTypeReports { get; set; } = new ObservableCollection<RevenueReport>();
 
-        public RoomtypeStatisticUC()
+        public RoomtypeStatisticUC(DateTime StartDay, DateTime EndDay)
         {
             InitializeComponent();
 
-            ListTest.Add(new TestData() { Roomtype = "Phòng VIP", Revenue = 1000000M });
-            ListTest.Add(new TestData() { Roomtype = "Phòng CÙi", Revenue = 2000000M });
-            ListTest.Add(new TestData() { Roomtype = "Phòng Thường", Revenue = 1500000M });
-            ListTest.Add(new TestData() { Roomtype = "CŨng ngon Đếi", Revenue = 2400000M });
+            List<RevenueReport> reports = new List<RevenueReport>();
+            reports.Clear();
+            reports.AddRange(RevenueReport.GetAllByDate(StartDay, EndDay));
+
+            RoomTypeReports.Clear();
+            foreach (var item in reports)
+                RoomTypeReports.Add(item);
+            //ListTest.Add(new TestData() { Roomtype = "Phòng VIP", Revenue = 1000000M });
+            //ListTest.Add(new TestData() { Roomtype = "Phòng CÙi", Revenue = 2000000M });
+            //ListTest.Add(new TestData() { Roomtype = "Phòng Thường", Revenue = 1500000M });
+            //ListTest.Add(new TestData() { Roomtype = "CŨng ngon Đếi", Revenue = 2400000M });
         }
     }
-    public class TestData
-    {
-        public string Roomtype { get; set; }
-        public decimal Revenue { get; set; }
-    }
+    //public class TestData
+    //{
+    //    public string Roomtype { get; set; }
+    //    public decimal Revenue { get; set; }
+    //}
 }
