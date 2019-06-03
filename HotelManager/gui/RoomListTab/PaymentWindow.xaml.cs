@@ -21,6 +21,8 @@ namespace HotelManager.gui
     public partial class PaymentWindow : Window
     {
         private Room _roomToPay;
+        private double totalMoney;
+        private TimeSpan daysRent;
         public PaymentWindow(Room roomToPay)
         {
             InitializeComponent();
@@ -32,7 +34,7 @@ namespace HotelManager.gui
             DateTime datePay = new DateTime();
             datePay = DateTime.Now;
 
-            TimeSpan daysRent = datePay.Subtract(dateRent);
+            daysRent = datePay.Subtract(dateRent);
 
             double roomPrice = (float)_roomToPay.Price * (daysRent.Days + 1);
             int quantum = 0;
@@ -40,7 +42,7 @@ namespace HotelManager.gui
                 quantum = RoomRentalDetail.GetQuantumCustomerInRoom(_roomToPay.Name) - RoomType.GetMaxCustomerInRoom(_roomToPay.Type);
             double surchargeCustomerType = RoomRentalDetail.GetQuantumForeignCustomerInRoom(_roomToPay.Name) * CustomerType.GetSurcharge("Nước ngoài") / 100;
             double surchargeQuantumCustomer = CustomerSurcharge.GetSurchargeByQuantum(quantum) / 100;
-            double totalMoney = roomPrice + roomPrice * surchargeCustomerType + roomPrice * surchargeQuantumCustomer;
+            totalMoney = roomPrice + roomPrice * surchargeCustomerType + roomPrice * surchargeQuantumCustomer;
 
             txbRoomName.Text = roomToPay.Name;
             txbRoomType.Text = roomToPay.Type;
@@ -65,7 +67,9 @@ namespace HotelManager.gui
         private void btnPay_Click(object sender, RoutedEventArgs e)
         {
 
-            if (RentInfo.UpdateChechoutDate(_roomToPay.Name) && RoomRentalDetail.DeleteRoomRentalDetail(_roomToPay.Name) && Room.UpdateRoomStatus(_roomToPay.Name))
+            if (RentInfo.UpdateChechoutDate(_roomToPay.Name) && RoomRentalDetail.DeleteRoomRentalDetail(_roomToPay.Name) 
+                && Room.UpdateRoomStatus(_roomToPay.Name) && RevenueReport.InsertRevenueReport(_roomToPay.Name, _roomToPay.Type, RentInfo.GetDateCheckin(_roomToPay.Name), DateTime.Now, totalMoney)
+                && PaymentDetail.UpdatePaymentDetail(_roomToPay.Name, daysRent.Days + 1, totalMoney))
             {
                 MessageBox.Show("Thanh toán thành công!");
             }

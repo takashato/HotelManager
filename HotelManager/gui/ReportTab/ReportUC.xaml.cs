@@ -24,7 +24,7 @@ namespace HotelManager.gui
         {
             InitializeComponent();
 
-            GrdContent.Children.Add(new RevenueHistoryUC());
+            GrdContent.Children.Add(new RevenueHistoryUC((DateTime)dtpStartDay.SelectedDate, (DateTime)dtpEndDay.SelectedDate));
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -33,12 +33,12 @@ namespace HotelManager.gui
             if (selectedTag == "RevenueHistory")
             {
                 GrdContent?.Children.Clear();
-                GrdContent?.Children.Add(new RevenueHistoryUC());
+                GrdContent?.Children.Add(new RevenueHistoryUC((DateTime)dtpStartDay.SelectedDate, (DateTime)dtpEndDay.SelectedDate));
             }
             else if (selectedTag == "RoomtypeStatistic")
             {
                 GrdContent?.Children?.Clear();
-                GrdContent.Children.Add(new RoomtypeStatisticUC());
+                GrdContent.Children.Add(new RoomtypeStatisticUC((DateTime)dtpStartDay.SelectedDate, (DateTime)dtpEndDay.SelectedDate));
             }
 
         }

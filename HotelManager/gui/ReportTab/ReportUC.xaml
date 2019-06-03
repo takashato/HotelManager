@@ -44,11 +44,13 @@
             <TextBlock Text="Từ ngày"/>
             <DatePicker Focusable="False" 
                         SelectedDate="{x:Static system:DateTime.Now}" 
-                        SelectedDateChanged="DatePicker_SelectedDateChanged" />
+                        SelectedDateChanged="DatePicker_SelectedDateChanged"
+                        x:Name="dtpStartDay"/>
             <TextBlock Text="Đến ngày"/>
             <DatePicker Focusable="False" SelectedDate=
                         "{x:Static system:DateTime.Now}" 
-                        SelectedDateChanged="DatePicker_SelectedDateChanged"/>
+                        SelectedDateChanged="DatePicker_SelectedDateChanged"
+                        x:Name="dtpEndDay"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="1">

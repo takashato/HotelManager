@@ -44,7 +44,7 @@ namespace HotelManager.db.model
         {
             using (var conn = DatabaseManager.Conn)
             {
-                return conn.ExecuteScalar<int>("SELECT COUNT(*) FROM rent_info WHERE room_name = @roomName", new { RoomName = roomName }) > 0;
+                return conn.ExecuteScalar<int>("SELECT COUNT(*) FROM rent_info WHERE room_name = @roomName AND checkout_date is null", new { RoomName = roomName }) > 0;
             }
         }
 

@@ -21,6 +21,7 @@ namespace HotelManager.gui
     /// </summary>
     public partial class MassPaymentWindow : Window
     {
+        private double totalMoney;
         public static ObservableCollection<PaymentDetail> paymentDetails { get; set; } = new ObservableCollection<PaymentDetail>();
         public MassPaymentWindow()
         {
@@ -59,7 +60,8 @@ namespace HotelManager.gui
             int flag = 0;
 
             foreach (var item in rooms)
-                if (RentInfo.UpdateChechoutDate(item.Name) && RoomRentalDetail.DeleteRoomRentalDetail(item.Name) && Room.UpdateRoomStatus(item.Name))
+                if (RentInfo.UpdateChechoutDate(item.Name) && RoomRentalDetail.DeleteRoomRentalDetail(item.Name) 
+                    && Room.UpdateRoomStatus(item.Name) && RevenueReport.InsertRevenueReport(item.Name, item.Type, RentInfo.GetDateCheckin(item.Name), DateTime.Now, totalMoney))
                     flag += 1;                
             
             if(flag == rooms.Count)
@@ -102,7 +104,7 @@ namespace HotelManager.gui
                     quantum = RoomRentalDetail.GetQuantumCustomerInRoom(item.Name) - RoomType.GetMaxCustomerInRoom(item.Type);
                 double surchargeCustomerType = RoomRentalDetail.GetQuantumForeignCustomerInRoom(item.Name) * CustomerType.GetSurcharge("Nước ngoài") / 100;
                 double surchargeQuantumCustomer = CustomerSurcharge.GetSurchargeByQuantum(quantum) / 100;
-                double totalMoney = roomPrice + roomPrice * surchargeCustomerType + roomPrice * surchargeQuantumCustomer;
+                totalMoney = roomPrice + roomPrice * surchargeCustomerType + roomPrice * surchargeQuantumCustomer;
 
                 PaymentDetail.UpdatePaymentDetail(item.Name, daysRent.Days + 1, totalMoney);
             }

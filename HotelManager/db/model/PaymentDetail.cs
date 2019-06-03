@@ -26,6 +26,15 @@ namespace HotelManager.db.model
             }
         }
 
+        //public static bool InsertPayment(string roomName, DateTime checkinDate, int customerQuantum, int foreignQuantum, int daysRented, double amount)
+        //{
+        //    using (var conn = DatabaseManager.Conn)
+        //    {
+        //        var paymentDetail = new PaymentDetail { RoomName = roomName, CheckinDate = checkinDate, DaysRented = daysRented, CustomerQuantum = customerQuantum, ForeignQuantum = foreignQuantum, Amount = amount };
+        //        return conn.Execute("INSERT INTO payment_detail(room_name, checkin_date, days_rented, customer_quantum, foreign_quantum, amount) VALUES(@RoomName, @CheckinDate, @DaysRented, @CustomerQuantum, @ForeignQuantum, @Amount)", paymentDetail) > 0;
+        //    }
+        //}
+
         public static bool UpdatePaymentDetail(string roomName, int daysRented, double amount)
         {
             using (var conn = DatabaseManager.Conn)

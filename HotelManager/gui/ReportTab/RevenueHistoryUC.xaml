@@ -46,7 +46,7 @@
     </UserControl.Resources>
 
 
-    <DataGrid ItemsSource="{Binding TestList}">
+    <DataGrid ItemsSource="{Binding RevenueReports}">
 
         <DataGrid.Columns>
             <DataGridTextColumn Header="Phòng"           IsReadOnly="True" 
@@ -54,11 +54,11 @@
             <DataGridTextColumn Header="Loại Phòng"      IsReadOnly="True" 
                                 Width="100*"             Binding="{Binding RoomType}"/>
             <DataGridTextColumn Header="Ngày Bắt Đầu"    IsReadOnly="True" 
-                                Width="120*"             Binding="{Binding DateStarted}"/>
+                                Width="120*"             Binding="{Binding CheckinDate}"/>
             <DataGridTextColumn Header="Ngày Thanh Toán" IsReadOnly="True" 
-                                Width="120*"             Binding="{Binding DatePaid}"/>
+                                Width="120*"             Binding="{Binding CheckoutDate}"/>
             <DataGridTextColumn Header="Số Tiền"         IsReadOnly="True" 
-                                Width="100*"             Binding="{Binding PaidAmountStr}"/>
+                                Width="100*"             Binding="{Binding Amount}"/>
         </DataGrid.Columns>
         
     </DataGrid>
