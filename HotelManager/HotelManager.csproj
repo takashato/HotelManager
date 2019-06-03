@@ -90,6 +90,7 @@
     <Compile Include="db\model\CustomerType.cs" />
     <Compile Include="db\model\PaymentDetail.cs" />
     <Compile Include="db\model\RentInfo.cs" />
+    <Compile Include="db\model\RevenueReport.cs" />
     <Compile Include="db\model\RoomRentalDetail.cs" />
     <Compile Include="db\model\RoomType.cs" />
     <Compile Include="db\model\StaffType.cs" />
