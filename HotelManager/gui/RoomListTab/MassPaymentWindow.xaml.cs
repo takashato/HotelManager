@@ -25,20 +25,20 @@ namespace HotelManager.gui
         public static ObservableCollection<PaymentDetail> paymentDetails { get; set; } = new ObservableCollection<PaymentDetail>();
         public MassPaymentWindow()
         {
-            InitializeComponent();         
+            InitializeComponent();
             
-            
+
         }
 
         public void LoadPaymentDetailFromDB()
         {
             List<PaymentDetail> paymentDetail = new List<PaymentDetail>();
             paymentDetail.Clear();
-            List<Room> rooms = new List<Room>();
+            List<string> rooms = new List<string>();
             rooms.Clear();
-            rooms.AddRange(RentInfo.GetRoomNameByCustomerName(cbCustomerName.Text));
+            rooms.AddRange(RentInfo.GetRoomNameByCustomerID(((Customer)cbCustomerName.SelectedItem).IdCardNumber));
             foreach (var item in rooms)
-                paymentDetail.AddRange(PaymentDetail.GetPaymentDetailByRoomName(item.Name));
+                paymentDetail.AddRange(PaymentDetail.GetPaymentDetailByRoomName(item));
 
             paymentDetails.Clear();
             foreach (var item in paymentDetail)
@@ -59,7 +59,7 @@ namespace HotelManager.gui
         private void btnPay_Click(object sender, RoutedEventArgs e)
         {
             List<Room> rooms = new List<Room>();
-            rooms.AddRange(Room.GetRoomsByCustomerName(cbCustomerName.Text));
+            rooms.AddRange(Room.GetRoomsByCustomerID(((Customer)cbCustomerName.SelectedItem).IdCardNumber));
 
             int flag = 0;
 
@@ -79,20 +79,20 @@ namespace HotelManager.gui
         {
             cbCustomerName.ItemsSource = Customer.GetCustomers();
             cbCustomerName.DisplayMemberPath = "Name";
-            cbCustomerName.SelectedValuePath = "Address";
-            //cbCustomerName.SelectedIndex = 0;
+            //cbCustomerName.SelectedValuePath = "Address";
+            cbCustomerName.SelectedIndex = 0;
         }
         
-        private string TotalFee => string.Format("{0:N0}",PaymentDetail.CalculateTotalMoney(cbCustomerName.Text));
+        private string TotalFee => string.Format("{0:N0}",PaymentDetail.CalculateTotalMoney(((Customer)cbCustomerName.SelectedItem).IdCardNumber));
 
         private void CbCustomerName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            txbAddress.Text = (string)cbCustomerName.SelectedValue;
-           
+            txbAddress.Text = ((Customer)cbCustomerName.SelectedItem).Address;
+            txbCustomerID.Text = ((Customer)cbCustomerName.SelectedItem).IdCardNumber.ToString();
             //Update payment detail
             List<Room> rooms = new List<Room>();
             rooms.Clear();
-            rooms.AddRange(Room.GetRoomsByCustomerName(cbCustomerName.Text));
+            rooms.AddRange(Room.GetRoomsByCustomerID(((Customer)cbCustomerName.SelectedItem).IdCardNumber));
 
             DateTime dateRent = new DateTime();
             DateTime datePay = new DateTime();

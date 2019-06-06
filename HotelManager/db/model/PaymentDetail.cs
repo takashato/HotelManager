@@ -58,11 +58,11 @@ namespace HotelManager.db.model
             }
         }
 
-        public static double CalculateTotalMoney(string customerName)
+        public static double CalculateTotalMoney(long customerId)
         {
             using (var conn = DatabaseManager.Conn)
             {
-                return conn.ExecuteScalar<double>("SELECT SUM(amount) FROM payment_detail INNER JOIN rent_info ON payment_detail.room_name = rent_info.room_name WHERE rent_info.customer_name = @CustomerName", new { CustomerName = customerName});
+                return conn.ExecuteScalar<double>("SELECT SUM(amount) FROM payment_detail INNER JOIN rent_info ON payment_detail.room_name = rent_info.room_name WHERE rent_info.customer_id = @CustomerID", new { CustomerID = customerId});
             }
         }
     }

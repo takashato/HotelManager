@@ -10,9 +10,9 @@ namespace HotelManager.db.model
     public class RentInfo
     {
         public int ID { get; set; }
-        public string CustomerName { get; set; }
+        public long CustomerID { get; set; }
         public string RoomName { get; set; }
-        public string StaffName { get; set; }
+        public string StaffUsername { get; set; }
         public DateTime CheckinDate { get; set; }
         public DateTime CheckoutDate { get; set; }
 
@@ -24,14 +24,14 @@ namespace HotelManager.db.model
             }
         }
 
-        public static bool InsertCheckinInfo(string roomName, string staffName, string customerName, DateTime checkinDate)
+        public static bool InsertCheckinInfo(string roomName, string staffUsername, long customerID, DateTime checkinDate)
         {
             using (var conn = DatabaseManager.Conn)
             {
-                var checkinInfo = new RentInfo { RoomName = roomName, StaffName = staffName, CustomerName = customerName, CheckinDate = checkinDate };
+                var checkinInfo = new RentInfo { RoomName = roomName, StaffUsername = staffUsername, CustomerID = customerID, CheckinDate = checkinDate };
                 try
                 {
-                    return conn.Execute("INSERT INTO rent_info(room_name, staff_name, customer_name, checkin_date) VALUE (@RoomName, @StaffName, @CustomerName, @CheckinDate)", checkinInfo) > 0;
+                    return conn.Execute("INSERT INTO rent_info(room_name, staff_username, customer_id, checkin_date) VALUE (@RoomName, @StaffUsername, @CustomerID, @CheckinDate)", checkinInfo) > 0;
                 }
                 catch(Exception)
                 {
@@ -71,11 +71,11 @@ namespace HotelManager.db.model
             }
         }
 
-        public static List<Room> GetRoomNameByCustomerName(string customerName)
+        public static List<string> GetRoomNameByCustomerID(long customerID)
         {
             using (var conn = DatabaseManager.Conn)
             {
-                return conn.Query<Room>("SELECT room_name FROM rent_info WHERE customer_name = @CustomerName", new { CustomerName = customerName}).ToList();
+                return conn.Query<string>("SELECT room_name FROM rent_info WHERE customer_id = @CustomerID", new { CustomerID = customerID}).ToList();
             }
         }
     }

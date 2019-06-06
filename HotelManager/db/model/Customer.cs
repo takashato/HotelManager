@@ -37,8 +37,8 @@ namespace HotelManager.db.model
             {
                 var customer = new Customer { Name = name, Address = address, IdCardNumber = idCardNumber, Type = type };
                
-                List<decimal> listIDNumber = new List<decimal>();
-                conn.Query<decimal>("SELECT id_card_number FROM customer").ToList();
+                List<long> listIDNumber = new List<long>();
+                conn.Query<long>("SELECT id_card_number FROM customer").ToList();
 
                 foreach (var item in listIDNumber)
                     if (item == idCardNumber)
@@ -58,7 +58,15 @@ namespace HotelManager.db.model
         {
             using (var conn = DatabaseManager.Conn)
             {
-                return conn.Query<Customer>("SELECT * FROM customer INNER JOIN room_rental_detail ON customer.name = room_rental_detail.customer_name").ToList();
+                return conn.Query<Customer>("SELECT name AS Name, id_card_number AS IdCardNumber, customer.address AS Address, type AS Type FROM customer INNER JOIN room_rental_detail ON customer.id_card_number = room_rental_detail.customer_id").ToList();
+            }
+        }
+
+        public static string GetCustomerNameByID(long ID)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.QueryFirstOrDefault<string>("SELECT name FROM customer WHERE id_card_number = @IdCardNumber", new { IdCardNumber = ID }).ToString();
             }
         }
     }

@@ -61,7 +61,7 @@ namespace HotelManager.gui
 
             Customer customer = dataGridCustomer.Items.GetItemAt(0) as Customer;
 
-            if (RentInfo.InsertCheckinInfo(_roomToRent.Name, App.Instance._Session.CurrentStaff.Fullname, customer.Name, (DateTime)dprCheckinDate.SelectedDate) 
+            if (RentInfo.InsertCheckinInfo(_roomToRent.Name, App.Instance._Session.CurrentStaff.Username, customer.IdCardNumber, (DateTime)dprCheckinDate.SelectedDate) 
                 && Customer.InsertCustomer(customer.Name, customer.Address, customer.IdCardNumber, customer.Type) && Room.UpdateRoomStatus(_roomToRent.Name))
             {
                 foreach (Customer item in ListGuestsRenting)
