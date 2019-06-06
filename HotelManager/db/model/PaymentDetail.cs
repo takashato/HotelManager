@@ -50,11 +50,11 @@ namespace HotelManager.db.model
             }
         }
 
-        public static List<PaymentDetail> GetPaymentDetailByRoomName()
+        public static List<PaymentDetail> GetPaymentDetailByRoomName(string roomName)
         {
             using (var conn = DatabaseManager.Conn)
             {
-                return conn.Query<PaymentDetail>("SELECT room_name, checkin_date, days_rented, customer_quantum, foreign_quantum, amount FROM payment_detail").ToList();
+                return conn.Query<PaymentDetail>("SELECT room_name AS RoomName, checkin_date AS CheckinDate, days_rented AS DaysRented, customer_quantum AS CustomerQuantum, foreign_quantum AS ForeignQuantum, amount AS Amount FROM payment_detail WHERE room_name = @RoomName", new { RoomName = roomName}).ToList();
             }
         }
 

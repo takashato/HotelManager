@@ -20,7 +20,7 @@ namespace HotelManager.db.model
         {
             using (var conn = DatabaseManager.Conn)
             {
-                return conn.Query<RevenueReport>("SELECT * FROM revenue_report WHERE checkout_date BETWEEN DATE(@StartDay) AND DATE(@EndDay)", new { StartDay = startDay, EndDay = endDay}).ToList();
+                return conn.Query<RevenueReport>("SELECT room_name AS RoomName, room_type AS RoomType, checkin_date AS CheckinDate, checkout_date AS CheckoutDate, amount AS Amount FROM revenue_report WHERE checkout_date BETWEEN DATE(@StartDay) AND DATE(@EndDay)", new { StartDay = startDay, EndDay = endDay}).ToList();
             }
         }
 

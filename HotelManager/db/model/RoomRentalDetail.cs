@@ -12,11 +12,11 @@ namespace HotelManager.db.model
         public int Id { get; set; }
         public string RoomName { get; set; }
         public string CustomerName { get; set; }
-        public decimal CustomerID { get; set; }
+        public long CustomerID { get; set; }
         public string Address { get; set; }
         public string CustomerType { get; set; }
 
-        public static bool InsertRoomRentalDetail(string roomName, string customerName, decimal customerID, string address, string customerType)
+        public static bool InsertRoomRentalDetail(string roomName, string customerName, long customerID, string address, string customerType)
         {
             using (var conn = DatabaseManager.Conn)
             {
@@ -44,7 +44,7 @@ namespace HotelManager.db.model
         {
             using (var conn = DatabaseManager.Conn)
             {
-                return conn.Query<RoomRentalDetail>("SELECT room_name, customer_name, customer_id, address, customer_type FROM room_rental_detail WHERE room_name = @RoomName", new { RoomName = roomName}).ToList();              
+                return conn.Query<RoomRentalDetail>("SELECT address AS Address, customer_id AS CustomerID, room_name AS RoomName, customer_name AS CustomerName, customer_type AS CustomerType FROM room_rental_detail WHERE room_name = @RoomName", new { RoomName = roomName}).ToList();              
             }
         }
 

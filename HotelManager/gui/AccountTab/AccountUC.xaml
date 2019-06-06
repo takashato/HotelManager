@@ -94,7 +94,7 @@
                     <DataGridTextColumn Width="100*"            IsReadOnly="True" 
                                         Header="Họ Tên"         Binding="{Binding Fullname}"/>
                     <DataGridTextColumn Width="150*"            IsReadOnly="True" 
-                                        Header="Ngày Tạo"       Binding="{Binding CreatedDate}"/>
+                                        Header="Ngày Tạo"       Binding="{Binding CreatedDate, StringFormat=\{0:dd/MM/yyyy HH:mm:ss\}}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

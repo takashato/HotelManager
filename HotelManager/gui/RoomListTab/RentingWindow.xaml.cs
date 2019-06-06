@@ -66,14 +66,9 @@ namespace HotelManager.gui
             {
                 foreach (Customer item in ListGuestsRenting)
                 {
-                    try
-                    {
-                        RoomRentalDetail.InsertRoomRentalDetail(_roomToRent.Name, item.Name, item.IdCardNumber, item.Address, item.Type);
-                    }
-                    catch(Exception)
-                    {
-
-                    }
+                    if (item.Name == null)
+                        continue;
+                   RoomRentalDetail.InsertRoomRentalDetail(_roomToRent.Name, item.Name, item.IdCardNumber, item.Address, item.Type);                 
                 }
                 PaymentDetail.InsertPaymentDetail(_roomToRent.Name, (DateTime)dprCheckinDate.SelectedDate, RoomRentalDetail.GetQuantumCustomerInRoom(_roomToRent.Name), RoomRentalDetail.GetQuantumForeignCustomerInRoom(_roomToRent.Name));
                 this.Close();

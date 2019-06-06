@@ -11,7 +11,7 @@ namespace HotelManager.db.model
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public decimal IdCardNumber { get; set; }
+        public long IdCardNumber { get; set; }
         public string Address { get; set; }
         public string Type { get; set; }
         //public string TypeStr
@@ -31,7 +31,7 @@ namespace HotelManager.db.model
         //    Foreign = 1
         //}
 
-        public static bool InsertCustomer(string name, string address, decimal idCardNumber, string type)
+        public static bool InsertCustomer(string name, string address, long idCardNumber, string type)
         {
             using (var conn = DatabaseManager.Conn)
             {

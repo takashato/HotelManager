@@ -22,7 +22,7 @@ namespace HotelManager.gui
     /// </summary>
     public partial class RoomtypeStatisticUC : UserControl
     {
-        public ObservableCollection<RevenueReport> RoomTypeReports { get; set; } = new ObservableCollection<RevenueReport>();
+        public static ObservableCollection<RevenueReport> RoomTypeReports { get; set; } = new ObservableCollection<RevenueReport>();
 
         public RoomtypeStatisticUC(DateTime StartDay, DateTime EndDay)
         {

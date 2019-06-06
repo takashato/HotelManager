@@ -54,9 +54,9 @@
             <DataGridTextColumn Header="Loại Phòng"      IsReadOnly="True" 
                                 Width="100*"             Binding="{Binding RoomType}"/>
             <DataGridTextColumn Header="Ngày Bắt Đầu"    IsReadOnly="True" 
-                                Width="120*"             Binding="{Binding CheckinDate}"/>
+                                Width="120*"             Binding="{Binding CheckinDate, StringFormat=\{0:dd/MM/yyyy\}}"/>
             <DataGridTextColumn Header="Ngày Thanh Toán" IsReadOnly="True" 
-                                Width="120*"             Binding="{Binding CheckoutDate}"/>
+                                Width="120*"             Binding="{Binding CheckoutDate, StringFormat=\{0:dd/MM/yyyy\}}"/>
             <DataGridTextColumn Header="Số Tiền"         IsReadOnly="True" 
                                 Width="100*"             Binding="{Binding Amount}"/>
         </DataGrid.Columns>

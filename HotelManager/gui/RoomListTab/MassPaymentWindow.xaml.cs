@@ -26,7 +26,7 @@ namespace HotelManager.gui
         public MassPaymentWindow()
         {
             InitializeComponent();         
-            LoadPaymentDetailFromDB();
+            
             
         }
 
@@ -34,7 +34,11 @@ namespace HotelManager.gui
         {
             List<PaymentDetail> paymentDetail = new List<PaymentDetail>();
             paymentDetail.Clear();
-            paymentDetail.AddRange(PaymentDetail.GetPaymentDetailByRoomName());
+            List<Room> rooms = new List<Room>();
+            rooms.Clear();
+            rooms.AddRange(RentInfo.GetRoomNameByCustomerName(cbCustomerName.Text));
+            foreach (var item in rooms)
+                paymentDetail.AddRange(PaymentDetail.GetPaymentDetailByRoomName(item.Name));
 
             paymentDetails.Clear();
             foreach (var item in paymentDetail)
@@ -76,7 +80,7 @@ namespace HotelManager.gui
             cbCustomerName.ItemsSource = Customer.GetCustomers();
             cbCustomerName.DisplayMemberPath = "Name";
             cbCustomerName.SelectedValuePath = "Address";
-            cbCustomerName.SelectedIndex = 0;
+            //cbCustomerName.SelectedIndex = 0;
         }
         
         private string TotalFee => string.Format("{0:N0}",PaymentDetail.CalculateTotalMoney(cbCustomerName.Text));
@@ -84,9 +88,10 @@ namespace HotelManager.gui
         private void CbCustomerName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             txbAddress.Text = (string)cbCustomerName.SelectedValue;
-
+           
             //Update payment detail
             List<Room> rooms = new List<Room>();
+            rooms.Clear();
             rooms.AddRange(Room.GetRoomsByCustomerName(cbCustomerName.Text));
 
             DateTime dateRent = new DateTime();
@@ -112,7 +117,7 @@ namespace HotelManager.gui
             //Calculate total fee
             txbTotalFee.Text = TotalFee;
 
-            //LoadPaymentDetailFromDB();
+            LoadPaymentDetailFromDB();
         }
     }
 }

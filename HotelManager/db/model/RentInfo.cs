@@ -20,7 +20,7 @@ namespace HotelManager.db.model
         {
             using (var conn = DatabaseManager.Conn)
             {
-                return conn.Query<RentInfo>("SELECT * FROM rent_info WHERE room_name = @roomName AND checkin_date >= CURDATE() AND checkout_date IS NULL", new { RoomName = roomName } ).ToList();
+                return conn.Query<RentInfo>("SELECT * FROM rent_info WHERE room_name = @roomName AND checkin_date <= CURDATE() AND checkout_date IS NULL", new { RoomName = roomName } ).ToList();
             }
         }
 

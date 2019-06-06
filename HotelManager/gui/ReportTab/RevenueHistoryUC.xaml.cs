@@ -22,7 +22,7 @@ namespace HotelManager.gui
     /// </summary>
     public partial class RevenueHistoryUC : UserControl
     {
-        public ObservableCollection<RevenueReport> RevenueReports { get; set; } = new ObservableCollection<RevenueReport>();
+        public static ObservableCollection<RevenueReport> RevenueReports { get; set; } = new ObservableCollection<RevenueReport>();
 
         public RevenueHistoryUC(DateTime StartDay, DateTime EndDay)
         {
