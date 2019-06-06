@@ -2,10 +2,10 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 03, 2019 at 11:27 AM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.3
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th6 06, 2019 lúc 01:52 PM
+-- Phiên bản máy phục vụ: 10.1.38-MariaDB
+-- Phiên bản PHP: 7.3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `hotelmanager`
+-- Cơ sở dữ liệu: `hotelmanager`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
+-- Cấu trúc bảng cho bảng `customer`
 --
 
 CREATE TABLE `customer` (
@@ -37,28 +37,28 @@ CREATE TABLE `customer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `customer`
+-- Đang đổ dữ liệu cho bảng `customer`
 --
 
 INSERT INTO `customer` (`id`, `name`, `id_card_number`, `address`, `type`) VALUES
-(1, 'UK', 121212, 'Nhật', 'Nước ngoài'),
-(2, 'Anh', 12312, 'Hà Nội', 'Nội địa'),
-(3, 'John', 556575, 'Anh', 'Nước ngoài');
+(1, 'UK', 123123, 'Nhật', 'Nước ngoài'),
+(2, 'Huy', 51515, 'Hà Nội', 'Nội địa'),
+(3, 'Nguyễn Ngọc', 6787, 'Đà Nẵng', 'Nội địa');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer_surcharge`
+-- Cấu trúc bảng cho bảng `customer_surcharge`
 --
 
 CREATE TABLE `customer_surcharge` (
   `quantum` int(11) NOT NULL,
   `surcharge` float NOT NULL,
-  `note` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `note` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `customer_surcharge`
+-- Đang đổ dữ liệu cho bảng `customer_surcharge`
 --
 
 INSERT INTO `customer_surcharge` (`quantum`, `surcharge`, `note`) VALUES
@@ -70,17 +70,17 @@ INSERT INTO `customer_surcharge` (`quantum`, `surcharge`, `note`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer_type`
+-- Cấu trúc bảng cho bảng `customer_type`
 --
 
 CREATE TABLE `customer_type` (
-  `type` varchar(20) CHARACTER SET utf8 NOT NULL,
+  `type` varchar(20) NOT NULL,
   `surcharge` double NOT NULL,
-  `note` text CHARACTER SET utf8 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `note` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `customer_type`
+-- Đang đổ dữ liệu cho bảng `customer_type`
 --
 
 INSERT INTO `customer_type` (`type`, `surcharge`, `note`) VALUES
@@ -90,7 +90,7 @@ INSERT INTO `customer_type` (`type`, `surcharge`, `note`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `payment_detail`
+-- Cấu trúc bảng cho bảng `payment_detail`
 --
 
 CREATE TABLE `payment_detail` (
@@ -104,42 +104,42 @@ CREATE TABLE `payment_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `payment_detail`
+-- Đang đổ dữ liệu cho bảng `payment_detail`
 --
 
 INSERT INTO `payment_detail` (`id`, `room_name`, `checkin_date`, `days_rented`, `customer_quantum`, `foreign_quantum`, `amount`) VALUES
-(1, 'B777', '2019-06-03', 1, 2, 2, 238000),
-(2, 'A999', '2019-06-03', 1, 2, 0, 150000),
-(3, 'C199', '2019-06-03', 1, 2, 1, 240000);
+(1, 'B777', '2019-06-06', 1, 1, 1, 204000),
+(2, 'B123', '2019-06-06', 1, 1, 0, 170000),
+(3, 'A999', '2019-06-06', 1, 3, 0, 150000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rent_info`
+-- Cấu trúc bảng cho bảng `rent_info`
 --
 
 CREATE TABLE `rent_info` (
   `id` int(11) NOT NULL,
   `room_name` varchar(128) NOT NULL,
-  `customer_name` varchar(128) NOT NULL,
-  `staff_name` varchar(254) NOT NULL,
+  `customer_id` bigint(20) NOT NULL,
+  `staff_username` varchar(128) NOT NULL,
   `checkin_date` date NOT NULL,
   `checkout_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `rent_info`
+-- Đang đổ dữ liệu cho bảng `rent_info`
 --
 
-INSERT INTO `rent_info` (`id`, `room_name`, `customer_name`, `staff_name`, `checkin_date`, `checkout_date`) VALUES
-(1, 'B777', 'UK', 'Pro', '2019-06-03', '2019-06-03'),
-(2, 'A999', 'Anh', 'Pro', '2019-06-03', '2019-06-03'),
-(3, 'C199', 'John', 'Pro', '2019-06-03', '2019-06-03');
+INSERT INTO `rent_info` (`id`, `room_name`, `customer_id`, `staff_username`, `checkin_date`, `checkout_date`) VALUES
+(1, 'B777', 123123, 'admin', '2019-06-06', NULL),
+(2, 'B123', 51515, 'admin', '2019-06-06', NULL),
+(3, 'A999', 6787, 'admin', '2019-06-06', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `revenue_report`
+-- Cấu trúc bảng cho bảng `revenue_report`
 --
 
 CREATE TABLE `revenue_report` (
@@ -151,19 +151,10 @@ CREATE TABLE `revenue_report` (
   `amount` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `revenue_report`
---
-
-INSERT INTO `revenue_report` (`id`, `room_name`, `room_type`, `checkin_date`, `checkout_date`, `amount`) VALUES
-(1, 'B777', 'B', '2019-06-03', '2019-06-03', 238000),
-(2, 'A999', 'A', '2019-06-03', '2019-06-03', 150000),
-(3, 'C199', 'C', '2019-06-03', '2019-06-03', 240000);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `room`
+-- Cấu trúc bảng cho bảng `room`
 --
 
 CREATE TABLE `room` (
@@ -175,35 +166,46 @@ CREATE TABLE `room` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `room`
+-- Đang đổ dữ liệu cho bảng `room`
 --
 
 INSERT INTO `room` (`id`, `name`, `type`, `status`, `note`) VALUES
-(1, 'B777', 'B', 'Available', ''),
-(2, 'A999', 'A', 'Available', 'dịch vụ vip'),
+(1, 'B777', 'B', 'NotAvailable', ''),
+(2, 'A999', 'A', 'NotAvailable', 'dịch vụ vip'),
 (3, 'C199', 'C', 'Available', ''),
 (4, 'A111', 'A', 'Available', ''),
-(5, 'B123', 'B', 'Available', '');
+(5, 'B123', 'B', 'NotAvailable', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `room_rental_detail`
+-- Cấu trúc bảng cho bảng `room_rental_detail`
 --
 
 CREATE TABLE `room_rental_detail` (
   `id` int(11) NOT NULL,
   `room_name` varchar(128) NOT NULL,
   `customer_name` varchar(128) NOT NULL,
-  `customer_id` decimal(20,0) DEFAULT NULL,
+  `customer_id` bigint(20) DEFAULT NULL,
   `address` text NOT NULL,
   `customer_type` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Đang đổ dữ liệu cho bảng `room_rental_detail`
+--
+
+INSERT INTO `room_rental_detail` (`id`, `room_name`, `customer_name`, `customer_id`, `address`, `customer_type`) VALUES
+(1, 'B777', 'UK', 123123, 'Nhật', 'Nước ngoài'),
+(2, 'B123', 'Huy', 51515, 'Hà Nội', 'Nội địa'),
+(3, 'A999', 'Nguyễn Ngọc', 6787, 'Đà Nẵng', 'Nội địa'),
+(4, 'A999', 'Nguyễn Huy', 4543, 'Huế', 'Nội địa'),
+(5, 'A999', 'Nguyễn Bảo', 97897, 'Hà Nội', 'Nội địa');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `room_type`
+-- Cấu trúc bảng cho bảng `room_type`
 --
 
 CREATE TABLE `room_type` (
@@ -214,7 +216,7 @@ CREATE TABLE `room_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `room_type`
+-- Đang đổ dữ liệu cho bảng `room_type`
 --
 
 INSERT INTO `room_type` (`type`, `price`, `max_customer`, `note`) VALUES
@@ -226,7 +228,7 @@ INSERT INTO `room_type` (`type`, `price`, `max_customer`, `note`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `staff`
+-- Cấu trúc bảng cho bảng `staff`
 --
 
 CREATE TABLE `staff` (
@@ -240,7 +242,7 @@ CREATE TABLE `staff` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `staff`
+-- Đang đổ dữ liệu cho bảng `staff`
 --
 
 INSERT INTO `staff` (`id`, `username`, `password`, `fullname`, `lastLoginDate`, `createdDate`, `level`) VALUES
@@ -252,7 +254,7 @@ INSERT INTO `staff` (`id`, `username`, `password`, `fullname`, `lastLoginDate`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `staff_type`
+-- Cấu trúc bảng cho bảng `staff_type`
 --
 
 CREATE TABLE `staff_type` (
@@ -261,7 +263,7 @@ CREATE TABLE `staff_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `staff_type`
+-- Đang đổ dữ liệu cho bảng `staff_type`
 --
 
 INSERT INTO `staff_type` (`level`, `type`) VALUES
@@ -270,36 +272,36 @@ INSERT INTO `staff_type` (`level`, `type`) VALUES
 (3, 'Administrator');
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `customer`
+-- Chỉ mục cho bảng `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id_card_number` (`id_card_number`);
 
 --
--- Indexes for table `payment_detail`
+-- Chỉ mục cho bảng `payment_detail`
 --
 ALTER TABLE `payment_detail`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rent_info`
+-- Chỉ mục cho bảng `rent_info`
 --
 ALTER TABLE `rent_info`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `revenue_report`
+-- Chỉ mục cho bảng `revenue_report`
 --
 ALTER TABLE `revenue_report`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `room`
+-- Chỉ mục cho bảng `room`
 --
 ALTER TABLE `room`
   ADD PRIMARY KEY (`id`),
@@ -308,60 +310,60 @@ ALTER TABLE `room`
   ADD KEY `id_4` (`id`);
 
 --
--- Indexes for table `room_rental_detail`
+-- Chỉ mục cho bảng `room_rental_detail`
 --
 ALTER TABLE `room_rental_detail`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `staff`
+-- Chỉ mục cho bảng `staff`
 --
 ALTER TABLE `staff`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `customer`
+-- AUTO_INCREMENT cho bảng `customer`
 --
 ALTER TABLE `customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `payment_detail`
+-- AUTO_INCREMENT cho bảng `payment_detail`
 --
 ALTER TABLE `payment_detail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `rent_info`
+-- AUTO_INCREMENT cho bảng `rent_info`
 --
 ALTER TABLE `rent_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `revenue_report`
+-- AUTO_INCREMENT cho bảng `revenue_report`
 --
 ALTER TABLE `revenue_report`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `room`
+-- AUTO_INCREMENT cho bảng `room`
 --
 ALTER TABLE `room`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `room_rental_detail`
+-- AUTO_INCREMENT cho bảng `room_rental_detail`
 --
 ALTER TABLE `room_rental_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `staff`
+-- AUTO_INCREMENT cho bảng `staff`
 --
 ALTER TABLE `staff`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
