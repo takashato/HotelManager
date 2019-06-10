@@ -20,22 +20,22 @@ namespace HotelManager.db.model
         {
             using (var conn = DatabaseManager.Conn)
             {
-                return conn.Query<RoomType>("SELECT * FROM `room_type`").ToList();
+                return conn.Query<RoomType>("SELECT type AS Type, price AS Price, max_customer AS MaxCustomer, note AS Note FROM `room_type`").ToList();
             }
         }
 
-        public static bool InsertRoomType(string type, decimal price, string note)
+        public static bool InsertRoomType(string type, decimal price, string note, int maxCustomer)
         {
             using (var conn = DatabaseManager.Conn)
             {
-                var roomType = new RoomType { Type = type, Price = price, Note = note };
+                var roomType = new RoomType { Type = type, Price = price, MaxCustomer = maxCustomer, Note = note };
 
                 if (!IsAvailable(type, price))
                     return false;
 
                 try
                 {
-                    return conn.Execute("INSERT INTO room_type(Type, Price, Note) VALUES(@Type, @Price, @Note)", roomType) > 0;
+                    return conn.Execute("INSERT INTO room_type(type, price, max_customer, note) VALUES(@Type, @Price, @MaxCustomer, @Note)", roomType) > 0;
                 }
                 catch(Exception)
                 {
@@ -44,16 +44,15 @@ namespace HotelManager.db.model
             }
         }
 
-        public static bool UpdateRoomType(string newRoomType, decimal newPrice, string newNote, string oldRoomType)
+        public static bool UpdateRoomType(string newRoomType, decimal newPrice, int newMaxCustomer, string newNote, string oldRoomType)
         {
             using (var conn = DatabaseManager.Conn)
             {
                 try
                 {
-                    if (!newRoomType.Equals(oldRoomType) && IsAvailable(newRoomType, newPrice) || newRoomType.Equals(oldRoomType))
+                    if (IsAvailable(newRoomType, newPrice) || newRoomType.Equals(oldRoomType))
                     {
-                        conn.Execute("UPDATE room_type SET type = '" + newRoomType + "', price = '" + newPrice + "', note = '" + newNote + "' WHERE type = '" + oldRoomType + "'");
-                        return true;
+                        return conn.Execute("UPDATE room_type SET type = @Type, price = @Price, max_customer = @MaxCustomer, note = @Note WHERE type = @OldType", new { Type = newRoomType, Price = newPrice, MaxCustomer = newMaxCustomer, Note = newNote, OldType = oldRoomType }) > 0;             
                     }
                     else
                         return false;

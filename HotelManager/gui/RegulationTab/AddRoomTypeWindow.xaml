@@ -13,8 +13,8 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="18"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto" 
-        Height="260" Width="300" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}" Closing="Window_Closing">
+        Height="300" Width="300" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" Closing="Window_Closing" Loaded="Window_Loaded">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -57,26 +57,28 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition/>
-                    <RowDefinition Height="auto" MinHeight="64.8"/>
+                    <RowDefinition Height="auto" MinHeight="101.6"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock VerticalAlignment="Center" Grid.Row="0" Margin="10,16,10,0.6" Text="Loại phòng" Height="25" />
-                <TextBlock VerticalAlignment="Center" Grid.Row="2" Margin="10,17.4,10,0.2" Text="Đơn giá" Height="24" />
-                <TextBlock VerticalAlignment="Center" Grid.Row="3" Margin="10,21.8,10,12" Text="Ghi chú" Height="23" />
+                <TextBlock VerticalAlignment="Center" Grid.Row="0" Margin="6,13,9.6,0.6" Text="Loại phòng" Height="28" />
+                <TextBlock VerticalAlignment="Center" Grid.Row="2" Margin="6,13.4,9.6,0.2" Text="Đơn giá" Height="28" />
+                <TextBlock VerticalAlignment="Bottom" Grid.Row="3" Margin="6,0,13.6,10.6" Text="Số khách tối đa" Height="31" />
+                <TextBlock VerticalAlignment="Center" Grid.Row="4" Margin="6,0.4,9.6,79.8" Text="Ghi chú" Height="23" />
 
-                <TextBox x:Name="txbRoomType" Grid.Column="1" Grid.Row="0" Margin="0,1,0.4,41.2" Grid.RowSpan="3"/>
-                <TextBox x:Name="txbPrice" Grid.Column="1" Grid.Row="2" Margin="0,0.4,0.4,0" Height="45" VerticalAlignment="Top" Grid.RowSpan="2" PreviewTextInput="TxbPrice_PreviewTextInput" />
-                <TextBox x:Name="txbNote" Grid.Column="1" Grid.Row="3" Margin="0,2.8,0.4,12" AcceptsReturn="True"/>
+                <TextBox x:Name="txbRoomType" Grid.Column="1" Grid.Row="0" Margin="0.4,1,0.4,6.6"/>
+                <TextBox x:Name="txbPrice" Grid.Column="1" Grid.Row="2" Margin="0.4,0.4,0.4,0" Height="38" VerticalAlignment="Top" PreviewTextInput="TxbPrice_PreviewTextInput" />
+                <ComboBox x:Name="cbMaxCustomer" Grid.Column="1" Grid.Row="3" Margin="0.4,2.8,0.4,19.6"/>
+                <TextBox x:Name="txbNote" Grid.Column="1" Grid.Row="3" Margin="0.4,49.8,0.4,80.8" AcceptsReturn="True" Grid.RowSpan="2"/>
 
                 <Button x:Name="btnAddRoomType" 
                     Style="{StaticResource MaterialDesignRaisedAccentButton}"
                     materialDesign:RippleAssist.IsDisabled="True"
                     Content="Thêm" 
-                    Margin="74,19,81.4,13.8"
+                    Margin="74,58.8,81.4,13.8"
                     Padding="40 0"
                     HorizontalAlignment="Center" 
                     Grid.Row="4" 

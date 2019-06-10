@@ -41,7 +41,7 @@ namespace HotelManager.gui.RegulationTab
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (RoomType.UpdateRoomType(txbNewRoomType.Text, System.Convert.ToDecimal(txbNewPrice.Text), txbNewNote.Text, roomTypeToEdit.Type))
+            if (RoomType.UpdateRoomType(txbNewRoomType.Text, System.Convert.ToDecimal(txbNewPrice.Text), Convert.ToInt32(cbNewMaxCustomer.Text), txbNewNote.Text, roomTypeToEdit.Type))
                 MessageBox.Show("Cập nhật thành công!");
             else
                 MessageBox.Show("Cập nhật không thành công!");
@@ -58,6 +58,12 @@ namespace HotelManager.gui.RegulationTab
                 HotelManager.gui.RegulationUC.ListRoomType.Add(item);
 
             CollectionViewSource.GetDefaultView(RegulationUC.ListRoomType).Refresh();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            for (int i = 2; i < 8; i++)
+                cbNewMaxCustomer.Items.Add(i + 1);
         }
     }
 }
