@@ -58,7 +58,7 @@
             <DataGridTextColumn Header="Ngày Thanh Toán" IsReadOnly="True" 
                                 Width="120*"             Binding="{Binding CheckoutDate, StringFormat=\{0:dd/MM/yyyy\}}"/>
             <DataGridTextColumn Header="Số Tiền"         IsReadOnly="True" 
-                                Width="100*"             Binding="{Binding Amount}"/>
+                                Width="100*"             Binding="{Binding Amount, StringFormat=\{0:N0\}}"/>
         </DataGrid.Columns>
         
     </DataGrid>

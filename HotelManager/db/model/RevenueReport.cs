@@ -32,5 +32,13 @@ namespace HotelManager.db.model
                 return conn.Execute("INSERT INTO revenue_report(room_name, room_type, checkin_date, checkout_date, amount) VALUES(@RoomName, @RoomType, @CheckinDate, @CheckoutDate, @Amount)", revenueReport) > 0;
             }
         }
+
+        public static double GetTotalRevenueByDate(DateTime startDay, DateTime endDay)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.ExecuteScalar<double>("SELECT SUM(amount) FROM revenue_report WHERE checkout_date BETWEEN DATE(@StartDay) AND DATE(@EndDay)", new { StartDay = startDay, EndDay = endDay });
+            }
+        }
     }
 }

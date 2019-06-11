@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelManager.db.model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,8 +24,8 @@ namespace HotelManager.gui
         public ReportUC()
         {
             InitializeComponent();
-
             GrdContent.Children.Add(new RevenueHistoryUC((DateTime)dtpStartDay.SelectedDate, (DateTime)dtpEndDay.SelectedDate));
+            txbTotalRevenue.Text = string.Format("{0:N0}", RevenueReport.GetTotalRevenueByDate((DateTime)dtpStartDay.SelectedDate, (DateTime)dtpEndDay.SelectedDate));
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -45,7 +46,25 @@ namespace HotelManager.gui
 
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            try
+            {
+                txbTotalRevenue.Text = string.Format("{0:N0}", RevenueReport.GetTotalRevenueByDate((DateTime)dtpStartDay.SelectedDate, (DateTime)dtpEndDay.SelectedDate));
+                string selectedTag = (cbbReportType.SelectedItem as ComboBoxItem).Tag as string;
+                if (selectedTag == "RevenueHistory")
+                {
+                    GrdContent?.Children.Clear();
+                    GrdContent?.Children.Add(new RevenueHistoryUC((DateTime)dtpStartDay.SelectedDate, (DateTime)dtpEndDay.SelectedDate));
+                }
+                else if (selectedTag == "RoomtypeStatistic")
+                {
+                    GrdContent?.Children?.Clear();
+                    GrdContent.Children.Add(new RoomtypeStatisticUC((DateTime)dtpStartDay.SelectedDate, (DateTime)dtpEndDay.SelectedDate));
+                }
+            }
+            catch (Exception)
+            {
 
+            }
         }
     }
 }

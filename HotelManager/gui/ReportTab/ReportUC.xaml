@@ -67,7 +67,7 @@
 
         <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="3">
             <TextBlock Text="Tổng doanh thu:"/>
-            <TextBox Text="1,000,000,000 đ" IsReadOnly="True"/>
+            <TextBox x:Name="txbTotalRevenue" IsReadOnly="True"/>
         </StackPanel>
 
     </Grid>

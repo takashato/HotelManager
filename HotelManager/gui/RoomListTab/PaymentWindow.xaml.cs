@@ -40,7 +40,7 @@ namespace HotelManager.gui
             int quantum = 0;
             if (RoomRentalDetail.GetQuantumCustomerInRoom(_roomToPay.Name) > RoomType.GetMaxCustomerInRoom(_roomToPay.Type))
                 quantum = RoomRentalDetail.GetQuantumCustomerInRoom(_roomToPay.Name) - RoomType.GetMaxCustomerInRoom(_roomToPay.Type); // Số lượng khách vượt quá số khách tối đa theo quy định của loại phòng đó.
-            double surchargeCustomerType = RoomRentalDetail.GetSurchargeCustomerInRoom(_roomToPay.Name) / 100;
+            double surchargeCustomerType = RoomRentalDetail.GetSurchargeCustomerInRoom(_roomToPay.Name) / 100; // Phụ thu theo loại khách trong phòng.
             double surchargeQuantumCustomer = CustomerSurcharge.GetSurchargeByQuantum(quantum) / 100; // Phụ thu theo số khách vượt quá số khách tối đa theo quy định của loại phòng đó.
             totalMoney = roomPrice + roomPrice * surchargeCustomerType + roomPrice * surchargeQuantumCustomer;
 

@@ -35,15 +35,6 @@ namespace HotelManager.gui
             RoomTypeReports.Clear();
             foreach (var item in reports)
                 RoomTypeReports.Add(item);
-            //ListTest.Add(new TestData() { Roomtype = "Phòng VIP", Revenue = 1000000M });
-            //ListTest.Add(new TestData() { Roomtype = "Phòng CÙi", Revenue = 2000000M });
-            //ListTest.Add(new TestData() { Roomtype = "Phòng Thường", Revenue = 1500000M });
-            //ListTest.Add(new TestData() { Roomtype = "CŨng ngon Đếi", Revenue = 2400000M });
         }
     }
-    //public class TestData
-    //{
-    //    public string Roomtype { get; set; }
-    //    public decimal Revenue { get; set; }
-    //}
 }
