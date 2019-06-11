@@ -15,6 +15,7 @@ namespace HotelManager.db.model
         public long CustomerID { get; set; }
         public string Address { get; set; }
         public string CustomerType { get; set; }
+        public double Surcharge { get; set; }
 
         public static bool InsertRoomRentalDetail(string roomName, string customerName, long customerID, string address, string customerType)
         {
@@ -44,7 +45,7 @@ namespace HotelManager.db.model
         {
             using (var conn = DatabaseManager.Conn)
             {
-                return conn.Query<RoomRentalDetail>("SELECT address AS Address, customer_id AS CustomerID, room_name AS RoomName, customer_name AS CustomerName, customer_type AS CustomerType FROM room_rental_detail WHERE room_name = @RoomName", new { RoomName = roomName}).ToList();              
+                return conn.Query<RoomRentalDetail>("SELECT address AS Address, customer_id AS CustomerID, room_name AS RoomName, customer_name AS CustomerName, customer_type AS CustomerType, surcharge AS Surcharge FROM room_rental_detail INNER JOIN customer_type ON room_rental_detail.customer_type = customer_type.type WHERE room_name = @RoomName", new { RoomName = roomName}).ToList();              
             }
         }
 
@@ -56,11 +57,19 @@ namespace HotelManager.db.model
             }
         }
 
-        public static int GetQuantumForeignCustomerInRoom(string roomName)
+        public static double GetSurchargeCustomerInRoom(string roomName)
         {
             using (var conn = DatabaseManager.Conn)
             {
-                return conn.ExecuteScalar<int>("SELECT COUNT(*) FROM room_rental_detail WHERE room_name = @RoomName AND customer_type = @CustomerType", new { RoomName = roomName, CustomerType = "Nước ngoài"});
+                return conn.ExecuteScalar<double>("SELECT SUM(surcharge) FROM room_rental_detail INNER JOIN customer_type ON room_rental_detail.customer_type = customer_type.type  WHERE room_name = @RoomName", new { RoomName = roomName});
+            }
+        }
+
+        public static int GetQuantumForeignCustomerInRoom(string roonName)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.ExecuteScalar<int>("SELECT COUNT(*) FROM room_rental_detail WHERE room_name = @RoomName AND customer_type = @CustomerType", new { RoomName = roonName, CustomerType = "Nước ngoài" });
             }
         }
     }

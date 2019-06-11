@@ -107,7 +107,7 @@ namespace HotelManager.gui
                 int quantum = 0;
                 if (RoomRentalDetail.GetQuantumCustomerInRoom(item.Name) > RoomType.GetMaxCustomerInRoom(item.Type))
                     quantum = RoomRentalDetail.GetQuantumCustomerInRoom(item.Name) - RoomType.GetMaxCustomerInRoom(item.Type);
-                double surchargeCustomerType = RoomRentalDetail.GetQuantumForeignCustomerInRoom(item.Name) * CustomerType.GetSurcharge("Nước ngoài") / 100;
+                double surchargeCustomerType = RoomRentalDetail.GetSurchargeCustomerInRoom(item.Name) / 100;
                 double surchargeQuantumCustomer = CustomerSurcharge.GetSurchargeByQuantum(quantum) / 100;
                 totalMoney = roomPrice + roomPrice * surchargeCustomerType + roomPrice * surchargeQuantumCustomer;
 

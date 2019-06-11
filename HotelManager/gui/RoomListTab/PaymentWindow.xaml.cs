@@ -36,12 +36,12 @@ namespace HotelManager.gui
 
             daysRent = datePay.Subtract(dateRent);
 
-            double roomPrice = (float)_roomToPay.Price * (daysRent.Days + 1);
+            double roomPrice = (float)_roomToPay.Price * (daysRent.Days + 1); // Tiền phòng gốc theo ngày thuê (chưa tính phụ thu).
             int quantum = 0;
             if (RoomRentalDetail.GetQuantumCustomerInRoom(_roomToPay.Name) > RoomType.GetMaxCustomerInRoom(_roomToPay.Type))
-                quantum = RoomRentalDetail.GetQuantumCustomerInRoom(_roomToPay.Name) - RoomType.GetMaxCustomerInRoom(_roomToPay.Type);
-            double surchargeCustomerType = RoomRentalDetail.GetQuantumForeignCustomerInRoom(_roomToPay.Name) * CustomerType.GetSurcharge("Nước ngoài") / 100;
-            double surchargeQuantumCustomer = CustomerSurcharge.GetSurchargeByQuantum(quantum) / 100;
+                quantum = RoomRentalDetail.GetQuantumCustomerInRoom(_roomToPay.Name) - RoomType.GetMaxCustomerInRoom(_roomToPay.Type); // Số lượng khách vượt quá số khách tối đa theo quy định của loại phòng đó.
+            double surchargeCustomerType = RoomRentalDetail.GetSurchargeCustomerInRoom(_roomToPay.Name) / 100;
+            double surchargeQuantumCustomer = CustomerSurcharge.GetSurchargeByQuantum(quantum) / 100; // Phụ thu theo số khách vượt quá số khách tối đa theo quy định của loại phòng đó.
             totalMoney = roomPrice + roomPrice * surchargeCustomerType + roomPrice * surchargeQuantumCustomer;
 
             txbRoomName.Text = roomToPay.Name;

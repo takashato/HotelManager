@@ -32,14 +32,14 @@ namespace HotelManager.gui
         public RentingWindow(Room roomToRent)
         {
             InitializeComponent();
-            
-            for (int i = 0; i < 3; i++)
+            _roomToRent = roomToRent;
+
+            for (int i = 0; i < RoomType.GetMaxCustomerInRoom(_roomToRent.Type) + 5; i++)
             {
                 Customer customer = new Customer();
                 ListGuestsRenting.Add(customer);
             }
-
-            _roomToRent = roomToRent;
+          
             txbRoomName.Text = "Phòng " + _roomToRent.Name;
         }
 
