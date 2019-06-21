@@ -65,5 +65,13 @@ namespace HotelManager.db.model
                 return conn.ExecuteScalar<double>("SELECT SUM(amount) FROM payment_detail INNER JOIN rent_info ON payment_detail.room_name = rent_info.room_name WHERE rent_info.customer_id = @CustomerID", new { CustomerID = customerId});
             }
         }
+
+        public static bool DeletePaymentDetailByRoomName(string roomName)
+        {
+            using (var conn = DatabaseManager.Conn)
+            {
+                return conn.Execute("DELETE FROM `payment_detail` WHERE room_name = @RoomName", new { RoomName = roomName}) > 0;
+            }
+        }
     }
 }

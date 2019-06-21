@@ -62,7 +62,7 @@ namespace HotelManager.db.model
             {
                 try
                 {
-                    return conn.Execute("UPDATE rent_info SET checkout_date = @CheckoutDate WHERE room_name = @RoomName", new { RoomName = roomName, CheckoutDate = DateTime.Now}) > 0;
+                    return conn.Execute("UPDATE rent_info SET checkout_date = @CheckoutDate WHERE room_name = @RoomName AND checkout_date is null", new { RoomName = roomName, CheckoutDate = DateTime.Now}) > 0;
                 }
                 catch(Exception)
                 {

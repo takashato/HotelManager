@@ -26,8 +26,6 @@ namespace HotelManager.gui
         public MassPaymentWindow()
         {
             InitializeComponent();
-            
-
         }
 
         public void LoadPaymentDetailFromDB()
@@ -65,7 +63,8 @@ namespace HotelManager.gui
 
             foreach (var item in rooms)
                 if (RentInfo.UpdateChechoutDate(item.Name) && RoomRentalDetail.DeleteRoomRentalDetail(item.Name) 
-                    && Room.UpdateRoomStatus(item.Name) && RevenueReport.InsertRevenueReport(item.Name, item.Type, RentInfo.GetDateCheckin(item.Name), DateTime.Now, totalMoney))
+                    && Room.UpdateRoomStatus(item.Name) && RevenueReport.InsertRevenueReport(item.Name, item.Type, RentInfo.GetDateCheckin(item.Name), DateTime.Now, totalMoney)
+                    && PaymentDetail.DeletePaymentDetailByRoomName(item.Name))
                     flag += 1;                
             
             if(flag == rooms.Count)
@@ -118,6 +117,18 @@ namespace HotelManager.gui
             txbTotalFee.Text = TotalFee;
 
             LoadPaymentDetailFromDB();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            List<Room> rooms = new List<Room>();
+            rooms.Clear();
+            rooms.AddRange(Room.GetAll());
+
+            HotelManager.gui.RoomListUC.RoomList.Clear();
+            foreach (var item in rooms)
+                HotelManager.gui.RoomListUC.RoomList.Add(item);
+            CollectionViewSource.GetDefaultView(HotelManager.gui.RoomListUC.RoomList).Refresh();
         }
     }
 }
