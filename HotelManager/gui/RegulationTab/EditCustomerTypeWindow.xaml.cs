@@ -53,7 +53,7 @@ namespace HotelManager.gui.RegulationTab
                     this.Close();
                 }
                 else
-                    MessageBox.Show("Cập nhật không thành công! Vui lòng kiểm tra lại thông tin!");
+                    MessageBox.Show("Cập nhật không thành công! Vui lòng kiểm tra lại thông tin! (Loại khách hàng và phụ thu không được trùng với loại khách hàng và phụ thu đã có)");
             }
         }
 

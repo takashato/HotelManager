@@ -26,7 +26,7 @@ namespace HotelManager.db.model
             using (var conn = DatabaseManager.Conn)
             {
                 var customerSurcharge = new CustomerSurcharge { Quantum = quantum, Surcharge = surcharge, Note = note };
-                if (!IsAvailable(quantum, surcharge))
+                if (!IsAvailable(quantum, surcharge, -1))
                     return false;
                 try
                 {
@@ -60,7 +60,7 @@ namespace HotelManager.db.model
             {
                 try
                 {
-                    if (newQuantum != oldQuantum && IsAvailable(newQuantum, newSurcharge) || newQuantum==oldQuantum)
+                    if (IsAvailable(newQuantum, newSurcharge, oldQuantum))
                     {
                         conn.Execute("UPDATE customer_surcharge SET quantum = '" + newQuantum + "', surcharge = '" + newSurcharge + "', note = '" + newNote + "' WHERE quantum = '" + oldQuantum + "'");
                         return true;
@@ -75,11 +75,16 @@ namespace HotelManager.db.model
             }
         }
 
-        public static bool IsAvailable(int quantum, double surcharge)
+        public static bool IsAvailable(int quantum, double surcharge, int oldQuantum)
         {
             using (var conn = DatabaseManager.Conn)
             {
-                return (conn.ExecuteScalar<int>("SELECT COUNT(*) FROM customer_surcharge WHERE quantum = @Quantum", new { Quantum = quantum }) + 
+                if (quantum == oldQuantum)
+                {
+                    return conn.ExecuteScalar<int>("SELECT COUNT(*) FROM customer_surcharge WHERE surcharge = @Surcharge AND quantum <> @Quantum", new { Surcharge = surcharge, Quantum = quantum }) <= 0;
+                }
+                else
+                    return (conn.ExecuteScalar<int>("SELECT COUNT(*) FROM customer_surcharge WHERE quantum = @Quantum", new { Quantum = quantum }) + 
                         conn.ExecuteScalar<int>("SELECT COUNT(*) FROM customer_surcharge WHERE surcharge = @Surcharge", new { Surcharge = surcharge })) <= 0;
             }
         }

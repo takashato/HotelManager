@@ -57,10 +57,20 @@ namespace HotelManager.gui.RegulationTab
 
         private void BtnAddCustomerSurcharge_Click(object sender, RoutedEventArgs e)
         {
-            if (CustomerSurcharge.InsertCustomerSurcharge(System.Convert.ToInt32(cbQuantum.Text), System.Convert.ToDouble(txbSurcharge.Text), txbNote.Text))
-                MessageBox.Show("Thêm thành công!");
+            if ("".Equals(txbSurcharge.Text) || "".Equals(cbQuantum.Text))
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!");
+            }
             else
-                MessageBox.Show("Thêm không thành công! Vui lòng kiểm tra lại thông tin!");
+            {
+                if (CustomerSurcharge.InsertCustomerSurcharge(System.Convert.ToInt32(cbQuantum.Text), System.Convert.ToDouble(txbSurcharge.Text), txbNote.Text))
+                {
+                    MessageBox.Show("Thêm thành công!");
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("Thêm không thành công! Vui lòng kiểm tra lại thông tin! (Số khách và phụ thu không được trùng số khách và phụ thu đã có)");
+            }
         }
     }
 }
