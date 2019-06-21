@@ -64,9 +64,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock VerticalAlignment="Center" Grid.Row="0" Margin="6,13,9.6,0.6" Text="Loại phòng" Height="28" />
-                <TextBlock VerticalAlignment="Center" Grid.Row="2" Margin="6,13.4,9.6,0.2" Text="Đơn giá" Height="28" />
-                <TextBlock VerticalAlignment="Bottom" Grid.Row="3" Margin="6,0,13.6,10.6" Text="Số khách tối đa" Height="31" />
+                <TextBlock VerticalAlignment="Center" Grid.Row="0" Margin="6,13,9.6,0.6" Text="Loại phòng*" Height="28" />
+                <TextBlock VerticalAlignment="Center" Grid.Row="2" Margin="6,13.4,9.6,0.2" Text="Đơn giá*" Height="28" />
+                <TextBlock VerticalAlignment="Bottom" Grid.Row="3" Margin="6,0,13.6,10.6" Text="Số khách tối đa*" Height="31" />
                 <TextBlock VerticalAlignment="Center" Grid.Row="4" Margin="6,0.4,9.6,79.8" Text="Ghi chú" Height="23" />
 
                 <TextBox x:Name="txbRoomType" Grid.Column="1" Grid.Row="0" Margin="0.4,1,0.4,6.6"/>
