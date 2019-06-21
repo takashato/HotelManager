@@ -81,9 +81,17 @@ namespace HotelManager.gui
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //HotelManager.gui.RoomListUC.RoomList.Clear();
-            //HotelManager.gui.RoomListUC.RoomList.AddRange(Room.GetAll());
-            //CollectionViewSource.GetDefaultView(HotelManager.gui.RoomListUC.RoomList).Refresh();
+            List<Room> rooms = new List<Room>();
+            rooms.Clear();
+            rooms.AddRange(Room.GetAll());
+
+            HotelManager.gui.RoomListUC.RoomList.Clear();
+            foreach (var item in rooms)
+            {
+                item.RetrieveRentInfo();
+                HotelManager.gui.RoomListUC.RoomList.Add(item);
+            }
+            CollectionViewSource.GetDefaultView(HotelManager.gui.RoomListUC.RoomList).Refresh();
         }
     }
 }

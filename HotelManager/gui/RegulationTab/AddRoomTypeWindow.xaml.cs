@@ -40,9 +40,15 @@ namespace HotelManager.gui.RegulationTab
         private void BtnAddRoomType_Click(object sender, RoutedEventArgs e)
         {
             if (RoomType.InsertRoomType(txbRoomType.Text, System.Convert.ToDecimal(txbPrice.Text), txbNote.Text, Convert.ToInt32(cbMaxCustomer.Text)))
+            {
                 MessageBox.Show("Thêm thành công!");
+                this.Close();
+            }
             else
+            {
                 MessageBox.Show("Thêm không thành công! Vui lòng kiểm tra lại thông tin nhập!");
+                this.Close();
+            }
         }
 
         private void TxbPrice_PreviewTextInput(object sender, TextCompositionEventArgs e)
