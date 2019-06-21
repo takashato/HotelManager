@@ -41,10 +41,20 @@ namespace HotelManager.gui.RegulationTab
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (RoomType.UpdateRoomType(txbNewRoomType.Text, System.Convert.ToDecimal(txbNewPrice.Text), Convert.ToInt32(cbNewMaxCustomer.Text), txbNewNote.Text, roomTypeToEdit.Type))
-                MessageBox.Show("Cập nhật thành công!");
+            if ("".Equals(txbNewRoomType.Text) || "".Equals(txbNewPrice.Text) || "".Equals(cbNewMaxCustomer.Text))
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!");
+            }
             else
-                MessageBox.Show("Cập nhật không thành công!");
+            {
+                if (RoomType.UpdateRoomType(txbNewRoomType.Text, System.Convert.ToDecimal(txbNewPrice.Text), Convert.ToInt32(cbNewMaxCustomer.Text), txbNewNote.Text, roomTypeToEdit.Type))
+                {
+                    MessageBox.Show("Cập nhật thành công!");
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("Cập nhật không thành công! Vui lòng kiểm tra lại thông tin! (Loại phòng và đơn giá không được trùng với loại phòng và đơn giá đã có)");
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

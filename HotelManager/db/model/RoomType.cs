@@ -30,7 +30,7 @@ namespace HotelManager.db.model
             {
                 var roomType = new RoomType { Type = type, Price = price, MaxCustomer = maxCustomer, Note = note };
 
-                if (!IsAvailable(type, price))
+                if (!IsAvailable(type, price, ""))
                     return false;
 
                 try
@@ -50,7 +50,7 @@ namespace HotelManager.db.model
             {
                 try
                 {
-                    if (IsAvailable(newRoomType, newPrice) || newRoomType.Equals(oldRoomType))
+                    if (IsAvailable(newRoomType, newPrice, oldRoomType))
                     {
                         return conn.Execute("UPDATE room_type SET type = @Type, price = @Price, max_customer = @MaxCustomer, note = @Note WHERE type = @OldType", new { Type = newRoomType, Price = newPrice, MaxCustomer = newMaxCustomer, Note = newNote, OldType = oldRoomType }) > 0;             
                     }
@@ -72,11 +72,16 @@ namespace HotelManager.db.model
             }
         }
 
-        public static bool IsAvailable(string type, decimal price)
+        public static bool IsAvailable(string type, decimal price, string oldType)
         {
             using (var conn = DatabaseManager.Conn)
-            {
-                return (conn.ExecuteScalar<int>("SELECT COUNT(*) FROM room_type WHERE type = @Type", new { Type = type }) + conn.ExecuteScalar<int>("SELECT COUNT(*) FROM room_type WHERE price = @Price", new { Price = price})) <= 0;
+            {   
+                if (type.Equals(oldType))
+                {
+                    return conn.ExecuteScalar<int>("SELECT COUNT(*) FROM room_type WHERE price = @Price AND type <> @Type", new { Price = price, Type = type }) <= 0;
+                }
+                else
+                    return (conn.ExecuteScalar<int>("SELECT COUNT(*) FROM room_type WHERE type = @Type", new { Type = type }) + conn.ExecuteScalar<int>("SELECT COUNT(*) FROM room_type WHERE price = @Price", new { Price = price })) <= 0;
             }
         }
 

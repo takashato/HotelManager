@@ -41,8 +41,7 @@ namespace HotelManager.gui.RegulationTab
         {
             if ("".Equals(txbRoomType.Text) || "".Equals(txbPrice.Text) || "".Equals(cbMaxCustomer.Text))
             {
-                MessageBox.Show("Vui lòng điền đầy đủ thông tin có dấu * ");
-                return;
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin có dấu * ");                
             }
             else
             {
@@ -54,7 +53,7 @@ namespace HotelManager.gui.RegulationTab
                 }
                 else
                 {
-                    MessageBox.Show("Thêm không thành công! Vui lòng kiểm tra lại thông tin nhập!");
+                    MessageBox.Show("Thêm không thành công! Vui lòng kiểm tra lại thông tin nhập! (Loại phòng và đơn giá không được trùng với loại phòng và đơn giá đã có)");
                 }
             }
         }
