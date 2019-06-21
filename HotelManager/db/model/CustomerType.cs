@@ -63,7 +63,7 @@ namespace HotelManager.db.model
             {
                 try
                 {
-                    if (!newCustomerType.Equals(oldCustomerType) && IsAvailable(newCustomerType, newSurcharge, oldCustomerType) || newCustomerType.Equals(oldCustomerType))
+                    if (IsAvailable(newCustomerType, newSurcharge, oldCustomerType))
                     {
                         conn.Execute("UPDATE customer_type SET type = '" + newCustomerType + "', surcharge = '" + newSurcharge + "', note = '" + newNote + "' WHERE type = '" + oldCustomerType + "'");
                         return true;

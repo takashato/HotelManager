@@ -25,7 +25,7 @@ namespace HotelManager.gui.RegulationTab
         {
             InitializeComponent();
             customerType = _customerType;
-            txbCustomerType.Text = customerType.Type;
+            txbNewCustomerType.Text = customerType.Type;
         }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -41,10 +41,20 @@ namespace HotelManager.gui.RegulationTab
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (CustomerType.UpdateCustomerType(txbCustomerType.Text, System.Convert.ToDouble(txbNewSurcharge.Text), txbNewNote.Text, customerType.Type))
-                MessageBox.Show("Cập nhật thành công!");
+            if ("".Equals(txbNewCustomerType.Text) || "".Equals(txbNewSurcharge.Text))
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!");
+            }
             else
-                MessageBox.Show("Cập nhật không thành công!");
+            {
+                if (CustomerType.UpdateCustomerType(txbNewCustomerType.Text, System.Convert.ToDouble(txbNewSurcharge.Text), txbNewNote.Text, customerType.Type))
+                {
+                    MessageBox.Show("Cập nhật thành công!");
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("Cập nhật không thành công! Vui lòng kiểm tra lại thông tin!");
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
