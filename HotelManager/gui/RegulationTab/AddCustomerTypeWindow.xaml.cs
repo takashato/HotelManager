@@ -39,10 +39,20 @@ namespace HotelManager.gui.RegulationTab
 
         private void BtnAddRoom_Click(object sender, RoutedEventArgs e)
         {
-            if (CustomerType.InsertCustomerType(txbCustomerType.Text, System.Convert.ToDouble(txbSurcharge.Text), txbNote.Text))
-                MessageBox.Show("Thêm thành công!");
+            if ("".Equals(txbCustomerType.Text) || "".Equals(txbSurcharge.Text))
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin có dấu * ");
+            }
             else
-                MessageBox.Show("Thêm không thành công! Vui lòng kiểm tra lại thông tin đã nhập!");
+            {
+                if (CustomerType.InsertCustomerType(txbCustomerType.Text, System.Convert.ToDouble(txbSurcharge.Text), txbNote.Text))
+                {
+                    MessageBox.Show("Thêm thành công!");
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("Thêm không thành công! Vui lòng kiểm tra lại thông tin đã nhập! (Loại khách và phụ thu không được trùng với loại khách và phụ thu đã có!)");
+            }
         }
 
         private void TxbSurcharge_PreviewTextInput(object sender, TextCompositionEventArgs e)

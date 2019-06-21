@@ -44,7 +44,7 @@ namespace HotelManager.db.model
                 var customerType = new CustomerType { Type = type, Surcharge = surcharge, Note = note };
                 List<CustomerType> customerTypes = new List<CustomerType>();
 
-                if (!IsAvailable(type, surcharge))
+                if (!IsAvailable(type, surcharge, ""))
                     return false;
                 try
                 {
@@ -63,7 +63,7 @@ namespace HotelManager.db.model
             {
                 try
                 {
-                    if (!newCustomerType.Equals(oldCustomerType) && IsAvailable(newCustomerType, newSurcharge) || newCustomerType.Equals(oldCustomerType))
+                    if (!newCustomerType.Equals(oldCustomerType) && IsAvailable(newCustomerType, newSurcharge, oldCustomerType) || newCustomerType.Equals(oldCustomerType))
                     {
                         conn.Execute("UPDATE customer_type SET type = '" + newCustomerType + "', surcharge = '" + newSurcharge + "', note = '" + newNote + "' WHERE type = '" + oldCustomerType + "'");
                         return true;
@@ -78,11 +78,15 @@ namespace HotelManager.db.model
             }
         }
 
-        public static bool IsAvailable(string type, double surcharge)
+        public static bool IsAvailable(string type, double surcharge, string oldType)
         {
             using (var conn = DatabaseManager.Conn)
             {
-                return (conn.ExecuteScalar<int>("SELECT COUNT(*) FROM customer_type WHERE type = @Type", new { Type = type }) + conn.ExecuteScalar<int>("SELECT COUNT(*) FROM customer_type WHERE surcharge = @Surcharge", new { Surcharge = surcharge })) <= 0;
+                if (type.Equals(oldType))
+                {
+                    return conn.ExecuteScalar<int>("SELECT COUNT(*) FROM customer_type WHERE surcharge = @Surcharge AND type <> @Type", new { Surcharge = surcharge, Type = type }) <= 0;
+                }
+                    return (conn.ExecuteScalar<int>("SELECT COUNT(*) FROM customer_type WHERE type = @Type", new { Type = type }) + conn.ExecuteScalar<int>("SELECT COUNT(*) FROM customer_type WHERE surcharge = @Surcharge", new { Surcharge = surcharge })) <= 0;
             }
         }
 

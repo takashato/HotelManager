@@ -64,8 +64,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock VerticalAlignment="Center" Grid.Row="0" Margin="10,16,10,0.6" Text="Loại khách" Height="25" />
-                <TextBlock VerticalAlignment="Center" Grid.Row="2" Margin="10,17.4,10,0.2" Text="Phụ thu (%)" Height="24" />
+                <TextBlock VerticalAlignment="Center" Grid.Row="0" Margin="10,16,10,0.6" Text="Loại khách*" Height="25" />
+                <TextBlock VerticalAlignment="Center" Grid.Row="2" Margin="10,17.4,10,0.2" Text="Phụ thu (%)*" Height="24" />
                 <TextBlock VerticalAlignment="Center" Grid.Row="3" Margin="10,21.8,10,12" Text="Ghi chú" Height="23" />
 
                 <TextBox x:Name="txbCustomerType" Grid.Column="1" Grid.Row="0" Margin="0,1,0.4,41.2" Grid.RowSpan="3"/>
