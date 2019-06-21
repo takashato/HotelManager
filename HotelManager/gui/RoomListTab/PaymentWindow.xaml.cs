@@ -77,5 +77,20 @@ namespace HotelManager.gui
                 MessageBox.Show("Thanh toán không thành công! Vui lòng thực hiện lại thao tác!");
             this.Close();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            List<Room> rooms = new List<Room>();
+            rooms.Clear();
+            rooms.AddRange(Room.GetAll());
+
+            HotelManager.gui.RoomListUC.RoomList.Clear();
+            foreach (var item in rooms)
+            {
+                item.RetrieveRentInfo();
+                HotelManager.gui.RoomListUC.RoomList.Add(item);
+            }
+            CollectionViewSource.GetDefaultView(HotelManager.gui.RoomListUC.RoomList).Refresh();
+        }
     }
 }

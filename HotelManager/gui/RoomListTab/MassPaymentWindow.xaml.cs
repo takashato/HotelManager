@@ -127,7 +127,10 @@ namespace HotelManager.gui
 
             HotelManager.gui.RoomListUC.RoomList.Clear();
             foreach (var item in rooms)
+            {
+                item.RetrieveRentInfo();
                 HotelManager.gui.RoomListUC.RoomList.Add(item);
+            }
             CollectionViewSource.GetDefaultView(HotelManager.gui.RoomListUC.RoomList).Refresh();
         }
     }
