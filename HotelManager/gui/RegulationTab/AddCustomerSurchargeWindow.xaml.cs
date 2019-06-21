@@ -59,7 +59,7 @@ namespace HotelManager.gui.RegulationTab
         {
             if ("".Equals(txbSurcharge.Text) || "".Equals(cbQuantum.Text))
             {
-                MessageBox.Show("Vui lòng điền đầy đủ thông tin!");
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin có dấu *!");
             }
             else
             {

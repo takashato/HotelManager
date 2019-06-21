@@ -62,8 +62,8 @@ namespace HotelManager.db.model
                 {
                     if (IsAvailable(newQuantum, newSurcharge, oldQuantum))
                     {
-                        conn.Execute("UPDATE customer_surcharge SET quantum = '" + newQuantum + "', surcharge = '" + newSurcharge + "', note = '" + newNote + "' WHERE quantum = '" + oldQuantum + "'");
-                        return true;
+                        return conn.Execute("UPDATE customer_surcharge SET quantum = @Quantum, surcharge = @Surcharge, note = @Note WHERE quantum = @OldQuantum", new { Quantum = newQuantum, Surcharge = newSurcharge, Note = newNote, OldQuantum = oldQuantum}) > 0;
+                        
                     }
                     else
                         return false;

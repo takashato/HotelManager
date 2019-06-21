@@ -41,10 +41,20 @@ namespace HotelManager.gui.RegulationTab
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            if (CustomerSurcharge.UpdateCustomerSurcharge(cbNewQuantum.SelectedIndex + 1, System.Convert.ToDouble(txbNewSurcharge.Text), txbNewNote.Text, customerSurchargeToEdit.Quantum))
-                MessageBox.Show("Cập nhật thành công!");
+            if ("".Equals(txbNewSurcharge.Text) || "".Equals(cbNewQuantum.Text))
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!");
+            }
             else
-                MessageBox.Show("Cập nhật không thành công!");
+            {
+                if (CustomerSurcharge.UpdateCustomerSurcharge(cbNewQuantum.SelectedIndex + 1, System.Convert.ToDouble(txbNewSurcharge.Text), txbNewNote.Text, customerSurchargeToEdit.Quantum))
+                {
+                    MessageBox.Show("Cập nhật thành công!");
+                    this.Close();
+                }
+                else
+                    MessageBox.Show("Cập nhật không thành công! Vui lòng kiểm tra lại thông tin! (Số khách và phụ thu không được trùng số khách và phụ thu đã có)");
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
