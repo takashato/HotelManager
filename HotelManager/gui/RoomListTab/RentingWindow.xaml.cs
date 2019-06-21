@@ -71,6 +71,7 @@ namespace HotelManager.gui
                    RoomRentalDetail.InsertRoomRentalDetail(_roomToRent.Name, item.Name, item.IdCardNumber, item.Address, item.Type);                 
                 }
                 PaymentDetail.InsertPaymentDetail(_roomToRent.Name, (DateTime)dprCheckinDate.SelectedDate, RoomRentalDetail.GetQuantumCustomerInRoom(_roomToRent.Name), RoomRentalDetail.GetQuantumForeignCustomerInRoom(_roomToRent.Name));
+                MessageBox.Show("Thuê phòng thành công");
                 this.Close();
             }
             else
@@ -90,6 +91,18 @@ namespace HotelManager.gui
             cbColumnCustomerType.ItemsSource = CustomerType.GetCustomerType();
             cbColumnCustomerType.DisplayMemberPath = "Type";
             cbColumnCustomerType.SelectedValuePath = "Type";
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            List<Room> rooms = new List<Room>();
+            rooms.Clear();
+            rooms.AddRange(Room.GetAll());
+
+            HotelManager.gui.RoomListUC.RoomList.Clear();
+            foreach (var item in rooms)
+                HotelManager.gui.RoomListUC.RoomList.Add(item);
+            CollectionViewSource.GetDefaultView(HotelManager.gui.RoomListUC.RoomList).Refresh();
         }
     }
 
