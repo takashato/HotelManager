@@ -72,14 +72,14 @@ namespace HotelManager.db.model
         {
             using (var conn = DatabaseManager.Conn)
             {
-                var room = new Room { Name = name, Type = type, Note = note };
+                //var room = new Room { Name = name, Type = type, Note = note };
 
                 if (!IsAvailableName(name))
                     return false;
 
                 try
                 {
-                    return conn.Execute("INSERT INTO room(Name, Type, Note) VALUES(@Name, @Type, @Note)", room) > 0;
+                    return conn.Execute("INSERT INTO room(Name, Type, Status, Note) VALUES(@Name, @Type, @Status, @Note)", new { Name = name, Type = type, Note = note, Status = "Available" }) > 0;
                 }
                 catch (Exception)
                 {
