@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>hotelmanager.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BCrypt.Net, Version=0.1.4141.31969, Culture=neutral, PublicKeyToken=f3bc8f8c31beeb49, processorArchitecture=MSIL">
       <HintPath>packages\BCrypt.Net.0.1.0\lib\net35\BCrypt.Net.dll</HintPath>
@@ -308,6 +311,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="hotelmanager.ico" />
     <Content Include="sql\hotelmanager.sql" />
     <Resource Include="gui\uit-logo.png" />
   </ItemGroup>
