@@ -17,6 +17,7 @@ We currently have 4 contributors / members in our working team.
 - Nguyễn Huỳnh Lợi [@loia5tqd001](https://github.com/loia5tqd001)
 - Đào Mạnh Dũng [@manhdung99](https://github.com/manhdung99)
 ## Installation
+If you are using pre-built excutable application with remote MySQL (in GitHub's release section), the following steps are redundant.
 ### Preparing
 1. [Visual Studio 2018 / 2019](https://visualstudio.microsoft.com/)
 2. MySQL Server. We suggest using [XAMPP](https://www.apachefriends.org/index.html) for quick installation
