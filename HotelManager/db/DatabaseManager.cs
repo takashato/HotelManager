@@ -10,7 +10,8 @@ namespace HotelManager.db
 {
     class DatabaseManager
     {
-        private const string CONN_STR = "server=localhost;user=root;database=hotelmanager;port=3306;password=;charset=utf8";
+        //private const string CONN_STR = "server=localhost;user=root;database=hotelmanager;port=3306;password=;charset=utf8";
+        private const string CONN_STR = "server=103.27.238.234;user=takashat_hm;database=takashat_hm;port=3306;password=hotelmanager123;charset=utf8";
 
         public static DatabaseManager Instance { get; set; } = new DatabaseManager(CONN_STR);
 
