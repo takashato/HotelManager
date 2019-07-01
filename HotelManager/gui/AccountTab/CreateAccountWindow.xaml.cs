@@ -59,7 +59,6 @@ namespace HotelManager.gui
             else
             {
                 MessageBox.Show("Nhập lại mật khẩu không khớp!");
-                return;
             }
         }
 

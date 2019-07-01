@@ -54,12 +54,17 @@ namespace HotelManager.gui
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if ("".Equals(txbPassword.Password) || "".Equals(txbFullName.Text) || "".Equals(cbAccountType.Text))
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin");
+                return;
+            }
             if (Staff.UpdateStaff(txbPassword.Password, txbFullName.Text, cbAccountType.Text, txbUsername.Text))
                 MessageBox.Show("Cập nhật thành công!");
             else
                 MessageBox.Show("Cập nhật không thành công!");
 
-            //this.Close();
+            this.Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
