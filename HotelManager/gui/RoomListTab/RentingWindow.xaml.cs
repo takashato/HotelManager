@@ -56,11 +56,14 @@ namespace HotelManager.gui
 
         private void btnHoanThanh_Click(object sender, RoutedEventArgs e)
         {
-            //_roomToRent.Status = Room.EStatus.NotAvailable;
             // TODO: Update Danh sách khách hàng thuê phòng cho _roomToRent
 
             Customer customer = dataGridCustomer.Items.GetItemAt(0) as Customer;
-
+            if (String.IsNullOrEmpty(customer.Name) || String.IsNullOrEmpty(customer.Type) || customer.IdCardNumber == 0 || String.IsNullOrEmpty(customer.Address))
+            {
+                MessageBox.Show("Khách hàng đầu tiên là người đại diện thuê phòng! Vui lòng nhập đầy đủ thông tin! Không để trống dòng này!");
+                return;
+            }
             if (RentInfo.InsertCheckinInfo(_roomToRent.Name, App.Instance._Session.CurrentStaff.Username, customer.IdCardNumber, (DateTime)dprCheckinDate.SelectedDate) 
                 && Customer.InsertCustomer(customer.Name, customer.Address, customer.IdCardNumber, customer.Type) && Room.UpdateRoomStatus(_roomToRent.Name))
             {
