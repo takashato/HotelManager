@@ -67,7 +67,7 @@
 
         <StackPanel Orientation="Horizontal" Margin="10" Grid.Row="3">
             <TextBlock Text="Tổng doanh thu:"/>
-            <TextBox x:Name="txbTotalRevenue" IsReadOnly="True"/>
+            <TextBox x:Name="txbTotalRevenue" IsReadOnly="True" Width="262"/>
         </StackPanel>
 
     </Grid>
